@@ -1,0 +1,3133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>영원한 7일의 도시 서버 복원 — 면접관 관점</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.10/dist/style.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.10/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.10/dist/index.js"></script><script>((...args) => {
+                        const r = args[0];
+                        setTimeout(r);
+                    })(() => {
+        // Serialized into HTML by fillTemplate; runs in the browser.
+        const { markmap, mm } = window;
+        const tb = new markmap.Toolbar();
+        tb.attach(mm);
+        const el = tb.render();
+        el.classList.add("mme-zoombar");
+        document.body.append(el);
+    })</script><script>((getMarkmap, getOptions, root2, jsonOptions) => {
+              const markmap = getMarkmap();
+              window.mm = markmap.Markmap.create(
+                "svg#mindmap",
+                (getOptions || markmap.deriveOptions)(jsonOptions),
+                root2
+              );
+            })(() => window.markmap,null,{"content":"&#xc601;&#xc6d0;&#xd55c; 7&#xc77c;&#xc758; &#xb3c4;&#xc2dc; &#xc11c;&#xbc84; &#xbcf5;&#xc6d0; <span class=\"mme-count\" aria-hidden=\"true\">+64</span>","children":[{"content":"&#xd55c;&#xb208;&#xc5d0; &#xbcf4;&#xae30; <span class=\"mme-count\" aria-hidden=\"true\">+3</span>","children":[{"content":"&#xd55c; &#xc904; &#xc815;&#xc758; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"10,13","detail":"<p><strong>&#xc815;&#xc758;</strong>: &#xc11c;&#xbe44;&#xc2a4;&#xac00; &#xc885;&#xb8cc;&#xb41c; &#xbaa8;&#xbc14;&#xc77c; &#xac8c;&#xc784;&#xc758; &#xc11c;&#xbc84;&#xb97c;, &#xb0a8;&#xc544; &#xc788;&#xb294; 2021&#xb144; &#xb124;&#xd2b8;&#xc6cc;&#xd06c; &#xcea1;&#xcc98;&#xc640; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xbd84;&#xc11d;&#xb9cc;&#xc73c;&#xb85c; &#xb2e4;&#xc2dc; &#xb9cc;&#xb4e4;&#xc5b4; &#xc5d0;&#xbbac;&#xb808;&#xc774;&#xd130;&#xc640; &#xc2e4;&#xae30;&#xae30;&#xc5d0;&#xc11c; &#xd50c;&#xb808;&#xc774;&#xb418;&#xac8c; &#xd55c; &#xd504;&#xb85c;&#xc81d;&#xd2b8;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xae30;&#xac04;&#xacfc; &#xaddc;&#xbaa8; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"13,20","detail":"<table>\n<thead>\n<tr>\n<th>&#xd56d;&#xbaa9;</th>\n<th>&#xac12;</th>\n<th>&#xadfc;&#xac70;</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>&#xae30;&#xac04;</td>\n<td>2026.05 ~ 2026.10</td>\n<td>&#xcee4;&#xbc0b; &#xae30;&#xc900;</td>\n</tr>\n<tr>\n<td>&#xcee4;&#xbc0b;</td>\n<td>230&#xac1c; (&#xc791;&#xc131;&#xc790; &#xd45c;&#xae30; 3&#xc885;, &#xbaa8;&#xb450; &#xbcf8;&#xc778;)</td>\n<td>&#xcee4;&#xbc0b; &#xae30;&#xc900;</td>\n</tr>\n<tr>\n<td>&#xc11c;&#xbc84; &#xcf54;&#xb4dc;</td>\n<td>&#xc57d; 5.6&#xb9cc; &#xc904;</td>\n<td>&#xc815;&#xc801; &#xc9d1;&#xacc4;</td>\n</tr>\n<tr>\n<td>&#xd14c;&#xc2a4;&#xd2b8; &#xcf54;&#xb4dc;</td>\n<td>&#xc57d; 5.2&#xb9cc; &#xc904;, &#xd14c;&#xc2a4;&#xd2b8; &#xd568;&#xc218; &#xc57d; 3,200&#xac1c;</td>\n<td>&#xc815;&#xc801; &#xc9d1;&#xacc4; (&#xc2e4;&#xd589; &#xacb0;&#xacfc; &#xc544;&#xb2d8;)</td>\n</tr>\n</tbody>\n</table>"}},{"content":"&#xae30;&#xc220; &#xc2a4;&#xd0dd; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"20,28","detail":"<ul>\n<li><strong>Python</strong>: &#xc11c;&#xbc84;, &#xb3c4;&#xad6c;, &#xd14c;&#xc2a4;&#xd2b8;</li>\n<li><strong>FastAPI&#xb7;asyncio</strong>: HTTP &#xc11c;&#xbe44;&#xc2a4;, &#xc6d0;&#xc2dc; TCP &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;</li>\n<li><strong>protobuf&#xb7;msgpack&#xb7;BSON&#xb7;zlib</strong>: &#xac8c;&#xc774;&#xd2b8; &#xba54;&#xc2dc;&#xc9c0;&#xc640; &#xc5d4;&#xd2f0;&#xd2f0; &#xc815;&#xbcf4; &#xc778;&#xcf54;&#xb529;</li>\n<li><strong>nginx&#xb7;dnsmasq&#xb7;systemd</strong>: &#xc774;&#xb984; &#xd574;&#xc11d;, &#xc911;&#xacc4;, &#xc11c;&#xbe44;&#xc2a4; &#xc6b4;&#xc6a9;</li>\n<li><strong>Java&#xb7;Android</strong>: &#xc811;&#xc18d; &#xbcf4;&#xc870; &#xc571;, &#xc571; &#xc548; VPN</li>\n<li><strong>pytest</strong>: &#xd68c;&#xadc0;&#xb7;&#xb300;&#xc870; &#xd14c;&#xc2a4;&#xd2b8;</li>\n</ul>"}}],"payload":{"tag":"h2","lines":"9,10","count":3}},{"content":"&#xd504;&#xb85c;&#xc81d;&#xd2b8; &#xc18c;&#xac1c; <span class=\"mme-count\" aria-hidden=\"true\">+4</span>","children":[{"content":"&#xd480;&#xb824;&#xb294; &#xbb38;&#xc81c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"29,32","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc6d0;&#xbcf8; &#xc11c;&#xbc84; &#xc18c;&#xc2a4;&#xc640; &#xac8c;&#xc784; &#xb370;&#xc774;&#xd130;&#xac00; &#xc0ac;&#xb77c;&#xc838;, &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xb9cc; &#xb0a8;&#xc740; &#xac8c;&#xc784;&#xc744; &#xb2e4;&#xc2dc; &#xb3cc;&#xb824;&#xc57c; &#xd55c;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xc815;&#xb2f5;&#xc9c0;&#xb97c; &#xcea1;&#xcc98;&#xc5d0;&#xc11c; &#xcc3e;&#xb294;&#xb2e4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"32,35","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: 2021&#xb144;&#xc5d0; &#xae30;&#xb85d;&#xb41c; HTTP &#xcea1;&#xcc98;&#xb97c; &#xc815;&#xb2f5;&#xc9c0;&#xb85c; &#xc0bc;&#xace0;, &#xc11c;&#xbc84; &#xc751;&#xb2f5;&#xc744; &#xbc14;&#xc774;&#xd2b8; &#xb2e8;&#xc704;&#xb85c; &#xac19;&#xac8c; &#xb9cc;&#xb4e0;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;), &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xb3c4;&#xb2ec; &#xbc94;&#xc704; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"35,40","detail":"<ol>\n<li>&#xc5c5;&#xb370;&#xc774;&#xd2b8; &#xd655;&#xc778;, &#xb85c;&#xadf8;&#xc778;, &#xac8c;&#xc774;&#xd2b8; &#xc811;&#xc18d;, &#xb3c4;&#xc2dc; &#xd654;&#xba74; &#xc9c4;&#xc785;</li>\n<li>&#xd504;&#xb864;&#xb85c;&#xadf8;, &#xb3c4;&#xc2dc; 7&#xc77c; &#xbc18;&#xbcf5;, &#xc5d4;&#xb529;&#xacfc; &#xb2e4;&#xc74c; &#xd68c;&#xcc28;</li>\n<li>&#xc601;&#xc6c5; &#xc721;&#xc131;, &#xb358;&#xc804;&#xb958; &#xcf58;&#xd150;&#xce20;, &#xc774;&#xbca4;&#xd2b8; &#xd65c;&#xb3d9;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;</li>\n</ol>"}},{"content":"&#xc11c;&#xbc84;&#xb97c; &#xc571; &#xc548;&#xc5d0; &#xb123;&#xc740; &#xb2e8;&#xb3c5; &#xc2e4;&#xd589; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"40,44","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: PC &#xc11c;&#xbc84; &#xc5c6;&#xc774; &#xae30;&#xae30;&#xb9cc;&#xc73c;&#xb85c; &#xc2e4;&#xd589;&#xd558;&#xb294; &#xad6c;&#xc131;&#xae4c;&#xc9c0; &#xb9cc;&#xb4e4;&#xc5c8;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;, &#xc791;&#xc5c5; &#xc77c;&#xc9c0; &#xae30;&#xc900;</p>"}}],"payload":{"tag":"h2","lines":"28,29","count":4}},{"content":"&#xb0b4;&#xac00; &#xd55c; &#xc77c; <span class=\"mme-count\" aria-hidden=\"true\">+5</span>","children":[{"content":"&#xac1c;&#xc778; &#xd504;&#xb85c;&#xc81d;&#xd2b8; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"45,48","detail":"<p><strong>&#xae30;&#xc5ec;</strong>: &#xcee4;&#xbc0b; 230&#xac1c;&#xac00; &#xbaa8;&#xb450; &#xbcf8;&#xc778; &#xacc4;&#xc815; (&#xc791;&#xc131;&#xc790; &#xd45c;&#xae30;&#xb294; 3&#xc885;)<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;</p>"}},{"content":"&#xc11c;&#xbc84; &#xad6c;&#xd604; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"48,52","detail":"<p><strong>&#xae30;&#xc5ec;</strong>: &#xc11c;&#xbc84; &#xc601;&#xc5ed; &#xcee4;&#xbc0b; 87&#xac1c; &#xc911; 87&#xac1c; (100%)<br>\n<strong>&#xc8fc;&#xc694; &#xc791;&#xc5c5;</strong>: &#xbd80;&#xd305; &#xd750;&#xb984;, &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;, &#xacc4;&#xc815;&#xbcc4; &#xc0c1;&#xd0dc; &#xc800;&#xc7a5;, &#xae30;&#xb2a5;&#xbcc4; &#xaddc;&#xce59; &#xbaa8;&#xb4c8;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;</p>"}},{"content":"&#xd14c;&#xc2a4;&#xd2b8;&#xc640; &#xac80;&#xc99d; &#xb3c4;&#xad6c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"52,56","detail":"<p><strong>&#xae30;&#xc5ec;</strong>: &#xd14c;&#xc2a4;&#xd2b8; &#xcee4;&#xbc0b; 73&#xac1c;, &#xb3c4;&#xad6c; &#xcee4;&#xbc0b; 47&#xac1c;&#xc640; &#xb3c4;&#xad6c; &#xd14c;&#xc2a4;&#xd2b8; &#xcee4;&#xbc0b; 38&#xac1c;<br>\n<strong>&#xc8fc;&#xc694; &#xc791;&#xc5c5;</strong>: &#xcea1;&#xcc98; &#xb300;&#xc870;, RPC &#xaddc;&#xc57d; &#xac80;&#xc0ac;, &#xbcf5;&#xc6d0; &#xd30c;&#xc774;&#xd504;&#xb77c;&#xc778; &#xb3c4;&#xad6c;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;</p>"}},{"content":"&#xbd84;&#xc11d; &#xbb38;&#xc11c;&#xc640; &#xc791;&#xc5c5; &#xc77c;&#xc9c0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"56,59","detail":"<p><strong>&#xae30;&#xc5ec;</strong>: &#xbd84;&#xc11d; &#xbcf4;&#xace0;&#xc11c; &#xcee4;&#xbc0b; 46&#xac1c;, &#xc791;&#xc5c5; &#xc77c;&#xc9c0; &#xcee4;&#xbc0b; 57&#xac1c;, &#xd559;&#xc2b5; &#xae30;&#xb85d; &#xcee4;&#xbc0b; 43&#xac1c;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;</p>"}},{"content":"&#xbcf8;&#xc778; &#xd310;&#xb2e8;&#xc774; &#xd544;&#xc694;&#xd55c; &#xbd80;&#xbd84; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"59,63","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc124;&#xacc4; &#xd310;&#xb2e8;&#xacfc; &#xc5ed;&#xd560;&#xc758; &#xbc94;&#xc704;&#xb294; &#xcf54;&#xb4dc;&#xc640; &#xcee4;&#xbc0b;&#xb9cc;&#xc73c;&#xb85c; &#xc54c; &#xc218; &#xc5c6;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xba74;&#xc811;&#xc5d0;&#xc11c; &#xbcf8;&#xc778;&#xc774; &#xc124;&#xba85;</p>"}}],"payload":{"tag":"h2","lines":"44,45","count":5}},{"content":"&#xb3d9;&#xc791; &#xad6c;&#xc870; <span class=\"mme-count\" aria-hidden=\"true\">+10</span>","children":[{"content":"&#xad6c;&#xc131; &#xc694;&#xc18c; <span class=\"mme-count\" aria-hidden=\"true\">+7</span>","children":[{"content":"&#xc774;&#xb984; &#xd574;&#xc11d;&#xacfc; &#xc911;&#xacc4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"65,69","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xac8c;&#xc784; &#xb3c4;&#xba54;&#xc778;&#xc744; &#xbcf5;&#xc6d0; &#xc11c;&#xbc84;&#xb85c; &#xb3cc;&#xb9ac;&#xace0;, &#xc811;&#xc18d; &#xc885;&#xb958;&#xc5d0; &#xb530;&#xb77c; HTTP &#xc11c;&#xbe44;&#xc2a4;&#xc640; &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;&#xb85c; &#xb098;&#xb208;&#xb2e4;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#x2192; &#xc911;&#xacc4; &#x2192; HTTP &#xc11c;&#xbe44;&#xc2a4; &#xb610;&#xb294; &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"HTTP &#xc11c;&#xbe44;&#xc2a4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"69,73","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xc124;&#xc815;, &#xc5c5;&#xb370;&#xc774;&#xd2b8; &#xd655;&#xc778;, &#xb85c;&#xadf8;&#xc778;, &#xacb0;&#xc81c;, &#xd154;&#xb808;&#xba54;&#xd2b8;&#xb9ac; &#xc751;&#xb2f5;<br>\n<strong>&#xbc29;&#xc2dd;</strong>: 2021 &#xcea1;&#xcc98; &#xc751;&#xb2f5;&#xc744; &#xadf8;&#xb300;&#xb85c; &#xb3cc;&#xb824;&#xc8fc;&#xace0;, &#xcea1;&#xcc98;&#xc5d0; &#xc5c6;&#xb294; &#xc694;&#xccad;&#xc740; &#xacbd;&#xace0; &#xb85c;&#xadf8;&#xb97c; &#xb0a8;&#xae34;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"&#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"73,77","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xc6d0;&#xc2dc; TCP&#xb85c; &#xc811;&#xc18d;&#xc744; &#xbc1b;&#xc544; &#xae38;&#xc774; &#xc811;&#xb450; &#xd504;&#xb808;&#xc774;&#xbc0d;&#xacfc; protobuf &#xba54;&#xc2dc;&#xc9c0;&#xb97c; &#xcc98;&#xb9ac;&#xd55c;&#xb2e4;<br>\n<strong>&#xbc29;&#xc2dd;</strong>: &#xc811;&#xc18d; &#x2192; &#xacc4;&#xc815; &#xc5d4;&#xd2f0;&#xd2f0; &#x2192; &#xb85c;&#xadf8;&#xc778; &#xc815;&#xbcf4; &#xc218;&#xc2e0; &#x2192; &#xc544;&#xbc14;&#xd0c0; &#xc5d4;&#xd2f0;&#xd2f0; &#x2192; &#xd50c;&#xb808;&#xc774; &#xc804;&#xd658;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"&#xac8c;&#xc784; &#xaddc;&#xce59; &#xacc4;&#xce35; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"77,81","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xacc4;&#xc815; &#xc0c1;&#xd0dc;&#xb97c; &#xbc14;&#xafb8;&#xb294; &#xaddc;&#xce59;&#xc744; &#xae30;&#xb2a5; &#xb2e8;&#xc704; &#xbaa8;&#xb4c8;&#xb85c; &#xb098;&#xb208;&#xb2e4;<br>\n<strong>&#xbc29;&#xc2dd;</strong>: &#xd45c;(JSON) &#x2192; &#xaddc;&#xce59; &#x2192; &#xacc4;&#xc815; &#xc0c1;&#xd0dc; &#x2192; &#xc2a4;&#xb0c5;&#xc0f7;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"RPC &#xd578;&#xb4e4;&#xb7ec; &#xacc4;&#xce35; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"81,85","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xd638;&#xcd9c;&#xc744; &#xbc1b;&#xc544; &#xaddc;&#xce59;&#xc744; &#xbd80;&#xb974;&#xace0; &#xc751;&#xb2f5;&#xc744; &#xb9cc;&#xb4e0;&#xb2e4;<br>\n<strong>&#xbc29;&#xc2dd;</strong>: &#xd578;&#xb4e4;&#xb7ec;&#xc5d0; &#xd45c;&#xc2dc;&#xb9cc; &#xd558;&#xba74; &#xc790;&#xb3d9; &#xb4f1;&#xb85d;&#xb418;&#xace0;, &#xc774;&#xb984;&#xc774; &#xace7; &#xd638;&#xcd9c; &#xc774;&#xb984;&#xc774;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"&#xbcf5;&#xc6d0; &#xb3c4;&#xad6c; &#xd30c;&#xc774;&#xd504;&#xb77c;&#xc778; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"85,88","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd06c;&#xb9bd;&#xd2b8;&#xb97c; &#xc77d;&#xc744; &#xc218; &#xc788;&#xb294; Python &#xc18c;&#xc2a4;&#xb85c; &#xb418;&#xc0b4;&#xb9ac;&#xace0; RPC &#xbaa9;&#xb85d;&#xacfc; &#xb370;&#xc774;&#xd130; &#xd45c;&#xb97c; &#xbf51;&#xb294;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"&#xc571; &#xc548; &#xc11c;&#xbc84; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"88,91","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xae30;&#xae30; &#xc548;&#xc5d0;&#xc11c; &#xc11c;&#xbc84;&#xb97c; &#xbcc4;&#xb3c4; &#xd504;&#xb85c;&#xc138;&#xc2a4;&#xb85c; &#xc2e4;&#xd589;&#xd558;&#xace0;, &#xc571; &#xc548; VPN&#xc774; &#xc811;&#xc18d;&#xc744; &#xb3cc;&#xb824;&#xc900;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;, &#xc791;&#xc5c5; &#xc77c;&#xc9c0; &#xae30;&#xc900;</p>"}}],"payload":{"tag":"li","lines":"64,91","count":7}},{"content":"&#xbd80;&#xd305;&#xc5d0;&#xc11c; &#xb3c4;&#xc2dc; &#xc9c4;&#xc785;&#xae4c;&#xc9c0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"91,98","detail":"<ol>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xac8c;&#xc784; &#xb3c4;&#xba54;&#xc778;&#xc744; &#xc9c8;&#xc758;&#xd558;&#xace0;, &#xbcf5;&#xc6d0; &#xc11c;&#xbc84; &#xc8fc;&#xc18c;&#xb97c; &#xbc1b;&#xb294;&#xb2e4;</li>\n<li>&#xc5c5;&#xb370;&#xc774;&#xd2b8; &#xd655;&#xc778;&#xacfc; &#xc11c;&#xbc84; &#xbaa9;&#xb85d; &#xc694;&#xccad;&#xc774; HTTP &#xc11c;&#xbe44;&#xc2a4;&#xb85c; &#xac04;&#xb2e4;</li>\n<li>&#xb85c;&#xadf8;&#xc778; &#xc751;&#xb2f5;&#xc744; &#xbc1b;&#xace0;, &#xc11c;&#xbc84; &#xbaa9;&#xb85d;&#xc5d0; &#xc801;&#xd78c; &#xac8c;&#xc774;&#xd2b8; &#xc8fc;&#xc18c;&#xb85c; TCP &#xc811;&#xc18d;&#xd55c;&#xb2e4;</li>\n<li>&#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;&#xac00; &#xacc4;&#xc815; &#xc5d4;&#xd2f0;&#xd2f0;&#xc640; &#xc544;&#xbc14;&#xd0c0; &#xc5d4;&#xd2f0;&#xd2f0;&#xb97c; &#xb9cc;&#xb4e4;&#xc5b4; &#xbcf4;&#xb0b8;&#xb2e4;</li>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xb3c4;&#xc2dc; &#xd654;&#xba74;&#xc5d0; &#xc9c4;&#xc785;&#xd558;&#xace0; 5&#xcd08; &#xac04;&#xaca9;&#xc73c;&#xb85c; &#xc0dd;&#xc874; &#xc2e0;&#xd638;&#xb97c; &#xbcf4;&#xb0b8;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;, &#xcee4;&#xbc0b; &#xae30;&#xc900;</li>\n</ol>"}},{"content":"&#xaddc;&#xce59;&#xc744; &#xbcf5;&#xc6d0;&#xd558;&#xb294; &#xd750;&#xb984; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"98,106","detail":"<ol>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd06c;&#xb9bd;&#xd2b8;&#xb97c; &#xbcf5;&#xd638;&#xd654;&#xd55c;&#xb2e4;</li>\n<li>&#xbc14;&#xc774;&#xd2b8;&#xcf54;&#xb4dc;&#xb97c; &#xc7ac;&#xc791;&#xc131;&#xd574; Python &#xc18c;&#xc2a4;&#xb85c; &#xb418;&#xc0b4;&#xb9b0;&#xb2e4;</li>\n<li>&#xc18c;&#xc2a4;&#xc5d0;&#xc11c; RPC &#xbaa9;&#xb85d;&#xacfc; &#xb370;&#xc774;&#xd130; &#xd45c;&#xb97c; &#xbf51;&#xb294;&#xb2e4;</li>\n<li>&#xc11c;&#xbc84; &#xaddc;&#xce59;&#xc744; &#xad6c;&#xd604;&#xd558;&#xace0; &#xac00;&#xc9dc; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xb85c; &#xd14c;&#xc2a4;&#xd2b8;&#xd55c;&#xb2e4;</li>\n<li>&#xc5d0;&#xbbac;&#xb808;&#xc774;&#xd130; &#xd654;&#xba74;&#xacfc; &#xb85c;&#xadf8;&#xb85c; &#xd655;&#xc778;&#xd55c;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</li>\n</ol>"}}],"payload":{"tag":"h2","lines":"63,64","count":10}},{"content":"&#xae30;&#xc220; &#xc2a4;&#xd0dd;&#xacfc; &#xc120;&#xd0dd; <span class=\"mme-count\" aria-hidden=\"true\">+6</span>","children":[{"content":"Python&#xacfc; FastAPI <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"107,110","detail":"<p><strong>&#xb9e1;&#xb294; &#xc77c;</strong>: HTTP &#xc11c;&#xbe44;&#xc2a4;&#xc640; &#xb3c4;&#xad6c;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"asyncio &#xae30;&#xbc18; &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"110,113","detail":"<p><strong>&#xb9e1;&#xb294; &#xc77c;</strong>: &#xc6d0;&#xc2dc; TCP &#xc811;&#xc18d; &#xcc98;&#xb9ac;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"nginx stream &#xc911;&#xacc4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"113,116","detail":"<p><strong>&#xb9e1;&#xb294; &#xc77c;</strong>: TLS &#xc11c;&#xbc84;&#xba85;&#xc774; &#xc788;&#xb294; &#xc811;&#xc18d;&#xacfc; &#xc5c6;&#xb294; &#xc811;&#xc18d;&#xc744; &#xb098;&#xb220; &#xbcf4;&#xb0b8;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"Starlette &#xae30;&#xbc18; FastAPI &#xb300;&#xccb4; &#xd328;&#xd0a4;&#xc9c0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"116,120","detail":"<p><strong>&#xb9e1;&#xb294; &#xc77c;</strong>: &#xae30;&#xae30;&#xc5d0; &#xc62c;&#xb9b4; &#xc218; &#xc5c6;&#xb294; &#xc758;&#xc874;&#xc131;&#xc744; &#xd53c;&#xd55c;&#xb2e4;<br>\n<strong>&#xace0;&#xb978; &#xc774;&#xc720;</strong>: &#xbb38;&#xc11c;&#xc5d0; &#xc801;&#xd78c; &#xc774;&#xc720;&#xb294; &#xae30;&#xae30;&#xc6a9; &#xbe4c;&#xb4dc;&#xac00; &#xc5b4;&#xb835;&#xb2e4;&#xb294; &#xc810;&#xc774;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xc815;&#xc801; &#xbd84;&#xc11d; &#xc5d0;&#xc774;&#xc804;&#xd2b8; &#xb3c4;&#xad6c; REA <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"120,124","detail":"<p><strong>&#xb9e1;&#xb294; &#xc77c;</strong>: &#xb124;&#xc774;&#xd2f0;&#xbe0c;&#xb7;APK&#xb7;HTTP &#xcea1;&#xcc98;&#xb97c; &#xbd84;&#xc11d;&#xd558;&#xace0; &#xadfc;&#xac70; ID&#xb97c; &#xbc1c;&#xae09;&#xd55c;&#xb2e4;<br>\n<strong>&#xb3c4;&#xc785; &#xc2dc;&#xc810;</strong>: 2026.10 (&#xcee4;&#xbc0b; &#xae30;&#xc900;)<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;</p>"}},{"content":"&#xae30;&#xc220;&#xc744; &#xace0;&#xb978; &#xb2e4;&#xb978; &#xc774;&#xc720;&#xc640; &#xb300;&#xc548; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"124,128","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xbe44;&#xad50;&#xd55c; &#xb300;&#xc548;&#xacfc; &#xac10;&#xc218;&#xd55c; &#xb2e8;&#xc810;&#xc740; &#xc800;&#xc7a5;&#xc18c;&#xc5d0; &#xc5c6;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xba74;&#xc811;&#xc5d0;&#xc11c; &#xbcf8;&#xc778;&#xc774; &#xc124;&#xba85;</p>"}}],"payload":{"tag":"h2","lines":"106,107","count":6}},{"content":"&#xbb38;&#xc81c; &#xd574;&#xacb0; &#xae30;&#xb85d; <span class=\"mme-count\" aria-hidden=\"true\">+6</span>","children":[{"content":"&#xbb38;&#xc11c;&#xb294; &#xc644;&#xb8cc;&#xc778;&#xb370; &#xd604;&#xc2e4;&#xc740; &#xb3c4;&#xc2dc; &#xc9c4;&#xc785; 0&#xd68c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"129,135","detail":"<p><strong>&#xc99d;&#xc0c1;</strong>: &#xbb38;&#xc11c;&#xac00; &#xd55c; &#xb2e8;&#xacc4;&#xb97c; &#xc644;&#xb8cc;&#xb85c; &#xc801;&#xc5c8;&#xc9c0;&#xb9cc; &#xc5d0;&#xbbac;&#xb808;&#xc774;&#xd130;&#xb294; &#xc5c5;&#xb370;&#xc774;&#xd2b8; &#xb2e8;&#xacc4;&#xb97c; &#xd1b5;&#xacfc;&#xd558;&#xc9c0; &#xbabb;&#xd568;<br>\n<strong>&#xbcc0;&#xacbd;</strong>: 9&#xc6d4; &#xc2e4;&#xd5d8;&#xc73c;&#xb85c; &#xbc14;&#xb010; &#xc11c;&#xbc84; &#xc751;&#xb2f5;&#xc744; 2021 &#xcea1;&#xcc98; &#xc6d0;&#xbcf8;&#xc73c;&#xb85c; &#xb418;&#xb3cc;&#xb9ac;&#xace0;, DNS&#xc640; &#xc778;&#xc99d;&#xc11c; &#xad6c;&#xc131;&#xc744; &#xb2e4;&#xc2dc; &#xb9cc;&#xb4e6;<br>\n<strong>&#xc7ac;&#xbc1c; &#xbc29;&#xc9c0;</strong>: &#xc751;&#xb2f5; &#xae38;&#xc774;&#xc640; &#xd574;&#xc2dc;&#xb97c; &#xace0;&#xc815;&#xd55c; &#xd14c;&#xc2a4;&#xd2b8;, &#xcea1;&#xcc98; &#xb300;&#xc870; &#xb3c4;&#xad6c;<br>\n<strong>&#xadfc;&#xac70;</strong>: 2026.10 &#xbd84;&#xc11d; &#xbcf4;&#xace0;&#xc11c;&#xc640; &#xc791;&#xc5c5; &#xc77c;&#xc9c0;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;</p>"}},{"content":"&#xb85c;&#xadf8;&#xc778; &#xc2e4;&#xd328;&#xc758; &#xc6d0;&#xc778; &#xc624;&#xc9c4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"135,140","detail":"<p><strong>&#xc99d;&#xc0c1;</strong>: &#xb85c;&#xadf8;&#xc778;&#xc5d0; &#xc2e4;&#xd328;&#xd574; &#xac8c;&#xc774;&#xd2b8; &#xbb38;&#xc81c;&#xb85c; &#xbcf4;&#xc600;&#xc74c;<br>\n<strong>&#xbcc0;&#xacbd;</strong>: &#xc804; &#xd3ec;&#xd2b8; &#xd328;&#xd0b7; &#xcea1;&#xcc98;&#xb85c; &#xac8c;&#xc774;&#xd2b8; &#xc811;&#xc18d;&#xc774; 0&#xac74;&#xc784;&#xc744; &#xd655;&#xc778;&#xd558;&#xace0;, &#xc11c;&#xbc84; &#xbaa9;&#xb85d; &#xc751;&#xb2f5;&#xacfc; &#xc911;&#xacc4; &#xc124;&#xc815;&#xc744; &#xace0;&#xce68;<br>\n<strong>&#xadfc;&#xac70;</strong>: 2026.05 &#xbd84;&#xc11d; &#xbcf4;&#xace0;&#xc11c;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xc11c;&#xbc84; &#xd638;&#xcd9c; &#xd0a4;&#xac00; &#xd2c0;&#xb824; &#xd654;&#xba74;&#xc774; &#xba48;&#xcda4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"140,145","detail":"<p><strong>&#xc99d;&#xc0c1;</strong>: &#xd504;&#xb864;&#xb85c;&#xadf8; &#xb9f5;&#xc774; &#xbe44;&#xc5b4; &#xc788;&#xace0; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xc5d0; &#xc608;&#xc678;&#xac00; &#xb0a8;<br>\n<strong>&#xbcc0;&#xacbd;</strong>: &#xc11c;&#xbc84;&#xac00; &#xbcf4;&#xb0b4;&#xb294; &#xc804;&#xd22c; &#xb370;&#xc774;&#xd130;&#xc5d0; &#xbe60;&#xc9c4; &#xd0a4;&#xb97c; &#xcc44;&#xc6c0;<br>\n<strong>&#xc7ac;&#xbc1c; &#xbc29;&#xc9c0;</strong>: &#xac00;&#xc9dc; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xc11c;&#xbc84;&#xc758; &#xbaa8;&#xb4e0; &#xd638;&#xcd9c;&#xc744; &#xbcf5;&#xc6d0;&#xb41c; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd141;&#xacfc; &#xb300;&#xc870;&#xd558;&#xb294; &#xac80;&#xc0ac;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xc18c;&#xcf13;&#xc774; &#xb2eb;&#xd600; &#xb2e4;&#xc2dc; &#xc811;&#xc18d;&#xd558;&#xc9c0; &#xbabb;&#xd568; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"145,151","detail":"<p><strong>&#xc99d;&#xc0c1;</strong>: &#xac8c;&#xc784;&#xb9cc; &#xc885;&#xb8cc;&#xd558;&#xace0; &#xb2e4;&#xc2dc; &#xcf1c;&#xba74; &#xc571; &#xc548; &#xc11c;&#xbc84;&#xc5d0; &#xc811;&#xc18d;&#xd558;&#xc9c0; &#xbabb;&#xd568;<br>\n<strong>&#xc6d0;&#xc778;</strong>: VPN &#xc7a5;&#xce58;&#xac00; &#xc0ac;&#xb77c;&#xc9c0;&#xba74; &#xc548;&#xb4dc;&#xb85c;&#xc774;&#xb4dc;&#xac00; &#xb4e3;&#xb294; &#xc18c;&#xcf13;&#xc744; &#xb2eb;&#xc74c;<br>\n<strong>&#xbcc0;&#xacbd;</strong>: &#xb2eb;&#xd78c; &#xc18c;&#xcf13;&#xc744; &#xc11c;&#xbc84;&#xac00; &#xc2a4;&#xc2a4;&#xb85c; &#xb2e4;&#xc2dc; &#xc5f4;&#xace0;, &#xc811;&#xc18d; &#xd654;&#xba74;&#xc774; &#xb2e8;&#xacc4;&#xc801;&#xc73c;&#xb85c; &#xbcf5;&#xad6c;<br>\n<strong>&#xb193;&#xce5c; &#xc774;&#xc720;</strong>: &#xae30;&#xc874; &#xd14c;&#xc2a4;&#xd2b8;&#xac00; &#xd56d;&#xc0c1; &#xb450; &#xd504;&#xb85c;&#xc138;&#xc2a4;&#xb97c; &#xd568;&#xaed8; &#xc885;&#xb8cc;&#xd574; &#xc774; &#xacbd;&#xc6b0;&#xb97c; &#xb2e4;&#xb8e8;&#xc9c0; &#xbabb;&#xd568;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xb85c;&#xadf8;&#xc5d0; &#xd3c9;&#xbb38; &#xbe44;&#xbc00;&#xbc88;&#xd638;&#xac00; &#xb0a8;&#xc74c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"151,155","detail":"<p><strong>&#xc99d;&#xc0c1;</strong>: &#xae30;&#xae30; &#xb85c;&#xadf8;&#xc5d0;&#xc11c; &#xd3c9;&#xbb38; &#xbe44;&#xbc00;&#xbc88;&#xd638;&#xac00; &#xc5ec;&#xb7ec; &#xacf3; &#xbc1c;&#xacac;&#xb428;<br>\n<strong>&#xbcc0;&#xacbd;</strong>: &#xb85c;&#xadf8;&#xb97c; &#xc4f0;&#xae30; &#xc804;&#xc5d0; &#xac00;&#xb9bc; &#xcc98;&#xb9ac;&#xd558;&#xace0;, &#xc77c;&#xce58; 0&#xac74;&#xc744; &#xd655;&#xc778;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xac00;&#xc124;&#xc744; &#xbc84;&#xb9ac;&#xace0; &#xc6d0;&#xc778;&#xc744; &#xcc3e;&#xc74c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"155,161","detail":"<p><strong>&#xc99d;&#xc0c1;</strong>: &#xbd84;&#xc11d; &#xb3c4;&#xad6c;&#xc758; &#xd55c; &#xae30;&#xb2a5;&#xc774; 30&#xcd08; &#xc2dc;&#xac04; &#xcd08;&#xacfc;<br>\n<strong>&#xacfc;&#xc815;</strong>: &#xcc98;&#xc74c; &#xcd94;&#xc815;&#xd55c; &#xbc84;&#xc804; &#xc870;&#xd569; &#xac00;&#xc124;&#xc744; &#xbc84;&#xb9ac;&#xace0;, &#xcd5c;&#xc18c; &#xd658;&#xacbd;&#xacfc; &#xbe44;&#xad50;&#xd574; &#xc678;&#xbd80; &#xc870;&#xd68c; &#xc124;&#xc815;&#xc774; &#xc6d0;&#xc778;&#xc784;&#xc744; &#xcc3e;&#xc74c;<br>\n<strong>&#xacb0;&#xacfc;</strong>: 2.1&#xcd08;&#xb85c; &#xb2e8;&#xcd95;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}}],"payload":{"tag":"h2","lines":"128,129","count":6}},{"content":"<span class=\"mme-more\" data-n=\"3\"></span>","children":[],"payload":{"more":true,"count":3}},{"content":"&#xd488;&#xc9c8;&#xacfc; &#xc6b4;&#xc601; <span class=\"mme-count\" aria-hidden=\"true\">+5</span>","children":[{"content":"&#xd14c;&#xc2a4;&#xd2b8; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"162,169","detail":"<ul>\n<li><strong>&#xaddc;&#xbaa8;</strong>: &#xd14c;&#xc2a4;&#xd2b8; &#xd568;&#xc218; &#xc57d; 3,200&#xac1c; (&#xc815;&#xc801; &#xc9d1;&#xacc4;), &#xcee4;&#xbc0b; &#xba54;&#xc2dc;&#xc9c0;&#xc5d0; &#xc801;&#xd78c; &#xd1b5;&#xacfc; &#xc218;&#xb294; 10&#xc6d4; 18&#xc77c; &#xae30;&#xc900; 3,848&#xac1c;</li>\n<li><strong>&#xc640;&#xc774;&#xc5b4; &#xac80;&#xc0ac;</strong>: &#xd14c;&#xc2a4;&#xd2b8; &#xd30c;&#xc77c; 100&#xc5ec; &#xac1c;&#xac00; &#xac00;&#xc9dc; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xb97c; &#xc4f0;&#xace0;, &#xc11c;&#xbc84;&#xc758; &#xbaa8;&#xb4e0; &#xd638;&#xcd9c;&#xc744; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd141;&#xacfc; &#xb300;&#xc870;</li>\n<li><strong>&#xcea1;&#xcc98; &#xb300;&#xc870;</strong>: &#xc815;&#xc801; &#xc751;&#xb2f5;&#xc758; &#xae38;&#xc774;&#xc640; &#xd574;&#xc2dc;&#xb97c; &#xace0;&#xc815;</li>\n<li><strong>&#xc6d0;&#xbcf8; &#xb300;&#xc870;</strong>: &#xb2a5;&#xb825;&#xce58; &#xacc4;&#xc0b0;&#xc744; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc18c;&#xc2a4;&#xb85c; &#xc2e4;&#xd589;&#xd55c; &#xacb0;&#xacfc;&#xc640; &#xb9de;&#xcda4; (&#xc601;&#xc6c5; 160&#xba85;, &#xc7a5;&#xbe44; 492&#xac1c;, &#xcc28;&#xc774; 0 &#x2014; &#xbd84;&#xc11d; &#xbcf4;&#xace0;&#xc11c; &#xae30;&#xc900;)</li>\n<li><strong>&#xacb0;&#xc815;&#xc131;</strong>: &#xc11c;&#xbc84; &#xc2dc;&#xacc4;&#xc640; &#xb09c;&#xc218; &#xc2dc;&#xb4dc;&#xb97c; &#xd14c;&#xc2a4;&#xd2b8;&#xc5d0;&#xc11c; &#xace0;&#xc815;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc815;&#xc801; &#xc9d1;&#xacc4;. &#xd14c;&#xc2a4;&#xd2b8; &#xc2e4;&#xd589;&#xc740; &#xc9c1;&#xc811; &#xd558;&#xc9c0; &#xc54a;&#xc74c;</li>\n</ul>"}},{"content":"&#xae30;&#xae30; &#xad6c;&#xc131; &#xb300;&#xc870; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"169,172","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xac19;&#xc740; &#xd14c;&#xc2a4;&#xd2b8;&#xb97c; &#xae30;&#xae30; &#xad6c;&#xc131;&#xc5d0;&#xc11c;&#xb3c4; &#xb3cc;&#xb9ac;&#xace0; &#xc9c4;&#xc9dc; FastAPI&#xc640; &#xc751;&#xb2f5; 119&#xac74;&#xc744; &#xbe44;&#xad50;<br>\n<strong>&#xacb0;&#xacfc;</strong>: &#xac19;&#xc74c; 113, &#xc54c;&#xb824;&#xc9c4; &#xcc28;&#xc774; 6, &#xbb38;&#xc81c; 0 (&#xcee4;&#xbc0b; &#xba54;&#xc2dc;&#xc9c0; &#xae30;&#xc900;)</p>"}},{"content":"CI&#xc640; &#xbc30;&#xd3ec; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"172,175","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: CI &#xc124;&#xc815;&#xc740; &#xc5c6;&#xb2e4;. &#xc11c;&#xbc84;&#xb294; systemd &#xc11c;&#xbe44;&#xc2a4;&#xc640; nginx, dnsmasq&#xb85c; &#xc6b4;&#xc6a9;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xcf54;&#xb4dc; &#xd655;&#xc778; (&#xbe44;&#xacf5;&#xac1c;)</p>"}},{"content":"&#xc5d0;&#xb7ec; &#xcc98;&#xb9ac;&#xc640; &#xb85c;&#xae45; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"175,180","detail":"<ul>\n<li><strong>PC &#xc11c;&#xbc84;</strong>: &#xb85c;&#xadf8;&#xb97c; &#xd30c;&#xc77c;&#xb85c; &#xc601;&#xad6c; &#xae30;&#xb85d;&#xd558;&#xace0;, &#xd328;&#xd0b7;&#xacfc; &#xae30;&#xae30; &#xb85c;&#xadf8;&#xb97c; &#xc0c1;&#xc2dc; &#xc218;&#xc9d1;</li>\n<li><strong>&#xc571; &#xc548; &#xc11c;&#xbc84;</strong>: &#xc870;&#xac01; &#xd30c;&#xc77c;, &#xcd1d;&#xb7c9; 300MB &#xc81c;&#xd55c;, &#xbc18;&#xbcf5; &#xc904;&#xc774;&#xae30;, &#xbe44;&#xbc00;&#xac12; &#xac00;&#xb9ac;&#xae30;</li>\n<li><strong>&#xac8c;&#xc774;&#xd2b8;</strong>: &#xc608;&#xc678; &#xaca9;&#xb9ac;, &#xc911;&#xbcf5; &#xb85c;&#xadf8;&#xc778; &#xc815;&#xb9ac;, &#xd1a0;&#xd070; &#xb300;&#xc870;, &#xbe60;&#xb978; &#xc885;&#xb8cc; (&#xc885;&#xb8cc; 90&#xcd08; &#x2192; 1&#xcd08;)<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xcee4;&#xbc0b; &#xae30;&#xc900;</li>\n</ul>"}},{"content":"&#xc99d;&#xac70; &#xac8c;&#xc774;&#xd2b8; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"180,184","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc11c;&#xbc84; &#xc751;&#xb2f5;&#xc740; &#xd328;&#xd0b7; &#xadfc;&#xac70;&#xc640; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc18c;&#xc2a4; &#xadfc;&#xac70;&#xb97c; &#xbaa8;&#xb450; &#xd655;&#xc778;&#xd558;&#xace0;, &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xbcc0;&#xacbd;&#xc740; &#xbcc4;&#xb3c4; &#xc815;&#xb2f9;&#xd654;&#xb97c; &#xbb38;&#xc11c;&#xb85c; &#xb0a8;&#xae30;&#xba70;, &#xc644;&#xb8cc; &#xc870;&#xac74;&#xc5d0; &#xd68c;&#xadc0; &#xd14c;&#xc2a4;&#xd2b8; 1&#xac1c; &#xc774;&#xc0c1;&#xc774; &#xb4e4;&#xc5b4;&#xac04;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}}],"payload":{"tag":"h2","lines":"161,162","count":5}},{"content":"&#xd55c;&#xacc4;&#xc640; &#xac1c;&#xc120; &#xbc29;&#xd5a5; <span class=\"mme-count\" aria-hidden=\"true\">+7</span>","children":[{"content":"&#xc6d0;&#xbcf8; &#xc11c;&#xbc84;&#xc758; &#xaddc;&#xce59;&#xc744; &#xbaa8;&#xb978;&#xb2e4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"185,188","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xc5d0; &#xc5c6;&#xb294; &#xc11c;&#xbc84; &#xaddc;&#xce59; &#xb2e4;&#xc218;&#xb294; &#xcd94;&#xb860;&#xc774;&#xba70;, &#xcf54;&#xb4dc; &#xc8fc;&#xc11d;&#xc774; &#xadfc;&#xac70; &#xb4f1;&#xae09;&#xc744; &#xd45c;&#xae30;&#xd55c;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"RPC &#xad6c;&#xd604; &#xbc94;&#xc704; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"188,191","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc815;&#xc801; &#xc9d1;&#xacc4;&#xb85c; &#xc11c;&#xbc84; &#xd638;&#xcd9c; 1,334&#xac1c; &#xc911; &#xc57d; 48.5%&#xc5d0; &#xd578;&#xb4e4;&#xb7ec;&#xb098; &#xc758;&#xb3c4;&#xc801; &#xbb34;&#xc751;&#xb2f5;&#xc774; &#xc788;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc815;&#xc801; &#xc9d1;&#xacc4;</p>"}},{"content":"&#xac8c;&#xc774;&#xd2b8; &#xd2b8;&#xb798;&#xd53d;&#xc758; &#xc815;&#xb2f5;&#xc9c0;&#xac00; &#xc5c6;&#xb2e4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"191,194","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: 2021 &#xcea1;&#xcc98;&#xb294; HTTP &#xb85c;&#xadf8;&#xc778; &#xad6c;&#xac04;&#xbfd0;&#xc774;&#xb77c; &#xac8c;&#xc774;&#xd2b8; &#xad6c;&#xac04;&#xc740; &#xc815;&#xb2f5;&#xc9c0;&#xac00; &#xc5c6;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xc804;&#xd22c; &#xc11c;&#xbc84;&#xac00; &#xc5c6;&#xb2e4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"194,197","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc628;&#xb77c;&#xc778; &#xc804;&#xd22c;&#xac00; &#xd544;&#xc694;&#xd55c; &#xcf58;&#xd150;&#xce20;&#xb294; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xc2a4;&#xc2a4;&#xb85c; &#xc804;&#xd22c;&#xb97c; &#xacc4;&#xc0b0;&#xd558;&#xac8c; &#xb3cc;&#xb824;&#xbcf4;&#xb0b8;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xbb38;&#xc11c; &#xac04; &#xbd88;&#xc77c;&#xce58; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"197,200","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc11c;&#xbc84; &#xc2dc;&#xacc4; &#xad6c;&#xac04;&#xc774; &#xbb38;&#xc11c;&#xb294; 30&#xc8fc;, &#xcf54;&#xb4dc;&#xb294; 26&#xc8fc;&#xb85c; &#xc5b4;&#xae0b;&#xb098;&#xb294; &#xb4f1; &#xac31;&#xc2e0;&#xb418;&#xc9c0; &#xc54a;&#xc740; &#xc11c;&#xc220;&#xc774; &#xc788;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c;&#xc640; &#xcf54;&#xb4dc; &#xb300;&#xc870;</p>"}},{"content":"&#xc571; &#xc548; &#xc11c;&#xbc84;&#xc758; &#xc81c;&#xc57d; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"200,203","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: 64&#xbe44;&#xd2b8;&#xc640; API 24 &#xc774;&#xc0c1;, VPN &#xd5c8;&#xc6a9; &#xd544;&#xc694;, &#xb2e4;&#xb978; VPN&#xacfc; &#xd568;&#xaed8; &#xc4f8; &#xc218; &#xc5c6;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xc6d0;&#xbcf8; &#xbb38;&#xc11c; &#xae30;&#xc900;</p>"}},{"content":"&#xc9c0;&#xae08;&#xc774;&#xb77c;&#xba74; &#xbc14;&#xafc0; &#xac83; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"203,207","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xbcf8;&#xc778;&#xc758; &#xd68c;&#xace0;&#xb294; &#xc800;&#xc7a5;&#xc18c;&#xc5d0; &#xc5c6;&#xb2e4;<br>\n<strong>&#xd655;&#xc778; &#xc218;&#xc900;</strong>: &#xba74;&#xc811;&#xc5d0;&#xc11c; &#xbcf8;&#xc778;&#xc774; &#xc124;&#xba85;</p>"}}],"payload":{"tag":"h2","lines":"184,185","count":7}},{"content":"&#xc774;&#xd574;&#xb97c; &#xc704;&#xd55c; &#xbc30;&#xacbd;&#xc9c0;&#xc2dd; <span class=\"mme-count\" aria-hidden=\"true\">+9</span>","children":[{"content":"&#xb3c4;&#xba54;&#xc778; &#xc6a9;&#xc5b4; <span class=\"mme-count\" aria-hidden=\"true\">+4</span>","children":[{"content":"&#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"209,211","detail":"<p><strong>&#xb73b;</strong>: &#xb85c;&#xadf8;&#xc778; &#xc774;&#xd6c4;&#xc758; &#xac8c;&#xc784; &#xd1b5;&#xc2e0;&#xc744; &#xbc1b;&#xb294; &#xc6d0;&#xc2dc; TCP &#xc11c;&#xbc84;</p>"}},{"content":"&#xc5d4;&#xd2f0;&#xd2f0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"211,213","detail":"<p><strong>&#xb73b;</strong>: &#xc11c;&#xbc84;&#xc640; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xac19;&#xc774; &#xb4e4;&#xace0; &#xc788;&#xb294; &#xac1d;&#xccb4;. &#xacc4;&#xc815;&#xacfc; &#xc544;&#xbc14;&#xd0c0;&#xac00; &#xc788;&#xb2e4;</p>"}},{"content":"&#xc2a4;&#xb0c5;&#xc0f7; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"213,215","detail":"<p><strong>&#xb73b;</strong>: &#xb85c;&#xadf8;&#xc778; &#xb54c; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xc5d0; &#xd55c;&#xaebc;&#xbc88;&#xc5d0; &#xbcf4;&#xb0b4;&#xb294; &#xacc4;&#xc815; &#xc0c1;&#xd0dc;</p>"}},{"content":"&#xc11c;&#xbc84; &#xc2dc;&#xacc4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"215,217","detail":"<p><strong>&#xb73b;</strong>: &#xd55c;&#xc815; &#xc774;&#xbca4;&#xd2b8;&#xb97c; &#xb2e4;&#xc2dc; &#xc5f4;&#xae30; &#xc704;&#xd574; &#xc11c;&#xbe44;&#xc2a4; &#xb9d0;&#xae30; &#xad6c;&#xac04;&#xc744; &#xb418;&#xd480;&#xc774;&#xd558;&#xb294; &#xc11c;&#xbc84; &#xcabd; &#xb0a0;&#xc9dc;</p>"}}],"payload":{"tag":"li","lines":"208,217","count":4}},{"content":"&#xc804;&#xc81c; &#xae30;&#xc220; &#xac1c;&#xb150; <span class=\"mme-count\" aria-hidden=\"true\">+2</span>","children":[{"content":"RPC <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"218,221","detail":"<p><strong>&#xb73b;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xc640; &#xc11c;&#xbc84;&#xac00; &#xc774;&#xb984;&#xc73c;&#xb85c; &#xc11c;&#xb85c;&#xc758; &#xd568;&#xc218;&#xb97c; &#xbd80;&#xb974;&#xb294; &#xbc29;&#xc2dd;<br>\n<strong>&#xc774; &#xd504;&#xb85c;&#xc81d;&#xd2b8;&#xc5d0;&#xc11c;</strong>: &#xd638;&#xcd9c; &#xc774;&#xb984;&#xc740; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc18c;&#xc2a4;&#xc5d0;&#xc11c; &#xbf51;&#xb294;&#xb2e4;</p>"}},{"content":"&#xbc14;&#xc774;&#xd2b8;&#xcf54;&#xb4dc; &#xbcf5;&#xc6d0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"221,223","detail":"<p><strong>&#xc774; &#xd504;&#xb85c;&#xc81d;&#xd2b8;&#xc5d0;&#xc11c;</strong>: &#xc554;&#xd638;&#xd654;&#xb41c; &#xac8c;&#xc784; &#xc2a4;&#xd06c;&#xb9bd;&#xd2b8;&#xb97c; &#xbcf5;&#xd638;&#xd654;&#xd558;&#xace0;, &#xc635;&#xcf54;&#xb4dc; &#xd45c;&#xb97c; &#xb9de;&#xcdb0; &#xc18c;&#xc2a4;&#xb85c; &#xb418;&#xc0b4;&#xb9b0;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"217,223","count":2}},{"content":"&#xc2dc;&#xc2a4;&#xd15c; &#xacbd;&#xacc4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"223,228","detail":"<table>\n<thead>\n<tr>\n<th>&#xc548;</th>\n<th>&#xbc16;</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>&#xbcf5;&#xc6d0; &#xc11c;&#xbc84;, &#xb3c4;&#xad6c;, &#xd14c;&#xc2a4;&#xd2b8;</td>\n<td>&#xc6d0;&#xbcf8; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xc640; &#xac8c;&#xc784; &#xb370;&#xc774;&#xd130;</td>\n</tr>\n<tr>\n<td>&#xc811;&#xc18d; &#xbcf4;&#xc870; &#xc571;</td>\n<td>&#xc6d0; &#xc11c;&#xbe44;&#xc2a4;&#xc758; &#xc11c;&#xbc84;</td>\n</tr>\n</tbody>\n</table>"}}],"payload":{"tag":"h2","lines":"207,208","count":9}},{"content":"<span class=\"mme-less\" data-n=\"3\"></span>","children":[],"payload":{"less":true,"count":3}}],"payload":{"tag":"h1","lines":"7,8","count":64}},{"maxWidth":320,"initialExpandLevel":2,"maxInitialScale":1.4,"spacingVertical":8,"paddingX":10})</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+    <textarea id="original-markdown" style="display:none;">---
+title: 영원한 7일의 도시 서버 복원 — 면접관 관점
+description: 무엇을, 어떻게, 얼마나 깊이 했는지. 노드 상세에 근거와 확인 수준
+markmap:
+  initialExpandLevel: 2
+---
+
+# 영원한 7일의 도시 서버 복원
+
+## 한눈에 보기
+- 한 줄 정의
+  &gt; **정의**: 서비스가 종료된 모바일 게임의 서버를, 남아 있는 2021년 네트워크 캡처와 클라이언트 분석만으로 다시 만들어 에뮬레이터와 실기기에서 플레이되게 한 프로젝트
+  &gt; **확인 수준**: 원본 문서 기준
+- 기간과 규모
+  &gt; | 항목 | 값 | 근거 |
+  &gt; |---|---|---|
+  &gt; | 기간 | 2026.05 ~ 2026.10 | 커밋 기준 |
+  &gt; | 커밋 | 230개 (작성자 표기 3종, 모두 본인) | 커밋 기준 |
+  &gt; | 서버 코드 | 약 5.6만 줄 | 정적 집계 |
+  &gt; | 테스트 코드 | 약 5.2만 줄, 테스트 함수 약 3,200개 | 정적 집계 (실행 결과 아님) |
+- 기술 스택
+  &gt; - **Python**: 서버, 도구, 테스트
+  &gt; - **FastAPI·asyncio**: HTTP 서비스, 원시 TCP 게이트 서버
+  &gt; - **protobuf·msgpack·BSON·zlib**: 게이트 메시지와 엔티티 정보 인코딩
+  &gt; - **nginx·dnsmasq·systemd**: 이름 해석, 중계, 서비스 운용
+  &gt; - **Java·Android**: 접속 보조 앱, 앱 안 VPN
+  &gt; - **pytest**: 회귀·대조 테스트
+
+## 프로젝트 소개
+- 풀려는 문제
+  &gt; **내용**: 원본 서버 소스와 게임 데이터가 사라져, 클라이언트만 남은 게임을 다시 돌려야 한다
+  &gt; **확인 수준**: 원본 문서 기준
+- 정답지를 캡처에서 찾는다
+  &gt; **내용**: 2021년에 기록된 HTTP 캡처를 정답지로 삼고, 서버 응답을 바이트 단위로 같게 만든다
+  &gt; **확인 수준**: 코드 확인 (비공개), 원본 문서 기준
+- 도달 범위
+  &gt; 1. 업데이트 확인, 로그인, 게이트 접속, 도시 화면 진입
+  &gt; 2. 프롤로그, 도시 7일 반복, 엔딩과 다음 회차
+  &gt; 3. 영웅 육성, 던전류 콘텐츠, 이벤트 활동
+  &gt; **확인 수준**: 커밋 기준
+- 서버를 앱 안에 넣은 단독 실행
+  &gt; **내용**: PC 서버 없이 기기만으로 실행하는 구성까지 만들었다
+  &gt; **확인 수준**: 커밋 기준, 작업 일지 기준
+
+## 내가 한 일
+- 개인 프로젝트
+  &gt; **기여**: 커밋 230개가 모두 본인 계정 (작성자 표기는 3종)
+  &gt; **확인 수준**: 커밋 기준
+- 서버 구현
+  &gt; **기여**: 서버 영역 커밋 87개 중 87개 (100%)
+  &gt; **주요 작업**: 부팅 흐름, 게이트 서버, 계정별 상태 저장, 기능별 규칙 모듈
+  &gt; **확인 수준**: 커밋 기준
+- 테스트와 검증 도구
+  &gt; **기여**: 테스트 커밋 73개, 도구 커밋 47개와 도구 테스트 커밋 38개
+  &gt; **주요 작업**: 캡처 대조, RPC 규약 검사, 복원 파이프라인 도구
+  &gt; **확인 수준**: 커밋 기준
+- 분석 문서와 작업 일지
+  &gt; **기여**: 분석 보고서 커밋 46개, 작업 일지 커밋 57개, 학습 기록 커밋 43개
+  &gt; **확인 수준**: 커밋 기준
+- 본인 판단이 필요한 부분
+  &gt; **내용**: 설계 판단과 역할의 범위는 코드와 커밋만으로 알 수 없다
+  &gt; **확인 수준**: 면접에서 본인이 설명
+
+## 동작 구조
+- 구성 요소
+  - 이름 해석과 중계
+    &gt; **역할**: 게임 도메인을 복원 서버로 돌리고, 접속 종류에 따라 HTTP 서비스와 게이트 서버로 나눈다
+    &gt; **연결**: 클라이언트 → 중계 → HTTP 서비스 또는 게이트 서버
+    &gt; **확인 수준**: 원본 코드 확인 (비공개)
+  - HTTP 서비스
+    &gt; **역할**: 설정, 업데이트 확인, 로그인, 결제, 텔레메트리 응답
+    &gt; **방식**: 2021 캡처 응답을 그대로 돌려주고, 캡처에 없는 요청은 경고 로그를 남긴다
+    &gt; **확인 수준**: 원본 코드 확인 (비공개)
+  - 게이트 서버
+    &gt; **역할**: 원시 TCP로 접속을 받아 길이 접두 프레이밍과 protobuf 메시지를 처리한다
+    &gt; **방식**: 접속 → 계정 엔티티 → 로그인 정보 수신 → 아바타 엔티티 → 플레이 전환
+    &gt; **확인 수준**: 원본 코드 확인 (비공개)
+  - 게임 규칙 계층
+    &gt; **역할**: 계정 상태를 바꾸는 규칙을 기능 단위 모듈로 나눈다
+    &gt; **방식**: 표(JSON) → 규칙 → 계정 상태 → 스냅샷
+    &gt; **확인 수준**: 원본 코드 확인 (비공개)
+  - RPC 핸들러 계층
+    &gt; **역할**: 클라이언트 호출을 받아 규칙을 부르고 응답을 만든다
+    &gt; **방식**: 핸들러에 표시만 하면 자동 등록되고, 이름이 곧 호출 이름이다
+    &gt; **확인 수준**: 원본 코드 확인 (비공개)
+  - 복원 도구 파이프라인
+    &gt; **역할**: 클라이언트 스크립트를 읽을 수 있는 Python 소스로 되살리고 RPC 목록과 데이터 표를 뽑는다
+    &gt; **확인 수준**: 원본 코드 확인 (비공개)
+  - 앱 안 서버
+    &gt; **역할**: 기기 안에서 서버를 별도 프로세스로 실행하고, 앱 안 VPN이 접속을 돌려준다
+    &gt; **확인 수준**: 커밋 기준, 작업 일지 기준
+- 부팅에서 도시 진입까지
+  &gt; 1. 클라이언트가 게임 도메인을 질의하고, 복원 서버 주소를 받는다
+  &gt; 2. 업데이트 확인과 서버 목록 요청이 HTTP 서비스로 간다
+  &gt; 3. 로그인 응답을 받고, 서버 목록에 적힌 게이트 주소로 TCP 접속한다
+  &gt; 4. 게이트 서버가 계정 엔티티와 아바타 엔티티를 만들어 보낸다
+  &gt; 5. 클라이언트가 도시 화면에 진입하고 5초 간격으로 생존 신호를 보낸다
+  &gt; **확인 수준**: 원본 문서 기준, 커밋 기준
+- 규칙을 복원하는 흐름
+  &gt; 1. 클라이언트 스크립트를 복호화한다
+  &gt; 2. 바이트코드를 재작성해 Python 소스로 되살린다
+  &gt; 3. 소스에서 RPC 목록과 데이터 표를 뽑는다
+  &gt; 4. 서버 규칙을 구현하고 가짜 클라이언트로 테스트한다
+  &gt; 5. 에뮬레이터 화면과 로그로 확인한다
+  &gt; **확인 수준**: 원본 문서 기준
+
+## 기술 스택과 선택
+- Python과 FastAPI
+  &gt; **맡는 일**: HTTP 서비스와 도구
+  &gt; **확인 수준**: 원본 코드 확인 (비공개)
+- asyncio 기반 게이트 서버
+  &gt; **맡는 일**: 원시 TCP 접속 처리
+  &gt; **확인 수준**: 원본 코드 확인 (비공개)
+- nginx stream 중계
+  &gt; **맡는 일**: TLS 서버명이 있는 접속과 없는 접속을 나눠 보낸다
+  &gt; **확인 수준**: 원본 코드 확인 (비공개)
+- Starlette 기반 FastAPI 대체 패키지
+  &gt; **맡는 일**: 기기에 올릴 수 없는 의존성을 피한다
+  &gt; **고른 이유**: 문서에 적힌 이유는 기기용 빌드가 어렵다는 점이다
+  &gt; **확인 수준**: 원본 문서 기준
+- 정적 분석 에이전트 도구 REA
+  &gt; **맡는 일**: 네이티브·APK·HTTP 캡처를 분석하고 근거 ID를 발급한다
+  &gt; **도입 시점**: 2026.10 (커밋 기준)
+  &gt; **확인 수준**: 커밋 기준
+- 기술을 고른 다른 이유와 대안
+  &gt; **내용**: 비교한 대안과 감수한 단점은 저장소에 없다
+  &gt; **확인 수준**: 면접에서 본인이 설명
+
+## 문제 해결 기록
+- 문서는 완료인데 현실은 도시 진입 0회
+  &gt; **증상**: 문서가 한 단계를 완료로 적었지만 에뮬레이터는 업데이트 단계를 통과하지 못함
+  &gt; **변경**: 9월 실험으로 바뀐 서버 응답을 2021 캡처 원본으로 되돌리고, DNS와 인증서 구성을 다시 만듦
+  &gt; **재발 방지**: 응답 길이와 해시를 고정한 테스트, 캡처 대조 도구
+  &gt; **근거**: 2026.10 분석 보고서와 작업 일지
+  &gt; **확인 수준**: 커밋 기준
+- 로그인 실패의 원인 오진
+  &gt; **증상**: 로그인에 실패해 게이트 문제로 보였음
+  &gt; **변경**: 전 포트 패킷 캡처로 게이트 접속이 0건임을 확인하고, 서버 목록 응답과 중계 설정을 고침
+  &gt; **근거**: 2026.05 분석 보고서
+  &gt; **확인 수준**: 원본 문서 기준
+- 서버 호출 키가 틀려 화면이 멈춤
+  &gt; **증상**: 프롤로그 맵이 비어 있고 클라이언트에 예외가 남
+  &gt; **변경**: 서버가 보내는 전투 데이터에 빠진 키를 채움
+  &gt; **재발 방지**: 가짜 클라이언트가 서버의 모든 호출을 복원된 클라이언트 스텁과 대조하는 검사
+  &gt; **확인 수준**: 원본 문서 기준
+- 소켓이 닫혀 다시 접속하지 못함
+  &gt; **증상**: 게임만 종료하고 다시 켜면 앱 안 서버에 접속하지 못함
+  &gt; **원인**: VPN 장치가 사라지면 안드로이드가 듣는 소켓을 닫음
+  &gt; **변경**: 닫힌 소켓을 서버가 스스로 다시 열고, 접속 화면이 단계적으로 복구
+  &gt; **놓친 이유**: 기존 테스트가 항상 두 프로세스를 함께 종료해 이 경우를 다루지 못함
+  &gt; **확인 수준**: 원본 문서 기준
+- 로그에 평문 비밀번호가 남음
+  &gt; **증상**: 기기 로그에서 평문 비밀번호가 여러 곳 발견됨
+  &gt; **변경**: 로그를 쓰기 전에 가림 처리하고, 일치 0건을 확인
+  &gt; **확인 수준**: 원본 문서 기준
+- 가설을 버리고 원인을 찾음
+  &gt; **증상**: 분석 도구의 한 기능이 30초 시간 초과
+  &gt; **과정**: 처음 추정한 버전 조합 가설을 버리고, 최소 환경과 비교해 외부 조회 설정이 원인임을 찾음
+  &gt; **결과**: 2.1초로 단축
+  &gt; **확인 수준**: 원본 문서 기준
+
+## 품질과 운영
+- 테스트
+  &gt; - **규모**: 테스트 함수 약 3,200개 (정적 집계), 커밋 메시지에 적힌 통과 수는 10월 18일 기준 3,848개
+  &gt; - **와이어 검사**: 테스트 파일 100여 개가 가짜 클라이언트를 쓰고, 서버의 모든 호출을 클라이언트 스텁과 대조
+  &gt; - **캡처 대조**: 정적 응답의 길이와 해시를 고정
+  &gt; - **원본 대조**: 능력치 계산을 클라이언트 소스로 실행한 결과와 맞춤 (영웅 160명, 장비 492개, 차이 0 — 분석 보고서 기준)
+  &gt; - **결정성**: 서버 시계와 난수 시드를 테스트에서 고정
+  &gt; **확인 수준**: 정적 집계. 테스트 실행은 직접 하지 않음
+- 기기 구성 대조
+  &gt; **내용**: 같은 테스트를 기기 구성에서도 돌리고 진짜 FastAPI와 응답 119건을 비교
+  &gt; **결과**: 같음 113, 알려진 차이 6, 문제 0 (커밋 메시지 기준)
+- CI와 배포
+  &gt; **하는 일**: CI 설정은 없다. 서버는 systemd 서비스와 nginx, dnsmasq로 운용
+  &gt; **확인 수준**: 원본 코드 확인 (비공개)
+- 에러 처리와 로깅
+  &gt; - **PC 서버**: 로그를 파일로 영구 기록하고, 패킷과 기기 로그를 상시 수집
+  &gt; - **앱 안 서버**: 조각 파일, 총량 300MB 제한, 반복 줄이기, 비밀값 가리기
+  &gt; - **게이트**: 예외 격리, 중복 로그인 정리, 토큰 대조, 빠른 종료 (종료 90초 → 1초)
+  &gt; **확인 수준**: 커밋 기준
+- 증거 게이트
+  &gt; **내용**: 서버 응답은 패킷 근거와 클라이언트 소스 근거를 모두 확인하고, 클라이언트 변경은 별도 정당화를 문서로 남기며, 완료 조건에 회귀 테스트 1개 이상이 들어간다
+  &gt; **확인 수준**: 원본 문서 기준
+
+## 한계와 개선 방향
+- 원본 서버의 규칙을 모른다
+  &gt; **내용**: 클라이언트에 없는 서버 규칙 다수는 추론이며, 코드 주석이 근거 등급을 표기한다
+  &gt; **확인 수준**: 원본 문서 기준
+- RPC 구현 범위
+  &gt; **내용**: 정적 집계로 서버 호출 1,334개 중 약 48.5%에 핸들러나 의도적 무응답이 있다
+  &gt; **확인 수준**: 정적 집계
+- 게이트 트래픽의 정답지가 없다
+  &gt; **내용**: 2021 캡처는 HTTP 로그인 구간뿐이라 게이트 구간은 정답지가 없다
+  &gt; **확인 수준**: 원본 문서 기준
+- 전투 서버가 없다
+  &gt; **내용**: 온라인 전투가 필요한 콘텐츠는 클라이언트가 스스로 전투를 계산하게 돌려보낸다
+  &gt; **확인 수준**: 원본 문서 기준
+- 문서 간 불일치
+  &gt; **내용**: 서버 시계 구간이 문서는 30주, 코드는 26주로 어긋나는 등 갱신되지 않은 서술이 있다
+  &gt; **확인 수준**: 원본 문서와 코드 대조
+- 앱 안 서버의 제약
+  &gt; **내용**: 64비트와 API 24 이상, VPN 허용 필요, 다른 VPN과 함께 쓸 수 없다
+  &gt; **확인 수준**: 원본 문서 기준
+- 지금이라면 바꿀 것
+  &gt; **내용**: 본인의 회고는 저장소에 없다
+  &gt; **확인 수준**: 면접에서 본인이 설명
+
+## 이해를 위한 배경지식
+- 도메인 용어
+  - 게이트 서버
+    &gt; **뜻**: 로그인 이후의 게임 통신을 받는 원시 TCP 서버
+  - 엔티티
+    &gt; **뜻**: 서버와 클라이언트가 같이 들고 있는 객체. 계정과 아바타가 있다
+  - 스냅샷
+    &gt; **뜻**: 로그인 때 클라이언트에 한꺼번에 보내는 계정 상태
+  - 서버 시계
+    &gt; **뜻**: 한정 이벤트를 다시 열기 위해 서비스 말기 구간을 되풀이하는 서버 쪽 날짜
+- 전제 기술 개념
+  - RPC
+    &gt; **뜻**: 클라이언트와 서버가 이름으로 서로의 함수를 부르는 방식
+    &gt; **이 프로젝트에서**: 호출 이름은 클라이언트 소스에서 뽑는다
+  - 바이트코드 복원
+    &gt; **이 프로젝트에서**: 암호화된 게임 스크립트를 복호화하고, 옵코드 표를 맞춰 소스로 되살린다
+- 시스템 경계
+  &gt; | 안 | 밖 |
+  &gt; |---|---|
+  &gt; | 복원 서버, 도구, 테스트 | 원본 클라이언트와 게임 데이터 |
+  &gt; | 접속 보조 앱 | 원 서비스의 서버 |
+</textarea>
+    <style id="mme-style">/* markmap-mcp-server: enhanced template styles.
+   Colors and sizes are CSS variables so a theme (e.g. dark) is a variable swap. */
+
+:root {
+    --mme-fg: #1f2328;
+    --mme-fg-2: #2f353b;
+    --mme-muted: #57606a;
+    --mme-surface: #ffffff;
+    --mme-surface-2: #f6f8fa;
+    --mme-border: #d0d7de;
+    --mme-accent: #0969da;
+    --mme-accent-soft: rgba(9, 105, 218, 0.12);
+    --mme-ok: #1a7f37;
+    --mme-code-bg: #eff2f5;
+    --mme-hover-bg: rgba(9, 105, 218, 0.08);
+    --mme-match-bg: #fff3b0;
+    --mme-active-bg: #ffd33d;
+    --mme-shadow: 0 8px 24px rgba(31, 35, 40, 0.16);
+    --mme-radius: 8px;
+    --mme-panel-width: min(380px, 92vw);
+    --mme-top: 60px;
+    --mme-font:
+        "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic",
+        system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mme-mono:
+        ui-monospace, SFMono-Regular, Menlo, Consolas, "D2Coding", monospace;
+}
+
+html,
+body {
+    background: var(--mme-surface);
+    font-family: var(--mme-font);
+}
+
+/* ---------- Map: typography by depth ---------- */
+
+/* The map lives below the floating header/toolbar so fit() never tucks nodes under them. */
+svg#mindmap {
+    position: fixed;
+    top: var(--mme-top);
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - var(--mme-top));
+}
+
+svg#mindmap.markmap {
+    --markmap-font: 400 16px/1.45 var(--mme-font);
+    --markmap-text-color: var(--mme-fg);
+    --markmap-code-bg: var(--mme-code-bg);
+    --markmap-code-color: #24292f;
+    --markmap-a-color: var(--mme-accent);
+    --markmap-a-hover-color: #0550ae;
+    --markmap-highlight-node-bg: var(--mme-accent-soft);
+    outline: none;
+}
+
+#mindmap .markmap-foreign {
+    font-family: var(--mme-font);
+    line-height: 1.45;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    color: var(--mme-muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#mindmap .markmap-foreign > div > div {
+    padding: 2px 4px;
+    border-radius: 6px;
+    transition: background-color 0.12s;
+}
+
+#mindmap g[data-depth="1"] > .markmap-foreign {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--mme-fg);
+}
+#mindmap g[data-depth="2"] > .markmap-foreign {
+    font-size: 20px;
+    font-weight: 650;
+    color: var(--mme-fg);
+}
+#mindmap g[data-depth="3"] > .markmap-foreign {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--mme-fg-2);
+}
+#mindmap g[data-depth="4"] > .markmap-foreign {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--mme-fg-2);
+}
+
+#mindmap .markmap-foreign a {
+    color: var(--mme-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ---------- Map: hover, focus, selection, search ---------- */
+
+#mindmap g.markmap-node:hover > .markmap-foreign > div > div {
+    background: var(--mme-hover-bg);
+}
+#mindmap g.markmap-node {
+    outline: none;
+}
+#mindmap g.markmap-node:focus-visible > .markmap-foreign > div > div {
+    outline: 2px solid var(--mme-accent);
+    outline-offset: 1px;
+}
+#mindmap .markmap-highlight rect {
+    fill: var(--mme-accent-soft);
+    stroke: var(--mme-accent);
+    stroke-width: 1.5;
+    rx: 8;
+    ry: 8;
+}
+
+#mindmap g.markmap-node,
+#mindmap path.markmap-link {
+    transition: opacity 0.15s;
+}
+#mindmap.mme-focusing g.markmap-node:not(.mme-on-path),
+#mindmap.mme-focusing path.markmap-link:not(.mme-on-path) {
+    opacity: 0.3;
+}
+
+#mindmap.mme-searching g.markmap-node:not(.mme-match):not(.mme-anc),
+#mindmap.mme-searching path.markmap-link:not(.mme-anc) {
+    opacity: 0.35;
+}
+#mindmap g.mme-match > .markmap-foreign > div > div {
+    background: var(--mme-match-bg);
+    box-shadow: 0 0 0 2px var(--mme-match-bg);
+}
+#mindmap g.mme-active > .markmap-foreign > div > div {
+    background: var(--mme-active-bg);
+    box-shadow: 0 0 0 2px var(--mme-active-bg);
+    outline: 2px solid #bf8700;
+}
+
+/* ---------- Map: node content ---------- */
+
+#mindmap .markmap-foreign:has(.mme-task-done) {
+    color: var(--mme-muted);
+}
+.mme-task {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    width: 15px;
+    height: 15px;
+    margin-right: 6px;
+    border: 1.5px solid #8c959f;
+    border-radius: 4px;
+    vertical-align: -2px;
+    background: var(--mme-surface);
+}
+.mme-task-done {
+    background: var(--mme-ok);
+    border-color: var(--mme-ok);
+}
+.mme-task-done::after {
+    content: "";
+    position: absolute;
+    left: 3.5px;
+    top: 0;
+    width: 4px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.mme-progress {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mme-ok);
+    vertical-align: 1px;
+    white-space: nowrap;
+}
+.mme-progress i {
+    display: inline-block;
+    width: 38px;
+    height: 5px;
+    border-radius: 3px;
+    background: linear-gradient(
+        to right,
+        var(--mme-ok) var(--p, 0%),
+        var(--mme-border) var(--p, 0%)
+    );
+}
+.mme-progress b {
+    font-weight: 600;
+}
+
+.mme-count {
+    display: none;
+    margin-left: 8px;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: #eaeef2;
+    color: var(--mme-muted);
+    font-size: 11px;
+    font-weight: 600;
+    vertical-align: 1px;
+    white-space: nowrap;
+}
+.markmap-fold .mme-count {
+    display: inline-block;
+}
+
+.mme-info {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 15px;
+    height: 15px;
+    margin-left: 7px;
+    border: 1.5px solid var(--mme-accent);
+    border-radius: 50%;
+    color: var(--mme-accent);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 12px;
+    text-align: center;
+    vertical-align: 1px;
+}
+.mme-info::before {
+    content: "i";
+}
+
+/* "+N more" / "N fewer" buttons: leaf siblings, drawn as dashed pills so they
+   cannot be mistaken for a parent node. */
+.mme-more,
+.mme-less {
+    display: inline-block;
+    padding: 1px 10px;
+    border: 1px dashed var(--mme-accent);
+    border-radius: 999px;
+    color: var(--mme-accent);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.mme-more::before {
+    content: "+" attr(data-n) " more \25BE";
+}
+.mme-less::before {
+    content: "Show " attr(data-n) " fewer \25B4";
+}
+html[lang^="ko"] .mme-more::before {
+    content: "외 " attr(data-n) "개 더 보기 \25BE";
+}
+html[lang^="ko"] .mme-less::before {
+    content: "외 " attr(data-n) "개 접기 \25B4";
+}
+#mindmap g.markmap-node:hover .mme-more,
+#mindmap g.markmap-node:hover .mme-less {
+    background: var(--mme-accent-soft);
+}
+#mindmap g.mme-sentinel > line {
+    stroke-dasharray: 3 3;
+}
+#mindmap path.markmap-link.mme-sentinel-link {
+    stroke-dasharray: 3 4;
+    opacity: 0.85;
+}
+
+.mme-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* code, tables, images */
+
+#mindmap .markmap-foreign pre {
+    margin: 4px 0;
+}
+#mindmap .markmap-foreign pre > code {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: var(--mme-code-bg);
+    color: #24292f;
+    font: 12.5px/1.55 var(--mme-mono);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+#mindmap .markmap-foreign table {
+    width: 100%;
+    margin: 4px 0;
+    border: 1px solid var(--mme-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.4;
+}
+#mindmap .markmap-foreign th,
+#mindmap .markmap-foreign td {
+    padding: 5px 10px;
+    border: 0;
+    border-bottom: 1px solid var(--mme-border);
+    text-align: left;
+    color: var(--mme-fg-2);
+    font-weight: 400;
+}
+#mindmap .markmap-foreign th {
+    background: var(--mme-surface-2);
+    font-weight: 600;
+}
+#mindmap .markmap-foreign tr:last-child td {
+    border-bottom: 0;
+}
+#mindmap .markmap-foreign tbody tr:nth-child(even) td {
+    background: #fafbfc;
+}
+/* Nodes holding code or tables get a wider text column than prose. */
+#mindmap .markmap-foreign > div > div:has(pre, table) {
+    width: min(560px, 80vw);
+}
+
+#mindmap .markmap-foreign img {
+    display: block;
+    max-width: 240px;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+    margin: 2px 0;
+    border-radius: 6px;
+    object-fit: contain;
+    cursor: zoom-in;
+}
+#mindmap .markmap-foreign figure {
+    display: block;
+    margin: 2px 0;
+}
+#mindmap .markmap-foreign figcaption {
+    max-width: 240px;
+    margin-top: 2px;
+    color: var(--mme-muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* ---------- Chrome: shared ---------- */
+
+.mme-ui {
+    font-family: var(--mme-font);
+    color: var(--mme-fg);
+    box-sizing: border-box;
+}
+.mme-ui *,
+.mme-ui *::before,
+.mme-ui *::after {
+    box-sizing: border-box;
+}
+
+.mme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid var(--mme-border);
+    border-radius: var(--mme-radius);
+    background: var(--mme-surface);
+    color: var(--mme-fg);
+    font: 500 13px/1 var(--mme-font);
+    cursor: pointer;
+}
+.mme-btn:hover {
+    background: var(--mme-surface-2);
+}
+.mme-btn:focus-visible,
+.mme-menu button:focus-visible,
+.mme-panel button:focus-visible,
+.mme-search input:focus-visible {
+    outline: 2px solid var(--mme-accent);
+    outline-offset: 1px;
+}
+.mme-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.mme-btn[aria-expanded="true"],
+.mme-btn.mme-on {
+    background: var(--mme-accent-soft);
+    border-color: var(--mme-accent);
+    color: var(--mme-accent);
+}
+
+/* ---------- Chrome: header + toolbar ---------- */
+
+.mme-head {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 900;
+    max-width: min(46vw, 520px);
+    padding: 8px 12px;
+    border: 1px solid var(--mme-border);
+    border-radius: var(--mme-radius);
+    background: color-mix(in srgb, var(--mme-surface) 92%, transparent);
+    backdrop-filter: blur(6px);
+}
+.mme-head h1 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mme-head p {
+    margin: 2px 0 0;
+    color: var(--mme-muted);
+    font-size: 12px;
+    line-height: 1.4;
+}
+.mme-head .mme-meta {
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+.mme-bar {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 950;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: right 0.2s;
+}
+body.mme-panel-open .mme-bar {
+    right: calc(var(--mme-panel-width) + 12px);
+}
+/* With the panel open the bar and header compete for the same row. */
+body.mme-panel-open .mme-head {
+    max-width: 240px;
+}
+body.mme-panel-open .mme-head p {
+    display: none;
+}
+body.mme-panel-open .mme-search input {
+    width: 130px;
+}
+
+.mme-search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.mme-search-field {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 36px;
+    padding: 0 4px 0 10px;
+    border: 1px solid var(--mme-border);
+    border-radius: var(--mme-radius);
+    background: var(--mme-surface);
+}
+.mme-search-field:focus-within {
+    border-color: var(--mme-accent);
+}
+.mme-search input {
+    width: 190px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--mme-fg);
+    font: 400 14px/1 var(--mme-font);
+}
+.mme-search input:focus-visible {
+    outline: none;
+}
+.mme-search input::-webkit-search-cancel-button,
+.mme-search input::-webkit-search-decoration {
+    display: none;
+    -webkit-appearance: none;
+}
+.mme-search-count {
+    min-width: 40px;
+    color: var(--mme-muted);
+    font-size: 12px;
+    text-align: right;
+    white-space: nowrap;
+}
+.mme-search-field .mme-btn {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    border: 0;
+    background: transparent;
+}
+.mme-search-field .mme-btn:hover {
+    background: var(--mme-surface-2);
+}
+.mme-search-toggle {
+    display: none;
+}
+.mme-search-field:not(.mme-has-results) .mme-search-count,
+.mme-search-field:not(.mme-has-results) .mme-step {
+    display: none;
+}
+
+.mme-dropdown {
+    position: relative;
+}
+.mme-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 1200;
+    display: none;
+    min-width: 190px;
+    padding: 4px;
+    border: 1px solid var(--mme-border);
+    border-radius: 10px;
+    background: var(--mme-surface);
+    box-shadow: var(--mme-shadow);
+}
+.mme-menu.mme-open {
+    display: block;
+}
+.mme-menu button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--mme-fg);
+    font: 400 13px/1.2 var(--mme-font);
+    text-align: left;
+    cursor: pointer;
+}
+.mme-menu button:hover {
+    background: var(--mme-surface-2);
+}
+.mme-menu button[aria-checked="true"]::after {
+    content: "✓";
+    color: var(--mme-accent);
+    font-weight: 700;
+}
+.mme-menu hr {
+    margin: 4px 0;
+    border: 0;
+    border-top: 1px solid var(--mme-border);
+}
+
+.mme-zoombar {
+    position: fixed !important;
+    right: 16px !important;
+    bottom: 16px !important;
+    left: auto !important;
+    transition: right 0.2s;
+}
+body.mme-panel-open .mme-zoombar {
+    right: calc(var(--mme-panel-width) + 16px) !important;
+}
+
+/* ---------- Chrome: hover card ---------- */
+
+.mme-card {
+    position: fixed;
+    z-index: 1100;
+    max-width: 320px;
+    padding: 10px 12px;
+    border: 1px solid var(--mme-border);
+    border-radius: 10px;
+    background: var(--mme-surface);
+    box-shadow: var(--mme-shadow);
+    font-size: 13px;
+    line-height: 1.5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.12s;
+}
+.mme-card.mme-show {
+    opacity: 1;
+}
+.mme-card-title {
+    margin: 0 0 4px;
+    font-weight: 650;
+    font-size: 14px;
+}
+.mme-card-detail {
+    position: relative;
+    max-height: 11em;
+    overflow: hidden;
+    color: var(--mme-fg-2);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+.mme-card-detail.mme-clipped::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 2.4em;
+    background: linear-gradient(transparent, var(--mme-surface));
+}
+.mme-card-meta {
+    margin-top: 6px;
+    color: var(--mme-muted);
+    font-size: 12px;
+}
+.mme-card a {
+    color: var(--mme-accent);
+}
+.mme-card ul {
+    margin: 4px 0 0;
+    padding-left: 18px;
+    color: var(--mme-fg-2);
+}
+.mme-card hint,
+.mme-card .mme-hint {
+    display: block;
+    margin-top: 6px;
+    color: var(--mme-muted);
+    font-size: 11px;
+}
+
+/* ---------- Chrome: detail panel ---------- */
+
+.mme-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    width: var(--mme-panel-width);
+    border-left: 1px solid var(--mme-border);
+    background: var(--mme-surface);
+    box-shadow: var(--mme-shadow);
+    transform: translateX(105%);
+    transition: transform 0.2s;
+    visibility: hidden;
+}
+.mme-panel.mme-open {
+    transform: none;
+    visibility: visible;
+}
+.mme-panel-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px 12px 8px 16px;
+}
+.mme-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 4px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--mme-muted);
+    font-size: 12px;
+}
+.mme-crumbs li:not(:last-child)::after {
+    content: "›";
+    margin-left: 4px;
+}
+.mme-crumbs button {
+    max-width: 14em;
+    padding: 2px 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--mme-accent);
+    font: inherit;
+    cursor: pointer;
+}
+.mme-crumbs button:hover {
+    background: var(--mme-surface-2);
+}
+.mme-panel-body {
+    flex: 1;
+    padding: 0 16px 16px;
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+.mme-panel-title {
+    margin: 4px 0 10px;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+.mme-panel h3 {
+    margin: 16px 0 6px;
+    color: var(--mme-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+.mme-detail {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--mme-fg-2);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+/* Detail content is written by agents in whatever structure fits it, so every
+   block type must read well in both the card preview and the side panel. */
+.mme-detail p,
+.mme-card-detail p {
+    margin: 0 0 8px;
+}
+.mme-detail > :last-child,
+.mme-card-detail > :last-child {
+    margin-bottom: 0;
+}
+.mme-detail a,
+.mme-card-detail a {
+    color: var(--mme-accent);
+}
+.mme-detail strong,
+.mme-card-detail strong {
+    color: var(--mme-fg);
+    font-weight: 650;
+}
+.mme-detail ul,
+.mme-detail ol,
+.mme-card-detail ul,
+.mme-card-detail ol {
+    margin: 0 0 8px;
+    padding-left: 20px;
+}
+.mme-detail li,
+.mme-card-detail li {
+    margin: 2px 0;
+}
+.mme-detail li > ul,
+.mme-detail li > ol,
+.mme-card-detail li > ul,
+.mme-card-detail li > ol {
+    margin: 2px 0 0;
+}
+.mme-detail code,
+.mme-card-detail code {
+    padding: 1px 4px;
+    border-radius: 4px;
+    background: var(--mme-code-bg);
+    font: 0.92em/1.4 var(--mme-mono);
+    word-break: break-all;
+}
+.mme-detail blockquote,
+.mme-card-detail blockquote {
+    margin: 0 0 8px;
+    padding-left: 10px;
+    border-left: 3px solid var(--mme-border);
+    color: var(--mme-muted);
+}
+.mme-detail h1,
+.mme-detail h2,
+.mme-detail h3,
+.mme-detail h4,
+.mme-card-detail h1,
+.mme-card-detail h2,
+.mme-card-detail h3,
+.mme-card-detail h4 {
+    margin: 10px 0 4px;
+    font-size: 1em;
+    font-weight: 650;
+    color: var(--mme-fg);
+}
+.mme-detail hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid var(--mme-border);
+}
+.mme-detail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    cursor: zoom-in;
+}
+.mme-detail pre,
+.mme-card-detail pre,
+.mme-panel-title pre {
+    overflow: auto;
+    margin: 0 0 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: var(--mme-code-bg);
+    font: 12.5px/1.55 var(--mme-mono);
+}
+.mme-detail pre code,
+.mme-card-detail pre code {
+    padding: 0;
+    background: none;
+    word-break: normal;
+}
+.mme-detail table,
+.mme-card-detail table {
+    display: block;
+    max-width: 100%;
+    margin: 0 0 8px;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.mme-detail th,
+.mme-detail td,
+.mme-card-detail th,
+.mme-card-detail td {
+    padding: 4px 8px;
+    border: 1px solid var(--mme-border);
+    text-align: left;
+    vertical-align: top;
+}
+.mme-detail th,
+.mme-card-detail th {
+    background: var(--mme-code-bg);
+    color: var(--mme-fg);
+    font-weight: 650;
+    white-space: nowrap;
+}
+.mme-detail tbody tr:nth-child(even) td,
+.mme-card-detail tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--mme-code-bg) 45%, transparent);
+}
+.mme-panel .mme-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.mme-panel .mme-list button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding: 7px 8px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--mme-fg);
+    font: 400 13px/1.35 var(--mme-font);
+    text-align: left;
+    cursor: pointer;
+}
+.mme-panel .mme-list button:hover {
+    background: var(--mme-surface-2);
+}
+.mme-panel .mme-list small {
+    color: var(--mme-muted);
+    white-space: nowrap;
+}
+.mme-panel .mme-list a {
+    color: var(--mme-accent);
+    font-size: 13px;
+    word-break: break-all;
+}
+.mme-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+.mme-panel .mme-progress-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--mme-ok);
+    font-weight: 600;
+}
+.mme-panel .mme-progress-line i {
+    flex: 1;
+    max-width: 160px;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(
+        to right,
+        var(--mme-ok) var(--p, 0%),
+        var(--mme-border) var(--p, 0%)
+    );
+}
+
+/* ---------- Chrome: lightbox, toast ---------- */
+
+.mme-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1300;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.82);
+    cursor: zoom-out;
+}
+.mme-lightbox.mme-open {
+    display: flex;
+}
+.mme-lightbox img {
+    max-width: 92vw;
+    max-height: 82vh;
+    border-radius: 8px;
+    background: #fff;
+}
+.mme-lightbox p {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+}
+.mme-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 1400;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #24292f;
+    color: #fff;
+    font-size: 13px;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+}
+.mme-toast.mme-show {
+    opacity: 1;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (pointer: coarse) {
+    .mme-btn {
+        min-width: 44px;
+        height: 44px;
+    }
+    .mme-search-field {
+        height: 44px;
+    }
+    .mme-menu button {
+        padding: 12px 12px;
+    }
+}
+
+@media (max-width: 640px) {
+    :root {
+        --mme-panel-width: 100vw;
+        --mme-top: 56px;
+    }
+    .mme-head {
+        top: 10px;
+        left: 10px;
+        max-width: calc(100vw - 150px);
+        padding: 6px 10px;
+    }
+    .mme-head p,
+    .mme-head .mme-meta {
+        display: none;
+    }
+    .mme-bar {
+        top: 10px;
+        right: 10px;
+        gap: 6px;
+    }
+    body.mme-panel-open .mme-bar {
+        right: 10px;
+    }
+    .mme-search-toggle {
+        display: inline-flex;
+    }
+    .mme-search-field {
+        display: none;
+    }
+    .mme-search.mme-open {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        z-index: 1250;
+    }
+    .mme-search.mme-open .mme-search-field {
+        display: flex;
+        flex: 1;
+    }
+    .mme-search.mme-open .mme-search-toggle {
+        display: none;
+    }
+    .mme-search input {
+        flex: 1;
+        width: 100%;
+        min-width: 0;
+        font-size: 16px;
+    }
+    .mme-panel {
+        top: auto;
+        left: 0;
+        width: 100%;
+        max-height: 58vh;
+        border-left: 0;
+        border-top: 1px solid var(--mme-border);
+        border-radius: 16px 16px 0 0;
+        transform: translateY(105%);
+    }
+    .mme-panel.mme-open {
+        transform: none;
+    }
+    .mme-zoombar {
+        right: 10px !important;
+        bottom: 10px !important;
+    }
+    body.mme-panel-open .mme-zoombar {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mme-panel,
+    .mme-card,
+    .mme-bar,
+    .mme-zoombar,
+    #mindmap g.markmap-node,
+    #mindmap path.markmap-link {
+        transition: none;
+    }
+}
+
+@media print {
+    .mme-ui {
+        display: none !important;
+    }
+}
+</style>
+    
+    <script>
+      (function() {
+        const labels = {"exportPng":"Export PNG","exportJpg":"Export JPG","exportSvg":"Export SVG","copyMarkdown":"Copy Markdown","copied":"✓ Copied","copyFailed":"Failed to copy to clipboard, please check browser permissions","copyError":"Unable to copy Markdown: ","exportFailed":"Image export failed: ","pngTitle":"Export as PNG image","jpgTitle":"Export as JPG image","svgTitle":"Export as SVG image","copyTitle":"Copy original Markdown content"};
+        const local = () => window.mmeT || {};
+        const notify = (msg) => {
+          if (window.mmeToast) window.mmeToast(msg);
+          else alert(msg);
+        };
+
+        function copyOriginalMarkdown() {
+          try {
+            const markdownElement = document.getElementById('original-markdown');
+            if (!markdownElement) throw new Error('Original Markdown content not found');
+            navigator.clipboard.writeText(markdownElement.value)
+              .then(() => notify(local().copied || labels.copied))
+              .catch(() => notify(local().copyFailed || labels.copyFailed));
+          } catch (e) {
+            notify(labels.copyError + (e && e.message ? e.message : e));
+          }
+        }
+
+        function exportToImage(format) {
+          try {
+            const node = window.mm.svg._groups[0][0];
+            if (!node) throw new Error('Cannot find mind map SVG element');
+            if (window.mmeBeforeExport) window.mmeBeforeExport();
+            const finish = () => { if (window.mmeAfterExport) window.mmeAfterExport(); };
+            window.mm.fit().then(() => {
+              const options = {
+                backgroundColor: '#ffffff',
+                quality: 1.0,
+                width: node.getBoundingClientRect().width,
+                height: node.getBoundingClientRect().height
+              };
+              const exportPromise = format === 'svg'
+                ? htmlToImage.toSvg(node, options)
+                : format === 'jpeg'
+                  ? htmlToImage.toJpeg(node, options)
+                  : htmlToImage.toPng(node, options);
+              exportPromise.then((dataUrl) => {
+                const link = document.createElement('a');
+                const timestamp = new Date().toISOString().slice(0, 10);
+                const ext = format === 'jpeg' ? 'jpg' : format;
+                link.download = 'markmap-' + timestamp + '.' + ext;
+                link.href = dataUrl;
+                link.click();
+              }).catch((err) => {
+                console.error('Export failed:', err);
+                notify(labels.exportFailed + (err && err.message ? err.message : err));
+              }).finally(finish);
+            });
+          } catch (e) {
+            if (window.mmeAfterExport) window.mmeAfterExport();
+            notify(labels.exportFailed + (e && e.message ? e.message : e));
+          }
+        }
+
+        window.mmExport = {
+          png: () => exportToImage('png'),
+          jpg: () => exportToImage('jpeg'),
+          svg: () => exportToImage('svg'),
+          copy: copyOriginalMarkdown
+        };
+      })();
+    </script>
+  
+    <script>window.__MM_ENHANCE__ = {"title":"영원한 7일의 도시 서버 복원 — 면접관 관점","header":{"title":"영원한 7일의 도시 서버 복원 — 면접관 관점","description":"무엇을, 어떻게, 얼마나 깊이 했는지. 노드 상세에 근거와 확인 수준","meta":""},"mobileLevel":null,"hasTasks":false};</script>
+    <script id="mme-client">// @ts-nocheck
+/* markmap-mcp-server: enhanced template runtime.
+   Runs after markmap-view created `window.mm`. Plain browser JS, no dependencies
+   besides the d3 and markmap globals already on the page. */
+(function () {
+    "use strict";
+
+    var cfg = window.__MM_ENHANCE__ || {};
+    var mm = window.mm;
+    if (!mm || !mm.state || !mm.state.data || !mm.svg) return;
+
+    var doc = document;
+    var d3 = window.d3;
+    var svgEl = mm.svg.node();
+    var root = mm.state.data;
+    var isKo = /^ko/i.test(navigator.language || "");
+    doc.documentElement.lang = isKo ? "ko" : "en";
+
+    /* ------------------------------------------------------------------ */
+    /* Labels                                                              */
+    /* ------------------------------------------------------------------ */
+
+    var KO = {
+        search: "검색",
+        placeholder: "노드 검색  ( / )",
+        clear: "지우기",
+        prev: "이전 결과",
+        next: "다음 결과",
+        noResult: "결과 없음",
+        level: "레벨",
+        levelItem: function (n) {
+            return n + "단계까지 보기";
+        },
+        expandAll: "전체 펼치기",
+        todoOnly: "미완료 작업만 보기",
+        exportLabel: "내보내기",
+        exportPng: "PNG로 저장",
+        exportJpg: "JPG로 저장",
+        exportSvg: "SVG로 저장",
+        copyMd: "마크다운 복사",
+        copied: "복사했습니다",
+        copyFailed: "복사하지 못했습니다",
+        panelLabel: "노드 상세",
+        close: "닫기",
+        detail: "상세",
+        progress: "진행률",
+        children: "하위 항목",
+        links: "링크",
+        collapse: "접기",
+        expand: "펼치기",
+        expandBelow: "하위 모두 펼치기",
+        copyText: "텍스트 복사",
+        hint: "클릭하면 상세 보기",
+        childCount: function (n) {
+            return "하위 " + n + "개";
+        },
+        folded: "접힘",
+        moreItems: function (n) {
+            return "외 " + n + "개 더 보기";
+        },
+        lessItems: function (n) {
+            return "외 " + n + "개 접기";
+        },
+        done: "완료",
+        todo: "미완료",
+        hasDetail: "상세 정보 있음",
+        resultsAnnounce: function (n) {
+            return "검색 결과 " + n + "개";
+        },
+        treeLabel: "마인드맵",
+        closeImage: "이미지 닫기",
+        images: "이미지",
+        zoomTitles: {
+            "Zoom in": "확대",
+            "Zoom out": "축소",
+            "Fit window size": "화면에 맞추기",
+            "Toggle recursively": "하위 모두 접기/펼치기"
+        }
+    };
+
+    var EN = {
+        search: "Search",
+        placeholder: "Search nodes  ( / )",
+        clear: "Clear",
+        prev: "Previous result",
+        next: "Next result",
+        noResult: "No results",
+        level: "Level",
+        levelItem: function (n) {
+            return "Show " + n + " level" + (n > 1 ? "s" : "");
+        },
+        expandAll: "Expand all",
+        todoOnly: "Open tasks only",
+        exportLabel: "Export",
+        exportPng: "Save as PNG",
+        exportJpg: "Save as JPG",
+        exportSvg: "Save as SVG",
+        copyMd: "Copy Markdown",
+        copied: "Copied",
+        copyFailed: "Copy failed",
+        panelLabel: "Node details",
+        close: "Close",
+        detail: "Details",
+        progress: "Progress",
+        children: "Items",
+        links: "Links",
+        collapse: "Collapse",
+        expand: "Expand",
+        expandBelow: "Expand all below",
+        copyText: "Copy text",
+        hint: "Click for details",
+        childCount: function (n) {
+            return n + " item" + (n > 1 ? "s" : "");
+        },
+        folded: "collapsed",
+        moreItems: function (n) {
+            return "+" + n + " more";
+        },
+        lessItems: function (n) {
+            return "Show " + n + " fewer";
+        },
+        done: "done",
+        todo: "open",
+        hasDetail: "has details",
+        resultsAnnounce: function (n) {
+            return n + " search results";
+        },
+        treeLabel: "Mind map",
+        closeImage: "Close image",
+        images: "Images",
+        zoomTitles: {}
+    };
+
+    var T = isKo ? KO : EN;
+    window.mmeT = T;
+
+    /* ------------------------------------------------------------------ */
+    /* Helpers                                                             */
+    /* ------------------------------------------------------------------ */
+
+    function h(tag, props, kids) {
+        var e = doc.createElement(tag);
+        if (props) {
+            Object.keys(props).forEach(function (k) {
+                var v = props[k];
+                if (v == null || v === false) return;
+                if (k === "class") e.className = v;
+                else if (k === "html") e.innerHTML = v;
+                else if (k === "text") e.textContent = v;
+                else if (k.slice(0, 2) === "on")
+                    e.addEventListener(k.slice(2), v);
+                else e.setAttribute(k, v === true ? "" : v);
+            });
+        }
+        (kids || []).forEach(function (c) {
+            if (c)
+                e.appendChild(
+                    typeof c === "string" ? doc.createTextNode(c) : c
+                );
+        });
+        return e;
+    }
+
+    function esc(s) {
+        return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+    }
+
+    var ICONS = {
+        search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+        layers: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg>',
+        download:
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>',
+        close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+        up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>',
+        down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
+    };
+
+    function iconButton(icon, label, cls, onClick) {
+        return h("button", {
+            type: "button",
+            class: "mme-btn " + (cls || ""),
+            "aria-label": label,
+            title: label,
+            html: ICONS[icon],
+            onclick: onClick
+        });
+    }
+
+    // While a sibling group is collapsed, `n.children` (what markmap lays out)
+    // omits the hidden siblings. `n.__all` always holds every real child plus the
+    // "more"/"less" buttons.
+    function allKids(n) {
+        return n.__all || n.children || [];
+    }
+    function isSentinel(n) {
+        var p = n.payload;
+        return !!(p && (p.more || p.less));
+    }
+    function realKids(n) {
+        return allKids(n).filter(function (c) {
+            return !isSentinel(c);
+        });
+    }
+    function walk(n, fn) {
+        fn(n);
+        allKids(n).forEach(function (c) {
+            walk(c, fn);
+        });
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Tree index                                                          */
+    /* ------------------------------------------------------------------ */
+
+    var parentOf = new Map();
+    var sibIndex = new Map();
+    (function index(n, p) {
+        parentOf.set(n, p || null);
+        allKids(n).forEach(function (c, i) {
+            sibIndex.set(c, i);
+            index(c, n);
+        });
+    })(root, null);
+
+    // Sibling groups: a parent with many children shows the first few plus a
+    // "more" button that is a leaf sibling (not a parent of the hidden ones).
+    var groups = new Map();
+    (function collapseGroups(n) {
+        var kids = n.children || [];
+        var mi = kids.findIndex(function (c) {
+            return c.payload && c.payload.more;
+        });
+        var li = kids.findIndex(function (c) {
+            return c.payload && c.payload.less;
+        });
+        if (mi !== -1 && li !== -1) {
+            groups.set(n, {
+                visible: kids.slice(0, mi),
+                more: kids[mi],
+                hidden: kids.slice(mi + 1, li),
+                less: kids[li],
+                expanded: false
+            });
+            n.__all = kids.slice();
+            n.children = kids.slice(0, mi + 1);
+        }
+        allKids(n).forEach(collapseGroups);
+    })(root);
+
+    function setSiblingsExpanded(p, expanded) {
+        var g = groups.get(p);
+        if (!g || g.expanded === expanded) return false;
+        g.expanded = expanded;
+        p.children = expanded
+            ? g.visible.concat(g.hidden, [g.less])
+            : g.visible.concat([g.more]);
+        return true;
+    }
+    function inView(x) {
+        var p = parentOf.get(x);
+        return !p || p.children.indexOf(x) !== -1;
+    }
+
+    function ancestors(n) {
+        var out = [];
+        for (var p = parentOf.get(n); p; p = parentOf.get(p)) out.push(p);
+        return out;
+    }
+    function hasKids(n) {
+        return allKids(n).length > 0;
+    }
+    function isFolded(n) {
+        return hasKids(n) && !!(n.payload && n.payload.fold);
+    }
+    function setFold(n, v) {
+        n.payload = Object.assign({}, n.payload, { fold: v });
+    }
+    function isShown(n) {
+        return (
+            ancestors(n).every(function (a) {
+                return !isFolded(a);
+            }) && ancestors(n).concat([n]).every(inView)
+        );
+    }
+    // Closest node that is currently on screen: the node itself, a hidden
+    // sibling's "more" button, or the nearest visible ancestor.
+    function nearestShown(n) {
+        for (var x = n; x; x = parentOf.get(x)) {
+            if (isShown(x)) return x;
+            var p = parentOf.get(x);
+            var g = p && groups.get(p);
+            if (g && !g.expanded && isShown(g.more)) return g.more;
+        }
+        return root;
+    }
+    // Makes `n` visible: unfolds its ancestors and expands any sibling group
+    // that hides it or one of its ancestors. Returns whether anything changed.
+    function revealSync(n) {
+        var changed = false;
+        ancestors(n)
+            .reverse()
+            .concat([n])
+            .forEach(function (x) {
+                var p = parentOf.get(x);
+                if (p && groups.has(p) && !inView(x)) {
+                    setSiblingsExpanded(p, true);
+                    changed = true;
+                }
+            });
+        ancestors(n).forEach(function (a) {
+            if (isFolded(a)) {
+                setFold(a, 0);
+                changed = true;
+            }
+        });
+        return changed;
+    }
+
+    var textCache = new Map();
+    function parseHtml(html) {
+        return new DOMParser().parseFromString(html, "text/html").body;
+    }
+    var BADGES = ".mme-count,.mme-progress,.mme-info,.mme-more,.mme-less";
+    function textOf(n) {
+        if (textCache.has(n)) return textCache.get(n);
+        var p = n.payload || {};
+        var t;
+        if (p.more) {
+            t = T.moreItems(p.count || 0);
+        } else if (p.less) {
+            t = T.lessItems(p.count || 0);
+        } else {
+            var body = parseHtml(n.content || "");
+            body.querySelectorAll(BADGES + ",.mme-task").forEach(function (e) {
+                e.remove();
+            });
+            t = (body.textContent || "").replace(/\s+/g, " ").trim();
+            if (!t) {
+                var img = body.querySelector("img");
+                t = (img && img.getAttribute("alt")) || (img ? T.images : "");
+            }
+        }
+        textCache.set(n, t);
+        return t;
+    }
+    function detailText(n) {
+        var d = n.payload && n.payload.detail;
+        return d
+            ? (parseHtml(d).textContent || "").replace(/\s+/g, " ").trim()
+            : "";
+    }
+    function titleHtml(n) {
+        if (isSentinel(n)) return esc(textOf(n));
+        var body = parseHtml(n.content || "");
+        body.querySelectorAll(BADGES).forEach(function (e) {
+            e.remove();
+        });
+        return body.innerHTML.trim();
+    }
+    function labelOf(n) {
+        var p = n.payload || {};
+        var parts = [textOf(n)];
+        if (p.task) parts.push(p.task === "done" ? T.done : T.todo);
+        if (p.tasks)
+            parts.push(T.done + " " + p.tasks.done + "/" + p.tasks.total);
+        if (p.detail) parts.push(T.hasDetail);
+        if (hasKids(n)) {
+            parts.push(T.childCount(realKids(n).length));
+            if (isFolded(n)) parts.push(T.folded);
+        }
+        return parts.join(", ");
+    }
+    function norm(s) {
+        return String(s || "")
+            .normalize("NFC")
+            .toLowerCase();
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* State                                                               */
+    /* ------------------------------------------------------------------ */
+
+    var S = {
+        selected: null,
+        focus: root,
+        hover: null,
+        pathSet: null,
+        query: "",
+        todoOnly: false,
+        searchActive: false,
+        matches: [],
+        matchSet: new Set(),
+        ancSet: new Set(),
+        active: -1,
+        savedFold: null,
+        savedSib: null,
+        userMoved: false,
+        searchToken: 0
+    };
+    var gMap = new Map();
+
+    /* ------------------------------------------------------------------ */
+    /* Options: color, line width, motion                                  */
+    /* ------------------------------------------------------------------ */
+
+    var branchScale = d3.scaleOrdinal(d3.schemeCategory10);
+    function colorOf(n) {
+        if (isSentinel(n)) return "#8c959f";
+        var path = String(n.state.path || "").split(".");
+        if (path.length < 2) return "#24292f";
+        var base = branchScale(path.slice(0, 2).join("."));
+        if (path.length < 3) return base;
+        var c = d3.hsl(base);
+        c.l = Math.min(
+            0.62,
+            Math.max(0.32, c.l + (((sibIndex.get(n) || 0) % 3) - 1) * 0.09)
+        );
+        return String(c);
+    }
+    function lineWidthOf(n) {
+        if (isSentinel(n)) return 1.5;
+        var d = n.state.depth;
+        return d === 1 ? 5 : Math.max(1.5, 4 - (d - 2) * 0.7);
+    }
+    var reduceMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var motionMs = reduceMotion ? 0 : 350;
+    // No animation while the first layout settles (hidden siblings are removed
+    // right after markmap's own first render).
+    mm.setOptions({
+        color: colorOf,
+        lineWidth: lineWidthOf,
+        duration: 0
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Fit handling                                                        */
+    /* ------------------------------------------------------------------ */
+
+    var origFit = mm.fit.bind(mm);
+    mm.fit = function () {
+        S.userMoved = false;
+        return origFit.apply(null, arguments);
+    };
+    var fitTimer = 0;
+    function fitSoon(delay) {
+        if (S.userMoved) return;
+        clearTimeout(fitTimer);
+        fitTimer = setTimeout(
+            function () {
+                if (!S.userMoved) origFit();
+            },
+            delay == null ? 200 : delay
+        );
+    }
+    mm.zoom.on("zoom.mme", function (ev) {
+        if (ev && ev.sourceEvent) S.userMoved = true;
+    });
+    svgEl.addEventListener(
+        "wheel",
+        function () {
+            S.userMoved = true;
+        },
+        { passive: true }
+    );
+    window.addEventListener("resize", function () {
+        fitSoon(250);
+    });
+    window.addEventListener("orientationchange", function () {
+        fitSoon(350);
+    });
+    window.addEventListener("load", function () {
+        fitSoon(250);
+    });
+    if (doc.fonts && doc.fonts.ready) {
+        doc.fonts.ready.then(function () {
+            fitSoon(250);
+        });
+    }
+    svgEl.addEventListener(
+        "load",
+        function (e) {
+            if (e.target && e.target.tagName === "IMG") fitSoon(350);
+        },
+        true
+    );
+
+    /* ------------------------------------------------------------------ */
+    /* Decoration (ARIA + state classes), re-applied after every render    */
+    /* ------------------------------------------------------------------ */
+
+    svgEl.setAttribute("role", "tree");
+    // markmap wraps every node in one plain <g>; without this the browser does
+    // not expose the nodes as tree items of the tree above.
+    mm.g.attr("role", "none");
+    svgEl.setAttribute("aria-label", cfg.title || T.treeLabel);
+
+    // markmap appends nodes children-first; assistive tech reads flat tree
+    // items in DOM order, so keep the DOM in tree (pre-order) order.
+    function orderDom() {
+        var pre = visibleList().filter(function (n) {
+            return gMap.has(n);
+        });
+        if (!pre.length) return;
+        var parent = gMap.get(pre[0]).parentNode;
+        var current = Array.prototype.filter.call(
+            parent.children,
+            function (c) {
+                return c.classList && c.classList.contains("markmap-node");
+            }
+        );
+        var same =
+            current.length === pre.length &&
+            current.every(function (g, i) {
+                return g === gMap.get(pre[i]);
+            });
+        if (same) return;
+        var active = doc.activeElement;
+        pre.forEach(function (n) {
+            parent.appendChild(gMap.get(n));
+        });
+        if (active && active !== doc.activeElement && svgEl.contains(active)) {
+            active.focus({ preventScroll: true });
+        }
+    }
+
+    function decorate() {
+        gMap.clear();
+        if (!S.focus || !isShown(S.focus))
+            S.focus = nearestShown(S.focus || root);
+        svgEl.querySelectorAll("g.markmap-node").forEach(function (g) {
+            var n = g.__data__;
+            if (!n || !n.state) return;
+            gMap.set(n, g);
+            var p = parentOf.get(n);
+            g.setAttribute("role", "treeitem");
+            g.setAttribute("aria-level", n.state.depth);
+            g.setAttribute("aria-setsize", p ? p.children.length : 1);
+            g.setAttribute(
+                "aria-posinset",
+                (p ? p.children.indexOf(n) : 0) + 1
+            );
+            if (hasKids(n))
+                g.setAttribute("aria-expanded", isFolded(n) ? "false" : "true");
+            else g.removeAttribute("aria-expanded");
+            g.setAttribute(
+                "aria-selected",
+                n === S.selected ? "true" : "false"
+            );
+            g.setAttribute("aria-label", labelOf(n));
+            g.setAttribute("tabindex", n === S.focus ? "0" : "-1");
+            Array.prototype.forEach.call(g.children, function (c) {
+                c.setAttribute("aria-hidden", "true");
+            });
+            g.querySelectorAll("a, img").forEach(function (e) {
+                e.setAttribute("tabindex", "-1");
+            });
+            g.querySelectorAll("img.mme-img").forEach(function (img) {
+                img.setAttribute("draggable", "false");
+            });
+        });
+        orderDom();
+        paintClasses();
+    }
+
+    function paintClasses() {
+        var searching = S.searchActive && S.matchSet.size > 0;
+        svgEl.classList.toggle("mme-searching", searching);
+        svgEl.classList.toggle("mme-focusing", !!S.pathSet && !searching);
+        var activeNode = S.matches[S.active];
+        gMap.forEach(function (g, n) {
+            g.classList.toggle("mme-sentinel", isSentinel(n));
+            g.classList.toggle("mme-match", S.matchSet.has(n));
+            g.classList.toggle("mme-active", activeNode === n);
+            g.classList.toggle("mme-anc", S.ancSet.has(n));
+            g.classList.toggle("mme-on-path", !!S.pathSet && S.pathSet.has(n));
+        });
+        svgEl.querySelectorAll("path.markmap-link").forEach(function (p) {
+            var d = p.__data__;
+            if (!d) return;
+            p.classList.toggle("mme-sentinel-link", isSentinel(d.target));
+            p.classList.toggle(
+                "mme-anc",
+                S.ancSet.has(d.target) || S.matchSet.has(d.target)
+            );
+            p.classList.toggle(
+                "mme-on-path",
+                !!S.pathSet &&
+                    S.pathSet.has(d.target) &&
+                    S.pathSet.has(d.source)
+            );
+        });
+    }
+
+    var firstRender = true;
+    var origRender = mm.renderData.bind(mm);
+    mm.renderData = function (t) {
+        return origRender(t).then(function () {
+            decorate();
+            if (firstRender) {
+                firstRender = false;
+                fitSoon(60);
+                setTimeout(function () {
+                    mm.setOptions({ duration: motionMs });
+                }, 400);
+            }
+        });
+    };
+
+    /* ------------------------------------------------------------------ */
+    /* Chrome: skeleton                                                    */
+    /* ------------------------------------------------------------------ */
+
+    var live = h("div", {
+        class: "mme-ui mme-sr",
+        "aria-live": "polite",
+        role: "status"
+    });
+    var toastEl = h("div", { class: "mme-ui mme-toast", role: "status" });
+    var cardEl = h("div", {
+        class: "mme-ui mme-card",
+        role: "tooltip",
+        "aria-hidden": "true"
+    });
+    var lightbox = h("div", {
+        class: "mme-ui mme-lightbox",
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": T.images
+    });
+    var panelEl = h("aside", {
+        class: "mme-ui mme-panel",
+        "aria-label": T.panelLabel,
+        tabindex: "-1"
+    });
+    var barEl = h("div", { class: "mme-ui mme-bar" });
+    doc.body.appendChild(live);
+    doc.body.appendChild(toastEl);
+    doc.body.appendChild(cardEl);
+    doc.body.appendChild(lightbox);
+    doc.body.appendChild(panelEl);
+    doc.body.appendChild(barEl);
+
+    function announce(msg) {
+        live.textContent = "";
+        setTimeout(function () {
+            live.textContent = msg;
+        }, 30);
+    }
+    var toastTimer = 0;
+    window.mmeToast = function (msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add("mme-show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+            toastEl.classList.remove("mme-show");
+        }, 1800);
+    };
+
+    // Header from front matter
+    if (cfg.header && (cfg.header.title || cfg.header.description)) {
+        var head = h("header", { class: "mme-ui mme-head" });
+        if (cfg.header.title)
+            head.appendChild(
+                h("h1", { text: cfg.header.title, title: cfg.header.title })
+            );
+        if (cfg.header.description)
+            head.appendChild(h("p", { text: cfg.header.description }));
+        if (cfg.header.meta)
+            head.appendChild(
+                h("p", { class: "mme-meta", text: cfg.header.meta })
+            );
+        doc.body.appendChild(head);
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Dropdown helper                                                     */
+    /* ------------------------------------------------------------------ */
+
+    var openMenus = [];
+    function closeMenus(except) {
+        openMenus.forEach(function (m) {
+            if (m.menu !== except) m.close();
+        });
+    }
+    function dropdown(icon, label, items) {
+        var wrap = h("div", { class: "mme-dropdown" });
+        var menu = h("div", {
+            class: "mme-menu",
+            role: "menu",
+            "aria-label": label
+        });
+        var btn = h("button", {
+            type: "button",
+            class: "mme-btn",
+            "aria-haspopup": "menu",
+            "aria-expanded": "false",
+            "aria-label": label,
+            title: label,
+            html:
+                ICONS[icon] +
+                '<span class="mme-btn-label">' +
+                esc(label) +
+                "</span>"
+        });
+        var entry = {
+            menu: menu,
+            close: function () {
+                menu.classList.remove("mme-open");
+                btn.setAttribute("aria-expanded", "false");
+            }
+        };
+        openMenus.push(entry);
+        items.forEach(function (it) {
+            if (it === "-")
+                return menu.appendChild(h("hr", { role: "separator" }));
+            var b = h("button", {
+                type: "button",
+                role: it.checkbox ? "menuitemcheckbox" : "menuitem",
+                text: it.label,
+                "aria-checked": it.checkbox ? "false" : null,
+                tabindex: "-1"
+            });
+            b.addEventListener("click", function () {
+                entry.close();
+                it.run(b);
+            });
+            it.el = b;
+            menu.appendChild(b);
+        });
+        function open() {
+            closeMenus(menu);
+            menu.classList.add("mme-open");
+            btn.setAttribute("aria-expanded", "true");
+        }
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            if (menu.classList.contains("mme-open")) entry.close();
+            else open();
+        });
+        btn.addEventListener("keydown", function (e) {
+            if (e.key === "ArrowDown") {
+                e.preventDefault();
+                open();
+                var first = menu.querySelector("button");
+                if (first) first.focus();
+            }
+        });
+        menu.addEventListener("keydown", function (e) {
+            var btns = Array.prototype.slice.call(
+                menu.querySelectorAll("button")
+            );
+            var i = btns.indexOf(doc.activeElement);
+            if (e.key === "ArrowDown") {
+                e.preventDefault();
+                btns[(i + 1) % btns.length].focus();
+            } else if (e.key === "ArrowUp") {
+                e.preventDefault();
+                btns[(i - 1 + btns.length) % btns.length].focus();
+            } else if (e.key === "Escape") {
+                e.stopPropagation();
+                entry.close();
+                btn.focus();
+            }
+        });
+        wrap.appendChild(btn);
+        wrap.appendChild(menu);
+        return { el: wrap, items: items };
+    }
+    doc.addEventListener("click", function () {
+        closeMenus();
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Search                                                              */
+    /* ------------------------------------------------------------------ */
+
+    var input = h("input", {
+        type: "search",
+        id: "mme-search-input",
+        name: "mme-search",
+        placeholder: T.placeholder,
+        "aria-label": T.search,
+        autocomplete: "off",
+        spellcheck: "false"
+    });
+    var countEl = h("span", {
+        class: "mme-search-count",
+        "aria-hidden": "true"
+    });
+    var prevBtn = iconButton("up", T.prev, "mme-step", function () {
+        stepMatch(-1);
+    });
+    var nextBtn = iconButton("down", T.next, "mme-step", function () {
+        stepMatch(1);
+    });
+    var clearBtn = iconButton("close", T.clear, "", function () {
+        clearSearchUi();
+        input.focus();
+    });
+    var searchField = h("div", { class: "mme-search-field" }, [
+        h("span", {
+            class: "mme-search-ico",
+            html: ICONS.search,
+            "aria-hidden": "true"
+        }),
+        input,
+        countEl,
+        prevBtn,
+        nextBtn,
+        clearBtn
+    ]);
+    var searchToggle = iconButton(
+        "search",
+        T.search,
+        "mme-search-toggle",
+        function () {
+            searchWrap.classList.add("mme-open");
+            input.focus();
+        }
+    );
+    var searchWrap = h("div", { class: "mme-search", role: "search" }, [
+        searchToggle,
+        searchField
+    ]);
+    // inline icon inside the field should not look like a button
+    searchField.firstChild.style.cssText =
+        "display:inline-flex;width:16px;height:16px;color:#57606a";
+    searchField.firstChild.firstChild.style.cssText =
+        "width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round";
+
+    function matchesNode(n, q) {
+        if (isSentinel(n)) return false;
+        if (S.todoOnly && !(n.payload && n.payload.task === "todo"))
+            return false;
+        if (!q) return true;
+        return (
+            norm(textOf(n)).indexOf(q) !== -1 ||
+            norm(detailText(n)).indexOf(q) !== -1
+        );
+    }
+
+    function snapshotFold() {
+        var m = new Map();
+        walk(root, function (n) {
+            if (hasKids(n)) m.set(n, (n.payload && n.payload.fold) || 0);
+        });
+        return m;
+    }
+    function snapshotSiblings() {
+        var m = new Map();
+        groups.forEach(function (g, p) {
+            m.set(p, g.expanded);
+        });
+        return m;
+    }
+    function restoreFold() {
+        if (!S.savedFold) return false;
+        S.savedFold.forEach(function (v, n) {
+            setFold(n, v);
+        });
+        if (S.savedSib) {
+            S.savedSib.forEach(function (expanded, p) {
+                setSiblingsExpanded(p, expanded);
+            });
+        }
+        S.savedFold = null;
+        S.savedSib = null;
+        return true;
+    }
+
+    var searchTimer = 0;
+    function scheduleSearch() {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(runSearch, 140);
+    }
+
+    function updateCount() {
+        var q = S.query.trim();
+        if (!S.searchActive) {
+            countEl.textContent = "";
+        } else if (S.matches.length) {
+            countEl.textContent = S.active + 1 + "/" + S.matches.length;
+        } else {
+            countEl.textContent = T.noResult;
+        }
+        searchField.classList.toggle("mme-has-results", S.searchActive);
+        prevBtn.disabled = nextBtn.disabled = S.matches.length < 2;
+        clearBtn.style.visibility = q || S.todoOnly ? "visible" : "hidden";
+    }
+
+    async function runSearch() {
+        var token = ++S.searchToken;
+        var q = norm(S.query.trim());
+        S.searchActive = !!q || S.todoOnly;
+        if (!S.searchActive) {
+            await clearSearchState();
+            return;
+        }
+        if (!S.savedFold) {
+            S.savedFold = snapshotFold();
+            S.savedSib = snapshotSiblings();
+        }
+        var matches = [];
+        walk(root, function (n) {
+            if (matchesNode(n, q)) matches.push(n);
+        });
+        var anc = new Set();
+        matches.forEach(function (n) {
+            ancestors(n).forEach(function (a) {
+                anc.add(a);
+            });
+        });
+        S.matches = matches;
+        S.matchSet = new Set(matches);
+        S.ancSet = anc;
+        var changed = false;
+        matches.forEach(function (n) {
+            if (revealSync(n)) changed = true;
+        });
+        S.active = matches.length ? 0 : -1;
+        if (changed) await mm.renderData();
+        if (token !== S.searchToken) return;
+        paintClasses();
+        updateCount();
+        announce(
+            matches.length ? T.resultsAnnounce(matches.length) : T.noResult
+        );
+        if (matches.length) gotoActive();
+    }
+
+    function panelPad() {
+        if (!panelEl.classList.contains("mme-open")) return {};
+        var r = panelEl.getBoundingClientRect();
+        return window.innerWidth <= 640
+            ? { bottom: r.height + 16 }
+            : { right: r.width + 16 };
+    }
+
+    function gotoActive() {
+        var n = S.matches[S.active];
+        if (!n) return;
+        S.focus = n;
+        decorate();
+        updateCount();
+        mm.centerNode(n, panelPad());
+    }
+    function stepMatch(dir) {
+        if (!S.matches.length) return;
+        S.active = (S.active + dir + S.matches.length) % S.matches.length;
+        gotoActive();
+    }
+
+    async function clearSearchState() {
+        S.matches = [];
+        S.matchSet = new Set();
+        S.ancSet = new Set();
+        S.active = -1;
+        S.searchActive = false;
+        var restored = restoreFold();
+        updateCount();
+        if (restored) await mm.renderData();
+        else paintClasses();
+    }
+    function clearSearchUi() {
+        input.value = "";
+        S.query = "";
+        S.todoOnly = false;
+        todoItem.el.setAttribute("aria-checked", "false");
+        S.searchToken++;
+        clearSearchState();
+        searchWrap.classList.remove("mme-open");
+    }
+
+    input.addEventListener("input", function () {
+        S.query = input.value;
+        scheduleSearch();
+    });
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            clearTimeout(searchTimer);
+            if (
+                S.searchToken &&
+                S.matches.length &&
+                norm(input.value.trim()) === norm(S.query.trim()) &&
+                S.searchActive
+            ) {
+                stepMatch(e.shiftKey ? -1 : 1);
+            } else {
+                S.query = input.value;
+                runSearch();
+            }
+        } else if (e.key === "ArrowDown") {
+            e.preventDefault();
+            stepMatch(1);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            stepMatch(-1);
+        } else if (e.key === "Escape") {
+            e.stopPropagation();
+            clearSearchUi();
+            input.blur();
+            focusNode(nearestShown(S.focus));
+        }
+    });
+    input.addEventListener("blur", function () {
+        if (!input.value && window.innerWidth <= 640 && !S.todoOnly) {
+            searchWrap.classList.remove("mme-open");
+        }
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Level menu                                                          */
+    /* ------------------------------------------------------------------ */
+
+    async function structuralChange() {
+        S.savedFold = null;
+        S.savedSib = null;
+        S.searchToken++;
+        S.matches = [];
+        S.matchSet = new Set();
+        S.ancSet = new Set();
+        S.active = -1;
+        S.searchActive = !!(S.query.trim() || S.todoOnly);
+        await mm.renderData();
+        await mm.fit();
+        if (S.searchActive) runSearch();
+        else updateCount();
+    }
+    function setLevel(level) {
+        walk(root, function (n) {
+            if (hasKids(n)) setFold(n, n.state.depth >= level + 1 ? 1 : 0);
+        });
+        structuralChange();
+    }
+    function expandAll() {
+        walk(root, function (n) {
+            if (hasKids(n)) setFold(n, 0);
+        });
+        groups.forEach(function (g, p) {
+            setSiblingsExpanded(p, true);
+        });
+        structuralChange();
+    }
+
+    var todoItem = {
+        label: T.todoOnly,
+        checkbox: true,
+        run: function (b) {
+            S.todoOnly = !S.todoOnly;
+            b.setAttribute("aria-checked", S.todoOnly ? "true" : "false");
+            runSearch();
+        }
+    };
+    var levelItems = [1, 2, 3, 4].map(function (n) {
+        return {
+            label: T.levelItem(n),
+            run: function () {
+                setLevel(n);
+            }
+        };
+    });
+    levelItems.push({ label: T.expandAll, run: expandAll });
+    if (cfg.hasTasks) {
+        levelItems.push("-");
+        levelItems.push(todoItem);
+    }
+    var levelDd = dropdown("layers", T.level, levelItems);
+
+    var exportDd = dropdown("download", T.exportLabel, [
+        {
+            label: T.exportPng,
+            run: function () {
+                exportAs("png");
+            }
+        },
+        {
+            label: T.exportJpg,
+            run: function () {
+                exportAs("jpg");
+            }
+        },
+        {
+            label: T.exportSvg,
+            run: function () {
+                exportAs("svg");
+            }
+        },
+        "-",
+        {
+            label: T.copyMd,
+            run: function () {
+                exportAs("copy");
+            }
+        }
+    ]);
+    function exportAs(kind) {
+        var api = window.mmExport;
+        if (api && api[kind]) api[kind]();
+    }
+
+    barEl.appendChild(searchWrap);
+    barEl.appendChild(levelDd.el);
+    barEl.appendChild(exportDd.el);
+    // Menu is built before todoItem exists only if tasks are absent.
+    if (!cfg.hasTasks) todoItem.el = h("span");
+
+    /* Export hooks: strip transient visual state while an image is rendered. */
+    window.mmeBeforeExport = function () {
+        svgEl.classList.add("mme-exporting");
+        cardEl.classList.remove("mme-show");
+    };
+    window.mmeAfterExport = function () {
+        svgEl.classList.remove("mme-exporting");
+    };
+
+    /* ------------------------------------------------------------------ */
+    /* Hover                                                               */
+    /* ------------------------------------------------------------------ */
+
+    function pathOf(n) {
+        var s = new Set([n]);
+        ancestors(n).forEach(function (a) {
+            s.add(a);
+        });
+        if (!isFolded(n)) {
+            (n.children || []).forEach(function (c) {
+                s.add(c);
+            });
+        }
+        return s;
+    }
+
+    function cardHtml(n) {
+        var p = n.payload || {};
+        var parts = [];
+        function list(items, extra) {
+            var li = items
+                .slice(0, 5)
+                .map(function (c) {
+                    return "<li>" + esc(textOf(c)) + "</li>";
+                })
+                .join("");
+            var more =
+                items.length > 5
+                    ? "<li>…" + esc(T.moreItems(items.length - 5)) + "</li>"
+                    : "";
+            return "<ul>" + li + more + "</ul>" + (extra || "");
+        }
+        if (p.less) return "";
+        if (p.more) {
+            var g = groups.get(parentOf.get(n));
+            return (
+                '<div class="mme-card-title">' +
+                esc(textOf(n)) +
+                "</div>" +
+                list(g ? g.hidden : [])
+            );
+        }
+        var needTitle = !!p.detail || isFolded(n);
+        if (needTitle)
+            parts.push(
+                '<div class="mme-card-title">' + esc(textOf(n)) + "</div>"
+            );
+        if (p.detail)
+            parts.push('<div class="mme-card-detail">' + p.detail + "</div>");
+        if (isFolded(n)) {
+            parts.push(
+                '<div class="mme-card-meta">' +
+                    esc(T.childCount(realKids(n).length) + " · " + T.folded) +
+                    "</div>" +
+                    list(realKids(n))
+            );
+        }
+        if (p.tasks) {
+            parts.push(
+                '<div class="mme-card-meta">' +
+                    esc(T.done + " " + p.tasks.done + "/" + p.tasks.total) +
+                    "</div>"
+            );
+        }
+        if (!parts.length) return "";
+        if (p.detail)
+            parts.push('<span class="mme-hint">' + esc(T.hint) + "</span>");
+        return parts.join("");
+    }
+
+    function positionCard(n) {
+        var g = gMap.get(n);
+        if (!g) return;
+        var fo = g.querySelector("foreignObject") || g;
+        var r = fo.getBoundingClientRect();
+        cardEl.style.left = "0px";
+        cardEl.style.top = "0px";
+        var cw = cardEl.offsetWidth;
+        var ch = cardEl.offsetHeight;
+        var left = Math.min(Math.max(8, r.left), window.innerWidth - cw - 8);
+        var top = r.bottom + 8;
+        if (top + ch > window.innerHeight - 8)
+            top = Math.max(8, r.top - ch - 8);
+        cardEl.style.left = left + "px";
+        cardEl.style.top = top + "px";
+    }
+    function showCard(n) {
+        var html = cardHtml(n);
+        if (!html) {
+            hideCard();
+            return;
+        }
+        cardEl.innerHTML = html;
+        var preview = cardEl.querySelector(".mme-card-detail");
+        if (preview && preview.scrollHeight > preview.clientHeight + 1) {
+            preview.classList.add("mme-clipped");
+        }
+        positionCard(n);
+        cardEl.classList.add("mme-show");
+    }
+    function hideCard() {
+        cardEl.classList.remove("mme-show");
+    }
+    var cardTimer = 0;
+    function startHover(n, immediate) {
+        S.hover = n;
+        S.pathSet = pathOf(n);
+        paintClasses();
+        clearTimeout(cardTimer);
+        cardTimer = setTimeout(
+            function () {
+                // The panel already shows the selected node's details.
+                if (S.hover === n && S.selected !== n) showCard(n);
+            },
+            immediate ? 60 : 220
+        );
+    }
+    function endHover() {
+        S.hover = null;
+        S.pathSet = null;
+        clearTimeout(cardTimer);
+        hideCard();
+        paintClasses();
+    }
+    var noHover =
+        window.matchMedia && window.matchMedia("(hover: none)").matches;
+    svgEl.addEventListener("mouseover", function (e) {
+        if (noHover || e.buttons) return;
+        var g = e.target.closest && e.target.closest("g.markmap-node");
+        var n = g && g.__data__;
+        if (n === S.hover) return;
+        if (!n || !n.state) endHover();
+        else startHover(n, false);
+    });
+    svgEl.addEventListener("mouseleave", endHover);
+    svgEl.addEventListener("mousedown", hideCard);
+    svgEl.addEventListener("focusin", function (e) {
+        var g = e.target.closest && e.target.closest("g.markmap-node");
+        var n = g && g.__data__;
+        if (n && n.state) {
+            S.focus = n;
+            startHover(n, true);
+        }
+    });
+    svgEl.addEventListener("focusout", endHover);
+    mm.zoom.on("start.mme", hideCard);
+
+    /* ------------------------------------------------------------------ */
+    /* Selection panel                                                     */
+    /* ------------------------------------------------------------------ */
+
+    function collectLinks(n) {
+        var out = [];
+        var seen = {};
+        [n.content, n.payload && n.payload.detail].forEach(function (html) {
+            if (!html) return;
+            parseHtml(html)
+                .querySelectorAll("a[href]")
+                .forEach(function (a) {
+                    var href = a.getAttribute("href");
+                    if (!href || seen[href]) return;
+                    seen[href] = 1;
+                    out.push({
+                        href: href,
+                        text: (a.textContent || href).trim()
+                    });
+                });
+        });
+        return out;
+    }
+
+    function labelButton(n, extraHtml) {
+        var b = h("button", { type: "button" });
+        b.appendChild(h("span", { text: textOf(n) }));
+        if (extraHtml) b.appendChild(h("small", { text: extraHtml }));
+        b.addEventListener("click", function () {
+            selectNode(n, { center: true });
+        });
+        return b;
+    }
+
+    function renderPanel(n) {
+        var p = n.payload || {};
+        panelEl.textContent = "";
+        var chain = ancestors(n).reverse();
+        var crumbs = h("ol", { class: "mme-crumbs", "aria-label": "path" });
+        chain.forEach(function (a) {
+            var li = h("li");
+            li.appendChild(labelButton(a));
+            crumbs.appendChild(li);
+        });
+        var closeBtn = iconButton("close", T.close, "", function () {
+            deselect(true);
+        });
+        panelEl.appendChild(
+            h("div", { class: "mme-panel-head" }, [crumbs, closeBtn])
+        );
+
+        var body = h("div", { class: "mme-panel-body" });
+        body.appendChild(
+            h("div", { class: "mme-panel-title", html: titleHtml(n) })
+        );
+
+        if (p.tasks) {
+            var pct = Math.round((p.tasks.done / p.tasks.total) * 100);
+            body.appendChild(h("h3", { text: T.progress }));
+            body.appendChild(
+                h("div", { class: "mme-progress-line" }, [
+                    h("i", { style: "--p:" + pct + "%" }),
+                    h("span", { text: p.tasks.done + "/" + p.tasks.total })
+                ])
+            );
+        }
+        if (p.detail) {
+            body.appendChild(h("h3", { text: T.detail }));
+            body.appendChild(h("div", { class: "mme-detail", html: p.detail }));
+        }
+        if (hasKids(n)) {
+            var kids = realKids(n);
+            body.appendChild(
+                h("h3", { text: T.children + " (" + kids.length + ")" })
+            );
+            var ul = h("ul", { class: "mme-list" });
+            kids.forEach(function (c) {
+                var li = h("li");
+                var extra =
+                    hasKids(c) && c.payload && c.payload.count
+                        ? "+" + c.payload.count
+                        : "";
+                li.appendChild(labelButton(c, extra));
+                ul.appendChild(li);
+            });
+            body.appendChild(ul);
+        }
+        var links = collectLinks(n);
+        if (links.length) {
+            body.appendChild(h("h3", { text: T.links }));
+            var lul = h("ul", { class: "mme-list" });
+            links.forEach(function (l) {
+                lul.appendChild(
+                    h("li", null, [
+                        h("a", {
+                            href: l.href,
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                            text: l.text
+                        })
+                    ])
+                );
+            });
+            body.appendChild(lul);
+        }
+
+        var actions = h("div", { class: "mme-actions" });
+        if (hasKids(n)) {
+            actions.appendChild(
+                h("button", {
+                    type: "button",
+                    class: "mme-btn",
+                    text: isFolded(n) ? T.expand : T.collapse,
+                    onclick: function () {
+                        mm.toggleNode(n, false).then(function () {
+                            renderPanel(n);
+                        });
+                    }
+                })
+            );
+            actions.appendChild(
+                h("button", {
+                    type: "button",
+                    class: "mme-btn",
+                    text: T.expandBelow,
+                    onclick: function () {
+                        walk(n, function (x) {
+                            if (hasKids(x)) setFold(x, 0);
+                        });
+                        mm.renderData(n).then(function () {
+                            renderPanel(n);
+                        });
+                    }
+                })
+            );
+        }
+        actions.appendChild(
+            h("button", {
+                type: "button",
+                class: "mme-btn",
+                text: T.copyText,
+                onclick: function () {
+                    copyText(textOf(n));
+                }
+            })
+        );
+        body.appendChild(actions);
+        panelEl.appendChild(body);
+        panelEl.setAttribute("aria-label", T.panelLabel + ": " + textOf(n));
+    }
+
+    function copyText(text) {
+        var done = function () {
+            window.mmeToast(T.copied);
+        };
+        var fail = function () {
+            window.mmeToast(T.copyFailed);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, fail);
+        } else fail();
+    }
+
+    async function reveal(n) {
+        if (revealSync(n)) await mm.renderData();
+    }
+
+    // Expands/collapses the hidden siblings of a long child list. The clicked
+    // button is swapped for its counterpart, so focus is handed over explicitly.
+    async function toggleSiblings(p, keyboard) {
+        var g = groups.get(p);
+        if (!g) return;
+        var expanding = !g.expanded;
+        setSiblingsExpanded(p, expanding);
+        await mm.renderData(p);
+        var target = expanding ? g.hidden[0] : g.more;
+        if (keyboard) await focusNode(target);
+        else {
+            S.focus = target;
+            decorate();
+        }
+        announce(textOf(expanding ? g.less : g.more));
+    }
+
+    async function selectNode(n, opts) {
+        opts = opts || {};
+        if (isSentinel(n)) {
+            await toggleSiblings(parentOf.get(n), opts.keyboard);
+            return;
+        }
+        await reveal(n);
+        S.selected = n;
+        S.focus = n;
+        // The panel shows the details now; a lingering hover card would repeat them.
+        clearTimeout(cardTimer);
+        hideCard();
+        renderPanel(n);
+        panelEl.classList.add("mme-open");
+        doc.body.classList.add("mme-panel-open");
+        await mm.setHighlight(n);
+        mm.ensureVisible(n, Object.assign({ left: 24, top: 64 }, panelPad()));
+        if (opts.keyboard) panelEl.focus({ preventScroll: true });
+        announce(T.panelLabel + ": " + textOf(n));
+    }
+
+    function deselect(refocus) {
+        var had = S.selected;
+        S.selected = null;
+        panelEl.classList.remove("mme-open");
+        doc.body.classList.remove("mme-panel-open");
+        mm.setHighlight(null);
+        if (refocus && had) focusNode(had);
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Lightbox                                                            */
+    /* ------------------------------------------------------------------ */
+
+    function openLightbox(img) {
+        var cap = "";
+        var fig = img.closest && img.closest("figure");
+        if (fig && fig.querySelector("figcaption"))
+            cap = fig.querySelector("figcaption").textContent;
+        else cap = img.getAttribute("alt") || "";
+        lightbox.textContent = "";
+        lightbox.appendChild(
+            h("img", { src: img.currentSrc || img.src, alt: cap })
+        );
+        if (cap) lightbox.appendChild(h("p", { text: cap }));
+        lightbox.classList.add("mme-open");
+        lightbox.setAttribute("tabindex", "-1");
+        lightbox.focus();
+    }
+    function closeLightbox() {
+        lightbox.classList.remove("mme-open");
+    }
+    lightbox.addEventListener("click", closeLightbox);
+    doc.addEventListener("click", function (e) {
+        var img = e.target;
+        if (img && img.tagName === "IMG" && panelEl.contains(img))
+            openLightbox(img);
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Pointer interaction on the map                                      */
+    /* ------------------------------------------------------------------ */
+
+    var downPos = null;
+    svgEl.addEventListener("pointerdown", function (e) {
+        downPos = { x: e.clientX, y: e.clientY };
+    });
+    var coarse =
+        window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+
+    function nearestCircle(x, y, radius) {
+        var best = null;
+        var bestD = radius;
+        svgEl.querySelectorAll("g.markmap-node > circle").forEach(function (c) {
+            var r = c.getBoundingClientRect();
+            var dx = r.left + r.width / 2 - x;
+            var dy = r.top + r.height / 2 - y;
+            var d = Math.sqrt(dx * dx + dy * dy);
+            if (d <= bestD) {
+                best = c;
+                bestD = d;
+            }
+        });
+        return best;
+    }
+
+    svgEl.addEventListener("click", function (e) {
+        var t = e.target;
+        if (
+            downPos &&
+            Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 5
+        )
+            return;
+        if (t.closest && t.closest("a")) return;
+        if (t.tagName === "IMG") {
+            openLightbox(t);
+            return;
+        }
+        if (t.tagName === "circle") return; // markmap toggles on its own handler
+        var c = nearestCircle(e.clientX, e.clientY, coarse ? 22 : 10);
+        if (c && c.__data__) {
+            mm.toggleNode(c.__data__, e.ctrlKey || e.metaKey);
+            return;
+        }
+        var g = t.closest && t.closest("g.markmap-node");
+        if (g && g.__data__ && t.closest("foreignObject")) {
+            selectNode(g.__data__, {}); // sibling-group buttons toggle instead
+        } else if (!g && S.selected) {
+            deselect(false);
+        }
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Keyboard tree navigation                                            */
+    /* ------------------------------------------------------------------ */
+
+    function visibleList() {
+        var out = [];
+        (function rec(n) {
+            out.push(n);
+            if (!isFolded(n)) (n.children || []).forEach(rec);
+        })(root);
+        return out;
+    }
+
+    async function focusNode(n) {
+        if (!n) return;
+        if (!isShown(n)) await reveal(n);
+        S.focus = n;
+        decorate();
+        var g = gMap.get(n);
+        if (g) g.focus({ preventScroll: true });
+        mm.ensureVisible(n, Object.assign({ left: 24, top: 64 }, panelPad()));
+    }
+
+    svgEl.addEventListener("keydown", function (e) {
+        var g = e.target.closest && e.target.closest("g.markmap-node");
+        var n = g && g.__data__;
+        if (!n || !n.state || e.altKey || e.ctrlKey || e.metaKey) return;
+        var list = visibleList();
+        var i = list.indexOf(n);
+        var handled = true;
+        switch (e.key) {
+            case "ArrowDown":
+                focusNode(list[Math.min(list.length - 1, i + 1)]);
+                break;
+            case "ArrowUp":
+                focusNode(list[Math.max(0, i - 1)]);
+                break;
+            case "Home":
+                focusNode(list[0]);
+                break;
+            case "End":
+                focusNode(list[list.length - 1]);
+                break;
+            case "ArrowRight":
+                if (hasKids(n) && isFolded(n)) mm.toggleNode(n, false);
+                else if (hasKids(n)) focusNode(n.children[0]);
+                break;
+            case "ArrowLeft":
+                if (hasKids(n) && !isFolded(n)) mm.toggleNode(n, false);
+                else if (parentOf.get(n)) focusNode(parentOf.get(n));
+                break;
+            case "Enter":
+                selectNode(n, { keyboard: true });
+                break;
+            case " ":
+                if (isSentinel(n)) toggleSiblings(parentOf.get(n), true);
+                else if (hasKids(n)) mm.toggleNode(n, e.shiftKey);
+                break;
+            default:
+                handled = false;
+        }
+        if (handled) e.preventDefault();
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Global shortcuts                                                    */
+    /* ------------------------------------------------------------------ */
+
+    function typing(el) {
+        return (
+            el &&
+            (el.tagName === "INPUT" ||
+                el.tagName === "TEXTAREA" ||
+                el.isContentEditable)
+        );
+    }
+    doc.addEventListener("keydown", function (e) {
+        if (
+            (e.key === "/" && !typing(e.target) && !e.ctrlKey && !e.metaKey) ||
+            ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k")
+        ) {
+            e.preventDefault();
+            searchWrap.classList.add("mme-open");
+            input.focus();
+            input.select();
+            return;
+        }
+        if (e.key !== "Escape") return;
+        if (lightbox.classList.contains("mme-open")) {
+            closeLightbox();
+        } else if (
+            openMenus.some(function (m) {
+                return m.menu.classList.contains("mme-open");
+            })
+        ) {
+            closeMenus();
+        } else if (S.searchActive || input.value) {
+            clearSearchUi();
+        } else if (S.selected) {
+            deselect(true);
+        } else {
+            endHover();
+        }
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Toolbar localisation (markmap-toolbar)                              */
+    /* ------------------------------------------------------------------ */
+
+    function enhanceZoomBar() {
+        var bar = doc.querySelector(".mm-toolbar");
+        if (!bar) return false;
+        bar.classList.add("mme-ui", "mme-zoombar");
+        bar.querySelectorAll(".mm-toolbar-item").forEach(function (item) {
+            var title = item.getAttribute("title") || "";
+            var local = T.zoomTitles[title] || title;
+            item.setAttribute("title", local);
+            item.setAttribute("role", "button");
+            item.setAttribute("aria-label", local);
+            item.setAttribute("tabindex", "0");
+            item.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+        return true;
+    }
+    var zoomTries = 0;
+    (function waitZoomBar() {
+        if (enhanceZoomBar() || ++zoomTries > 40) return;
+        setTimeout(waitZoomBar, 100);
+    })();
+
+    /* ------------------------------------------------------------------ */
+    /* Boot                                                                */
+    /* ------------------------------------------------------------------ */
+
+    // Small screens: start with the first levels only so text stays readable.
+    if (window.innerWidth <= 640 && cfg.mobileLevel) {
+        walk(root, function (n) {
+            if (!hasKids(n)) return;
+            setFold(n, n.state.depth >= cfg.mobileLevel + 1 ? 1 : 0);
+        });
+    }
+
+    updateCount();
+    mm.renderData();
+})();
+</script>
+  
+</body>
+</html>

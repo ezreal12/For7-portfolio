@@ -1,0 +1,3161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>영원한 7일의 도시 서버 복원 — 동작 원리 (신규 합류 개발자 관점)</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.10/dist/style.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.10/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.10/dist/index.js"></script><script>((...args) => {
+                        const r = args[0];
+                        setTimeout(r);
+                    })(() => {
+        // Serialized into HTML by fillTemplate; runs in the browser.
+        const { markmap, mm } = window;
+        const tb = new markmap.Toolbar();
+        tb.attach(mm);
+        const el = tb.render();
+        el.classList.add("mme-zoombar");
+        document.body.append(el);
+    })</script><script>((getMarkmap, getOptions, root2, jsonOptions) => {
+              const markmap = getMarkmap();
+              window.mm = markmap.Markmap.create(
+                "svg#mindmap",
+                (getOptions || markmap.deriveOptions)(jsonOptions),
+                root2
+              );
+            })(() => window.markmap,null,{"content":"&#xc601;&#xc6d0;&#xd55c; 7&#xc77c;&#xc758; &#xb3c4;&#xc2dc; &#xc11c;&#xbc84; &#xbcf5;&#xc6d0; &#xb3d9;&#xc791; &#xc6d0;&#xb9ac; <span class=\"mme-count\" aria-hidden=\"true\">+83</span>","children":[{"content":"&#xc774; &#xc2dc;&#xc2a4;&#xd15c;&#xc740; &#xbb34;&#xc5c7;&#xc778;&#xac00; <span class=\"mme-count\" aria-hidden=\"true\">+4</span>","children":[{"content":"&#xbaa9;&#xc801; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"10,13","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc11c;&#xbe44;&#xc2a4;&#xac00; &#xc885;&#xb8cc;&#xb41c; &#xbaa8;&#xbc14;&#xc77c; &#xac8c;&#xc784;&#xc758; &#xc11c;&#xbc84;&#xb97c; &#xb2e4;&#xc2dc; &#xb9cc;&#xb4e0;&#xb2e4;<br>\n<strong>&#xbaa9;&#xd45c;</strong>: &#xc6d0;&#xbcf8; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xbd80;&#xd305;&#xbd80;&#xd130; &#xb3c4;&#xc2dc; &#xd654;&#xba74;&#xacfc; &#xac01;&#xc885; &#xcf58;&#xd150;&#xce20;&#xae4c;&#xc9c0; &#xc9c4;&#xd589;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xc2dc;&#xc2a4;&#xd15c; &#xacbd;&#xacc4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"13,19","detail":"<table>\n<thead>\n<tr>\n<th>&#xc548;</th>\n<th>&#xbc16;</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>&#xbcf5;&#xc6d0; &#xc11c;&#xbc84; (HTTP &#xc11c;&#xbe44;&#xc2a4;, &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;, &#xac8c;&#xc784; &#xaddc;&#xce59;)</td>\n<td>&#xc6d0;&#xbcf8; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc571;&#xacfc; &#xac8c;&#xc784; &#xb370;&#xc774;&#xd130;</td>\n</tr>\n<tr>\n<td>&#xbcf5;&#xc6d0; &#xb3c4;&#xad6c;&#xc640; &#xac80;&#xc99d; &#xb3c4;&#xad6c;</td>\n<td>&#xc6d0; &#xc11c;&#xbe44;&#xc2a4;&#xc758; &#xc11c;&#xbc84; (&#xc18c;&#xc2a4;&#xb7;&#xb370;&#xc774;&#xd130;&#xac00; &#xc5c6;&#xc74c;)</td>\n</tr>\n<tr>\n<td>&#xc811;&#xc18d; &#xbcf4;&#xc870; &#xc571;&#xacfc; &#xc571; &#xc548; &#xc11c;&#xbc84;</td>\n<td>&#xc628;&#xb77c;&#xc778; &#xc804;&#xd22c; &#xc11c;&#xbc84; (&#xbcf5;&#xc6d0;&#xd558;&#xc9c0; &#xc54a;&#xc74c;)</td>\n</tr>\n</tbody>\n</table>"}},{"content":"&#xc8fc;&#xc694; &#xc0ac;&#xc6a9; &#xd750;&#xb984; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"19,24","detail":"<ol>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xbcf5;&#xc6d0; &#xc11c;&#xbc84;&#xc5d0; &#xc811;&#xc18d;&#xd574; &#xc5c5;&#xb370;&#xc774;&#xd2b8; &#xd655;&#xc778;&#xacfc; &#xb85c;&#xadf8;&#xc778;&#xc744; &#xb9c8;&#xce5c;&#xb2e4;</li>\n<li>&#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;&#xac00; &#xacc4;&#xc815;&#xacfc; &#xc544;&#xbc14;&#xd0c0;&#xb97c; &#xb9cc;&#xb4e4;&#xc5b4; &#xb3c4;&#xc2dc; &#xd654;&#xba74;&#xc73c;&#xb85c; &#xbcf4;&#xb0b8;&#xb2e4;</li>\n<li>&#xd50c;&#xb808;&#xc774;&#xc5b4;&#xac00; &#xae30;&#xb2a5;&#xc744; &#xc4f8; &#xb54c;&#xb9c8;&#xb2e4; RPC&#xac00; &#xc624;&#xac00;&#xace0;, &#xc11c;&#xbc84; &#xaddc;&#xce59;&#xc774; &#xacc4;&#xc815; &#xc0c1;&#xd0dc;&#xb97c; &#xbc14;&#xafbc;&#xb2e4;</li>\n<li>&#xc0c1;&#xd0dc;&#xb294; &#xacc4;&#xc815;&#xb9c8;&#xb2e4; &#xd30c;&#xc77c;&#xb85c; &#xc800;&#xc7a5;&#xb418;&#xc5b4; &#xc11c;&#xbc84;&#xb97c; &#xb2e4;&#xc2dc; &#xb744;&#xc6cc;&#xb3c4; &#xb0a8;&#xb294;&#xb2e4;</li>\n</ol>"}},{"content":"&#xc791;&#xc5c5; &#xbc29;&#xc2dd; &#xd55c;&#xb208;&#xc5d0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"24,29","detail":"<ul>\n<li><strong>&#xc815;&#xb2f5;&#xc9c0;</strong>: 2021 HTTP &#xcea1;&#xcc98;&#xc640; &#xbcf5;&#xc6d0;&#xd55c; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc18c;&#xc2a4;</li>\n<li><strong>&#xac1c;&#xbc1c;&#xc790;</strong>: 1&#xc778;</li>\n<li><strong>&#xae30;&#xb85d;</strong>: &#xbc88;&#xd638; &#xbd99;&#xc740; &#xbd84;&#xc11d; &#xbcf4;&#xace0;&#xc11c;, &#xc77c;&#xc790;&#xbcc4; &#xc791;&#xc5c5; &#xc77c;&#xc9c0;, &#xd559;&#xc2b5; &#xae30;&#xb85d;</li>\n</ul>"}}],"payload":{"tag":"h2","lines":"9,10","count":4}},{"content":"&#xad6c;&#xc131; &#xc694;&#xc18c; &#xc9c0;&#xb3c4; <span class=\"mme-count\" aria-hidden=\"true\">+13</span>","children":[{"content":"&#xc774;&#xb984; &#xd574;&#xc11d;&#xacfc; &#xc911;&#xacc4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"30,35","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xac8c;&#xc784; &#xb3c4;&#xba54;&#xc778;&#xc744; &#xbcf5;&#xc6d0; &#xc11c;&#xbc84;&#xb85c; &#xb3cc;&#xb9ac;&#xace0; &#xc811;&#xc18d;&#xc744; &#xc885;&#xb958;&#xbcc4;&#xb85c; &#xb098;&#xb208;&#xb2e4;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xc758; DNS &#xc9c8;&#xc758;, 80/443 &#xc811;&#xc18d;<br>\n<strong>&#xcd9c;&#xb825;</strong>: HTTP &#xc11c;&#xbe44;&#xc2a4; &#xb610;&#xb294; &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;&#xb85c; &#xc804;&#xb2ec;&#xb41c; &#xc811;&#xc18d;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;, HTTP &#xc11c;&#xbe44;&#xc2a4;, &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;</p>"}},{"content":"HTTP &#xc11c;&#xbe44;&#xc2a4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"35,40","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xc124;&#xc815;, &#xc5c5;&#xb370;&#xc774;&#xd2b8; &#xd655;&#xc778;, &#xb85c;&#xadf8;&#xc778;, &#xacb0;&#xc81c;, &#xd154;&#xb808;&#xba54;&#xd2b8;&#xb9ac; &#xc751;&#xb2f5;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xc758; HTTP &#xc694;&#xccad;<br>\n<strong>&#xcd9c;&#xb825;</strong>: 2021 &#xcea1;&#xcc98;&#xc640; &#xac19;&#xc740; &#xc751;&#xb2f5;, &#xb610;&#xb294; &#xac8c;&#xc784; &#xaddc;&#xce59;&#xc73c;&#xb85c; &#xb9cc;&#xb4e0; &#xc751;&#xb2f5;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xc911;&#xacc4;, &#xacc4;&#xc815; &#xc800;&#xc7a5;&#xc18c;</p>"}},{"content":"&#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"40,45","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xb85c;&#xadf8;&#xc778; &#xc774;&#xd6c4; &#xac8c;&#xc784; &#xd1b5;&#xc2e0;&#xc744; &#xbc1b;&#xb294; &#xc6d0;&#xc2dc; TCP &#xc11c;&#xbc84;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xae38;&#xc774; &#xc811;&#xb450; &#xd504;&#xb808;&#xc784;&#xc73c;&#xb85c; &#xac10;&#xc2fc; protobuf &#xba54;&#xc2dc;&#xc9c0;<br>\n<strong>&#xcd9c;&#xb825;</strong>: &#xc5d4;&#xd2f0;&#xd2f0; &#xc0dd;&#xc131; &#xba54;&#xc2dc;&#xc9c0;, RPC &#xc751;&#xb2f5;, &#xc0dd;&#xc874; &#xc2e0;&#xd638; &#xc751;&#xb2f5;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xc544;&#xbc14;&#xd0c0; &#xacc4;&#xce35;, &#xacc4;&#xc815; &#xc800;&#xc7a5;&#xc18c;</p>"}},{"content":"&#xc544;&#xbc14;&#xd0c0; &#xacc4;&#xce35; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"45,50","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xc811;&#xc18d;&#xd55c; &#xacc4;&#xc815; &#xd558;&#xb098;&#xc758; &#xc0c1;&#xd0dc;&#xc640; RPC &#xcc98;&#xb9ac;&#xb97c; &#xb9e1;&#xb294;&#xb2e4;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; RPC<br>\n<strong>&#xcd9c;&#xb825;</strong>: &#xc751;&#xb2f5;&#xacfc; &#xc11c;&#xbc84; &#xd478;&#xc2dc;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: RPC &#xd578;&#xb4e4;&#xb7ec;, &#xac8c;&#xc784; &#xaddc;&#xce59;, &#xc0c1;&#xd0dc; &#xc800;&#xc7a5;</p>"}},{"content":"RPC &#xd578;&#xb4e4;&#xb7ec; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"50,55","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xae30;&#xb2a5;&#xbcc4; &#xd638;&#xcd9c;&#xc744; &#xbc1b;&#xc544; &#xaddc;&#xce59;&#xc744; &#xbd80;&#xb974;&#xace0; &#xc751;&#xb2f5;&#xc744; &#xb9cc;&#xb4e0;&#xb2e4;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xd638;&#xcd9c; &#xc774;&#xb984;&#xacfc; &#xc778;&#xc790;<br>\n<strong>&#xcd9c;&#xb825;</strong>: &#xc751;&#xb2f5; &#xac12;, &#xc0c1;&#xd0dc; &#xbcc0;&#xacbd;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xc544;&#xbc14;&#xd0c0; &#xacc4;&#xce35;, &#xac8c;&#xc784; &#xaddc;&#xce59;</p>"}},{"content":"&#xac8c;&#xc784; &#xaddc;&#xce59; &#xbaa8;&#xb4c8; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"55,60","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xb3c4;&#xc2dc;, &#xc601;&#xc6c5; &#xc721;&#xc131;, &#xc7a5;&#xbe44;, &#xb358;&#xc804;&#xb958;, &#xc774;&#xbca4;&#xd2b8; &#xac19;&#xc740; &#xae30;&#xb2a5;&#xbcc4; &#xaddc;&#xce59;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xacc4;&#xc815; &#xc0c1;&#xd0dc;, &#xd45c; &#xb370;&#xc774;&#xd130;, &#xc11c;&#xbc84; &#xc2dc;&#xacc4;<br>\n<strong>&#xcd9c;&#xb825;</strong>: &#xbc14;&#xb010; &#xacc4;&#xc815; &#xc0c1;&#xd0dc;, &#xc2a4;&#xb0c5;&#xc0f7; &#xc870;&#xac01;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xd45c; &#xb370;&#xc774;&#xd130;, &#xc0c1;&#xd0dc; &#xc800;&#xc7a5;</p>"}},{"content":"<span class=\"mme-more\" data-n=\"7\"></span>","children":[],"payload":{"more":true,"count":7}},{"content":"&#xd45c; &#xb370;&#xc774;&#xd130; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"60,64","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xc5d0;&#xc11c; &#xbf51;&#xc740; &#xac8c;&#xc784; &#xd45c;&#xb97c; JSON&#xc73c;&#xb85c; &#xbcf4;&#xad00;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xbcf5;&#xc6d0; &#xb3c4;&#xad6c;&#xc758; &#xb0b4;&#xbcf4;&#xb0b4;&#xae30; &#xacb0;&#xacfc;<br>\n<strong>&#xcd9c;&#xb825;</strong>: &#xaddc;&#xce59; &#xbaa8;&#xb4c8;&#xc774; &#xc77d;&#xb294; &#xd45c;</p>"}},{"content":"&#xc0c1;&#xd0dc; &#xc800;&#xc7a5; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"64,67","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xacc4;&#xc815;&#xb2f9; JSON &#xd30c;&#xc77c;&#xb85c; &#xc9c4;&#xd589; &#xc0c1;&#xd0dc;&#xb97c; &#xc800;&#xc7a5;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xc544;&#xbc14;&#xd0c0; &#xacc4;&#xce35;, &#xc6b4;&#xc601;&#xc790; &#xb3c4;&#xad6c;</p>"}},{"content":"&#xbcf5;&#xc6d0; &#xb3c4;&#xad6c; &#xd30c;&#xc774;&#xd504;&#xb77c;&#xc778; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"67,72","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd06c;&#xb9bd;&#xd2b8;&#xc5d0;&#xc11c; &#xc18c;&#xc2a4;, RPC &#xbaa9;&#xb85d;, &#xd45c;&#xb97c; &#xb9cc;&#xb4e0;&#xb2e4;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xb9ac;&#xc18c;&#xc2a4;<br>\n<strong>&#xcd9c;&#xb825;</strong>: &#xbcf5;&#xc6d0; &#xc18c;&#xc2a4;, RPC &#xbaa9;&#xb85d;, &#xd45c; JSON<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xd45c; &#xb370;&#xc774;&#xd130;, &#xd14c;&#xc2a4;&#xd2b8;</p>"}},{"content":"&#xac80;&#xc99d; &#xb3c4;&#xad6c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"72,75","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xcea1;&#xcc98;&#xc640; &#xc11c;&#xbc84; &#xc751;&#xb2f5;&#xc744; &#xb300;&#xc870;&#xd558;&#xace0;, &#xc11c;&#xbc84;&#xac00; &#xbcf4;&#xb0b4;&#xb294; &#xd638;&#xcd9c;&#xc744; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd141;&#xacfc; &#xb300;&#xc870;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xd14c;&#xc2a4;&#xd2b8;, &#xc5d0;&#xbbac;&#xb808;&#xc774;&#xd130; &#xc790;&#xb3d9;&#xd654;</p>"}},{"content":"&#xc811;&#xc18d; &#xbcf4;&#xc870; &#xc571;&#xacfc; &#xc571; &#xc548; &#xc11c;&#xbc84; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"75,80","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xae30;&#xae30;&#xb9cc;&#xc73c;&#xb85c; &#xc2e4;&#xd589;&#xd558;&#xb294; &#xb2e8;&#xb3c5; &#xad6c;&#xc131;<br>\n<strong>&#xc785;&#xb825;</strong>: &#xc571; &#xc548; VPN&#xc774; &#xb3cc;&#xb824;&#xc900; &#xc811;&#xc18d;<br>\n<strong>&#xcd9c;&#xb825;</strong>: &#xc11c;&#xbc84; &#xc751;&#xb2f5;<br>\n<strong>&#xc5f0;&#xacb0;</strong>: &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84; &#xb85c;&#xc9c1; &#xc7ac;&#xc0ac;&#xc6a9;</p>"}},{"content":"&#xc6b4;&#xc601;&#xc790; &#xb3c4;&#xad6c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"80,83","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xc2dc;&#xd5d8;&#xc6a9; &#xacc4;&#xc815; &#xad00;&#xb9ac;, &#xc7ac;&#xd654; &#xc9c0;&#xae09;, &#xb808;&#xbca8; &#xbcc0;&#xacbd;<br>\n<strong>&#xcc38;&#xace0;</strong>: &#xc6d0;&#xbcf8; &#xc6b4;&#xc601; &#xae30;&#xb2a5;&#xc774; &#xc544;&#xb2c8;&#xb77c; &#xc2dc;&#xd5d8; &#xc218;&#xb2e8;&#xc774;&#xb2e4;</p>"}},{"content":"&#xb85c;&#xadf8; &#xc218;&#xc9d1; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"83,86","detail":"<p><strong>&#xc5ed;&#xd560;</strong>: &#xc11c;&#xbc84; &#xb85c;&#xadf8;, &#xd328;&#xd0b7;, &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc5d4;&#xc9c4; &#xb85c;&#xadf8;, &#xae30;&#xae30; &#xb85c;&#xadf8;&#xb97c; &#xbaa8;&#xc740;&#xb2e4;</p>"}},{"content":"<span class=\"mme-less\" data-n=\"7\"></span>","children":[],"payload":{"less":true,"count":7}}],"payload":{"tag":"h2","lines":"29,30","count":13}},{"content":"&#xd750;&#xb984; <span class=\"mme-count\" aria-hidden=\"true\">+5</span>","children":[{"content":"&#xbd80;&#xd305;&#xacfc; &#xb85c;&#xadf8;&#xc778; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"87,93","detail":"<ol>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xc124;&#xc815;, &#xc5c5;&#xb370;&#xc774;&#xd2b8; &#xd655;&#xc778;, &#xc11c;&#xbc84; &#xbaa9;&#xb85d;&#xc744; HTTP &#xc11c;&#xbe44;&#xc2a4;&#xc5d0; &#xc694;&#xccad;&#xd55c;&#xb2e4;</li>\n<li>&#xb85c;&#xadf8;&#xc778; &#xc751;&#xb2f5;&#xc744; &#xbc1b;&#xb294;&#xb2e4;</li>\n<li>&#xc11c;&#xbc84; &#xbaa9;&#xb85d;&#xc774; &#xc54c;&#xb824; &#xc900; &#xac8c;&#xc774;&#xd2b8; &#xc8fc;&#xc18c;&#xb85c; TCP &#xc811;&#xc18d;&#xd55c;&#xb2e4;</li>\n<li>&#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;&#xac00; &#xc811;&#xc18d; &#xc751;&#xb2f5;&#xacfc; &#xacc4;&#xc815; &#xc5d4;&#xd2f0;&#xd2f0;&#xb97c; &#xbcf4;&#xb0b8;&#xb2e4;</li>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xb85c;&#xadf8;&#xc778; &#xc815;&#xbcf4;&#xb97c; &#xbcf4;&#xb0b4;&#xba74;, &#xadf8; &#xacc4;&#xc815;&#xc758; &#xc544;&#xbc14;&#xd0c0;&#xb97c; &#xb9cc;&#xb4e4;&#xc5b4; &#xc2a4;&#xb0c5;&#xc0f7;&#xacfc; &#xd568;&#xaed8; &#xbcf4;&#xb0b8;&#xb2e4;</li>\n</ol>"}},{"content":"&#xb3c4;&#xc2dc; &#xc9c4;&#xc785;&#xacfc; &#xc720;&#xc9c0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"93,98","detail":"<ol>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xd50c;&#xb808;&#xc774; &#xc804;&#xd658;&#xc744; &#xc694;&#xccad;&#xd55c;&#xb2e4;</li>\n<li>&#xc11c;&#xbc84;&#xac00; &#xc774;&#xbca4;&#xd2b8; &#xd050;&#xc640; &#xc0c1;&#xd0dc; &#xc804;&#xd658;&#xc5d0; &#xc751;&#xb2f5;&#xd55c;&#xb2e4;</li>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; 5&#xcd08; &#xac04;&#xaca9;&#xc73c;&#xb85c; &#xc0dd;&#xc874; &#xc2e0;&#xd638;&#xb97c; &#xbcf4;&#xb0b8;&#xb2e4;</li>\n<li>&#xc751;&#xb2f5;&#xc774; &#xc5c6;&#xc73c;&#xba74; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xc77c;&#xc815; &#xc2dc;&#xac04; &#xb4a4; &#xc811;&#xc18d;&#xc744; &#xb04a;&#xb294;&#xb2e4;</li>\n</ol>"}},{"content":"&#xae30;&#xb2a5; &#xd638;&#xcd9c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"98,104","detail":"<ol>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; RPC&#xb97c; &#xbcf4;&#xb0b8;&#xb2e4;</li>\n<li>&#xc544;&#xbc14;&#xd0c0; &#xacc4;&#xce35;&#xc774; &#xc774;&#xb984;&#xc73c;&#xb85c; &#xd578;&#xb4e4;&#xb7ec;&#xb97c; &#xcc3e;&#xb294;&#xb2e4;</li>\n<li>&#xd578;&#xb4e4;&#xb7ec;&#xac00; &#xaddc;&#xce59; &#xbaa8;&#xb4c8;&#xc744; &#xbd88;&#xb7ec; &#xacc4;&#xc815; &#xc0c1;&#xd0dc;&#xb97c; &#xbc14;&#xafbc;&#xb2e4;</li>\n<li>&#xc751;&#xb2f5;&#xacfc; &#xd544;&#xc694;&#xd55c; &#xd478;&#xc2dc;&#xb97c; &#xbcf4;&#xb0b8;&#xb2e4;</li>\n<li>&#xc0c1;&#xd0dc;&#xb97c; &#xd30c;&#xc77c;&#xc5d0; &#xc800;&#xc7a5;&#xd55c;&#xb2e4;</li>\n</ol>"}},{"content":"&#xaddc;&#xce59; &#xbcf5;&#xc6d0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"104,110","detail":"<ol>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd06c;&#xb9bd;&#xd2b8;&#xb97c; &#xbcf5;&#xd638;&#xd654;&#xd55c;&#xb2e4;</li>\n<li>&#xbc14;&#xc774;&#xd2b8;&#xcf54;&#xb4dc;&#xb97c; &#xc7ac;&#xc791;&#xc131;&#xd574; &#xc18c;&#xc2a4;&#xb85c; &#xb418;&#xc0b4;&#xb9b0;&#xb2e4;</li>\n<li>&#xc18c;&#xc2a4;&#xc5d0;&#xc11c; RPC &#xbaa9;&#xb85d;&#xacfc; &#xd45c;&#xb97c; &#xbf51;&#xb294;&#xb2e4;</li>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xc77d;&#xb294; &#xd544;&#xb4dc;, &#xd0c0;&#xc785;, &#xc21c;&#xc11c;&#xb97c; &#xacc4;&#xc57d; &#xbb38;&#xc11c;&#xb85c; &#xc815;&#xb9ac;&#xd55c;&#xb2e4;</li>\n<li>&#xaddc;&#xce59;&#xc744; &#xad6c;&#xd604;&#xd558;&#xace0; &#xd14c;&#xc2a4;&#xd2b8;&#xc640; &#xc5d0;&#xbbac;&#xb808;&#xc774;&#xd130;&#xb85c; &#xd655;&#xc778;&#xd55c;&#xb2e4;</li>\n</ol>"}},{"content":"&#xc99d;&#xac70; &#xac8c;&#xc774;&#xd2b8; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"110,116","detail":"<ol>\n<li>&#xc11c;&#xbc84; &#xc751;&#xb2f5; &#xbcc0;&#xacbd; &#xc804;&#xc5d0; &#xd328;&#xd0b7; &#xadfc;&#xac70;&#xb97c; &#xcc3e;&#xb294;&#xb2e4;</li>\n<li>&#xc5c6;&#xc73c;&#xba74; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc18c;&#xc2a4;&#xc5d0;&#xc11c; &#xadfc;&#xac70;&#xb97c; &#xcc3e;&#xb294;&#xb2e4;</li>\n<li>&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xb97c; &#xbc14;&#xafb8;&#xb294; &#xacbd;&#xc6b0; &#xbcc4;&#xb3c4; &#xc815;&#xb2f9;&#xd654;&#xb97c; &#xbb38;&#xc11c;&#xb85c; &#xb0a8;&#xae34;&#xb2e4;</li>\n<li>&#xd68c;&#xadc0; &#xd14c;&#xc2a4;&#xd2b8;&#xb97c; 1&#xac1c; &#xc774;&#xc0c1; &#xcd94;&#xac00;&#xd55c;&#xb2e4;</li>\n</ol>"}}],"payload":{"tag":"h2","lines":"86,87","count":5}},{"content":"&#xd575;&#xc2ec; &#xac1c;&#xb150;&#xacfc; &#xc6a9;&#xc5b4; <span class=\"mme-count\" aria-hidden=\"true\">+7</span>","children":[{"content":"&#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"117,120","detail":"<p><strong>&#xb73b;</strong>: &#xb85c;&#xadf8;&#xc778; &#xc774;&#xd6c4;&#xc758; &#xac8c;&#xc784; &#xd1b5;&#xc2e0;&#xc744; &#xbc1b;&#xb294; &#xc6d0;&#xc2dc; TCP &#xc11c;&#xbc84;<br>\n<strong>&#xad00;&#xacc4;</strong>: HTTP &#xc11c;&#xbe44;&#xc2a4;&#xac00; &#xc54c;&#xb824; &#xc900; &#xc8fc;&#xc18c;&#xb85c; &#xc811;&#xc18d;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xc5d4;&#xd2f0;&#xd2f0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"120,123","detail":"<p><strong>&#xb73b;</strong>: &#xc11c;&#xbc84;&#xc640; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xd568;&#xaed8; &#xb4e4;&#xace0; &#xc788;&#xb294; &#xac1d;&#xccb4;. &#xacc4;&#xc815;&#xacfc; &#xc544;&#xbc14;&#xd0c0;&#xac00; &#xc788;&#xb2e4;<br>\n<strong>&#xad00;&#xacc4;</strong>: &#xc11c;&#xbc84;&#xac00; &#xc0dd;&#xc131; &#xba54;&#xc2dc;&#xc9c0;&#xb97c; &#xbcf4;&#xb0b4;&#xba74; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xb9cc;&#xb4e0;&#xb2e4;</p>"}},{"content":"&#xc2a4;&#xb0c5;&#xc0f7; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"123,126","detail":"<p><strong>&#xb73b;</strong>: &#xb85c;&#xadf8;&#xc778; &#xb54c; &#xbcf4;&#xb0b4;&#xb294; &#xacc4;&#xc815; &#xc0c1;&#xd0dc; &#xbb36;&#xc74c;<br>\n<strong>&#xad00;&#xacc4;</strong>: &#xae30;&#xb2a5; &#xbaa8;&#xb4c8;&#xb9c8;&#xb2e4; &#xc870;&#xac01;&#xc744; &#xb4f1;&#xb85d;&#xd558;&#xace0;, &#xc601;&#xc6c5; &#xb370;&#xc774;&#xd130;&#xb294; &#xc804;&#xd22c;&#xc640; &#xac19;&#xc740; &#xc870;&#xb9bd;&#xae30;&#xb97c; &#xc4f4;&#xb2e4;</p>"}},{"content":"RPC &#xbaa9;&#xb85d; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"126,129","detail":"<p><strong>&#xb73b;</strong>: &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc18c;&#xc2a4;&#xc5d0;&#xc11c; &#xbf51;&#xc740; &#xd638;&#xcd9c; &#xc774;&#xb984; &#xbaa9;&#xb85d;. &#xc11c;&#xbc84; &#xd638;&#xcd9c; 1,334&#xac1c;, &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd141; 1,493&#xac1c;<br>\n<strong>&#xad00;&#xacc4;</strong>: &#xad6c;&#xd604; &#xbc94;&#xc704;&#xc758; &#xae30;&#xc900;&#xc774;&#xace0;, &#xd14c;&#xc2a4;&#xd2b8;&#xac00; &#xc11c;&#xbc84; &#xd638;&#xcd9c;&#xc744; &#xc774; &#xbaa9;&#xb85d;&#xacfc; &#xb300;&#xc870;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xadfc;&#xac70; &#xb4f1;&#xae09; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"129,132","detail":"<p><strong>&#xb73b;</strong>: &#xaddc;&#xce59;&#xb9c8;&#xb2e4; &#xd45c;, &#xc18c;&#xc2a4;, &#xcd94;&#xb860;, &#xbcf5;&#xc6d0; &#xc11c;&#xbc84;&#xc758; &#xacb0;&#xc815; &#xc911; &#xc5b4;&#xb514;&#xc11c; &#xc654;&#xb294;&#xc9c0; &#xd45c;&#xae30;<br>\n<strong>&#xad00;&#xacc4;</strong>: &#xc6d0;&#xbcf8; &#xc11c;&#xbc84;&#xac00; &#xc5c6;&#xc5b4;&#xc11c; &#xcd94;&#xb860;&#xc774; &#xb9ce;&#xb2e4;</p>"}},{"content":"&#xc11c;&#xbc84; &#xc2dc;&#xacc4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"132,135","detail":"<p><strong>&#xb73b;</strong>: &#xd55c;&#xad6d; &#xbcbd;&#xc2dc;&#xacc4;&#xb97c; &#xae30;&#xc900;&#xc73c;&#xb85c; &#xd558;&#xace0;, &#xc11c;&#xbe44;&#xc2a4; &#xb9d0;&#xae30; &#xad6c;&#xac04;&#xc744; &#xb418;&#xd480;&#xc774;&#xd574; &#xd55c;&#xc815; &#xc774;&#xbca4;&#xd2b8;&#xb97c; &#xb2e4;&#xc2dc; &#xc5f0;&#xb2e4;<br>\n<strong>&#xad00;&#xacc4;</strong>: &#xc774;&#xbca4;&#xd2b8; &#xbaa8;&#xb4c8;&#xc774; &#xb418;&#xd480;&#xc774; &#xbc88;&#xd638;&#xb85c; &#xc0c1;&#xd0dc;&#xb97c; &#xbe44;&#xc6b4;&#xb2e4;</p>"}},{"content":"&#xc99d;&#xac70; &#xb4f1;&#xae09; Tier 1&#xb7;2&#xb7;3 <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"135,138","detail":"<p><strong>&#xb73b;</strong>: &#xd328;&#xd0b7; &#xadfc;&#xac70;, &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc18c;&#xc2a4; &#xadfc;&#xac70;, &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xbcc0;&#xacbd;&#xc758; &#xc815;&#xb2f9;&#xd654;</p>"}}],"payload":{"tag":"h2","lines":"116,117","count":7}},{"content":"&#xad6c;&#xc131; &#xc694;&#xc18c;&#xbcc4; &#xb3d9;&#xc791; &#xc6d0;&#xb9ac; <span class=\"mme-count\" aria-hidden=\"true\">+33</span>","children":[{"content":"&#xc911;&#xacc4; <span class=\"mme-count\" aria-hidden=\"true\">+2</span>","children":[{"content":"&#xc11c;&#xbc84;&#xba85; &#xc720;&#xbb34;&#xb85c; &#xbd84;&#xae30; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"140,146","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xac19;&#xc740; 443 &#xd3ec;&#xd2b8;&#xb85c; &#xc624;&#xb294; TLS &#xc811;&#xc18d;&#xacfc; &#xc6d0;&#xc2dc; TCP &#xc811;&#xc18d;&#xc744; &#xb098;&#xb208;&#xb2e4;<br>\n<strong>&#xbc29;&#xc2dd;</strong>:</p>\n<ol>\n<li>TLS &#xc11c;&#xbc84;&#xba85;&#xc774; &#xc788;&#xc73c;&#xba74; TLS&#xb97c; &#xd480;&#xc5b4; HTTP &#xc11c;&#xbe44;&#xc2a4;&#xb85c; &#xbcf4;&#xb0b8;&#xb2e4;</li>\n<li>&#xc11c;&#xbc84;&#xba85;&#xc774; &#xc5c6;&#xc73c;&#xba74; &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;&#xb85c; &#xbcf4;&#xb0b8;&#xb2e4;<br>\n<strong>&#xc774;&#xb807;&#xac8c; &#xd55c; &#xd6a8;&#xacfc;</strong>: &#xd55c; &#xc8fc;&#xc18c;&#xb85c; &#xb450; &#xc885;&#xb958; &#xd1b5;&#xc2e0;&#xc744; &#xbc1b;&#xb294;&#xb2e4;</li>\n</ol>"}},{"content":"&#xc2e4;&#xc81c; &#xae30;&#xae30; &#xc8fc;&#xc18c; &#xbcf4;&#xc874; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"146,149","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc911;&#xacc4; &#xb4a4;&#xc5d0;&#xc11c;&#xb3c4; &#xc811;&#xc18d;&#xd55c; &#xae30;&#xae30;&#xc758; &#xc2e4;&#xc81c; &#xc8fc;&#xc18c;&#xb97c; &#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84;&#xac00; &#xbcf8;&#xb2e4;<br>\n<strong>&#xbc29;&#xc2dd;</strong>: &#xc911;&#xacc4;&#xac00; &#xc55e;&#xc5d0; &#xbd99;&#xc774;&#xb294; &#xd504;&#xb85d;&#xc2dc; &#xd504;&#xb85c;&#xd1a0;&#xcf5c; &#xd5e4;&#xb354;&#xb97c; &#xd574;&#xc11d;&#xd55c;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"139,149","count":2}},{"content":"HTTP &#xc11c;&#xbe44;&#xc2a4; <span class=\"mme-count\" aria-hidden=\"true\">+2</span>","children":[{"content":"&#xcea1;&#xcc98; &#xc751;&#xb2f5; &#xc7ac;&#xd604; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"150,153","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xcea1;&#xcc98;&#xb41c; &#xc751;&#xb2f5;&#xc744; &#xbc14;&#xc774;&#xd2b8;&#xc640; Content-Type&#xae4c;&#xc9c0; &#xac19;&#xac8c; &#xb3cc;&#xb824;&#xc900;&#xb2e4;<br>\n<strong>&#xc774;&#xb807;&#xac8c; &#xd55c; &#xd6a8;&#xacfc;</strong>: &#xc751;&#xb2f5;&#xc774; &#xc5b4;&#xae0b;&#xb098; &#xc5c5;&#xb370;&#xc774;&#xd2b8; &#xb2e8;&#xacc4;&#xc5d0;&#xc11c; &#xba48;&#xcd94;&#xb294; &#xbb38;&#xc81c;&#xb97c; &#xb9c9;&#xb294;&#xb2e4;</p>"}},{"content":"&#xc54c; &#xc218; &#xc5c6;&#xb294; &#xc694;&#xccad; &#xcc98;&#xb9ac; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"153,155","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xcea1;&#xcc98;&#xc5d0; &#xc5c6;&#xb294; &#xacbd;&#xb85c;&#xb294; &#xc2a4;&#xd141;&#xc73c;&#xb85c; &#xb2f5;&#xd558;&#xace0; &#xacbd;&#xace0; &#xb85c;&#xadf8;&#xb97c; &#xb0a8;&#xae34;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"149,155","count":2}},{"content":"&#xac8c;&#xc774;&#xd2b8; &#xc11c;&#xbc84; <span class=\"mme-count\" aria-hidden=\"true\">+3</span>","children":[{"content":"&#xb85c;&#xadf8;&#xc778; &#xd6c4; &#xc544;&#xbc14;&#xd0c0; &#xc0dd;&#xc131; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"156,159","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc811;&#xc18d; &#xc9c1;&#xd6c4;&#xac00; &#xc544;&#xb2c8;&#xb77c; &#xb85c;&#xadf8;&#xc778; &#xc815;&#xbcf4;&#xb97c; &#xbc1b;&#xc740; &#xb4a4; &#xacc4;&#xc815;&#xbcc4; &#xc544;&#xbc14;&#xd0c0;&#xb97c; &#xb9cc;&#xb4e0;&#xb2e4;<br>\n<strong>&#xc774;&#xc720;</strong>: &#xae30;&#xae30; &#xc2dd;&#xbcc4;&#xc790;&#xac00; &#xc811;&#xc18d;&#xb9c8;&#xb2e4; &#xbc14;&#xb010;&#xb2e4;</p>"}},{"content":"&#xc811;&#xc18d; &#xc548;&#xc815;&#xd654; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"159,162","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc608;&#xc678;&#xb97c; &#xc811;&#xc18d; &#xb2e8;&#xc704;&#xb85c; &#xac00;&#xb450;&#xace0;, &#xc911;&#xbcf5; &#xb85c;&#xadf8;&#xc778;&#xc744; &#xc815;&#xb9ac;&#xd558;&#xace0;, &#xd1a0;&#xd070;&#xc744; &#xb300;&#xc870;&#xd55c;&#xb2e4;<br>\n<strong>&#xbc29;&#xc2dd;</strong>: &#xd1a0;&#xd070; &#xb300;&#xc870;&#xb294; &#xc5c4;&#xaca9;, &#xae30;&#xb85d;&#xb9cc;, &#xb054; &#xc138; &#xac00;&#xc9c0; &#xbaa8;&#xb4dc;</p>"}},{"content":"&#xbe60;&#xb978; &#xc885;&#xb8cc; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"162,165","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc885;&#xb8cc;&#xd560; &#xb54c; &#xc811;&#xc18d;&#xc744; &#xba3c;&#xc800; &#xb2eb;&#xb294;&#xb2e4;<br>\n<strong>&#xc774;&#xb807;&#xac8c; &#xd55c; &#xd6a8;&#xacfc;</strong>: &#xc811;&#xc18d;&#xc774; &#xc788;&#xc744; &#xb54c; &#xc885;&#xb8cc;&#xac00; 90&#xcd08; &#xac78;&#xb9ac;&#xb358; &#xac83;&#xc774; 1&#xcd08;&#xb85c; &#xc904;&#xc5c8;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"155,165","count":3}},{"content":"&#xc544;&#xbc14;&#xd0c0; &#xacc4;&#xce35; <span class=\"mme-count\" aria-hidden=\"true\">+3</span>","children":[{"content":"&#xd578;&#xb4e4;&#xb7ec; &#xc790;&#xb3d9; &#xb4f1;&#xb85d; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"166,172","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xd45c;&#xc2dc;&#xac00; &#xbd99;&#xc740; &#xd578;&#xb4e4;&#xb7ec;&#xb97c; &#xbaa8;&#xc544; &#xd638;&#xcd9c; &#xc774;&#xb984;&#xacfc; &#xc5f0;&#xacb0;&#xd55c;&#xb2e4;<br>\n<strong>&#xbc29;&#xc2dd;</strong>:</p>\n<ol>\n<li>&#xd578;&#xb4e4;&#xb7ec;&#xc5d0; RPC &#xd45c;&#xc2dc;&#xb97c; &#xbd99;&#xc778;&#xb2e4;</li>\n<li>&#xc544;&#xbc14;&#xd0c0;&#xac00; &#xb9cc;&#xb4e4;&#xc5b4;&#xc9c8; &#xb54c; &#xba64;&#xbc84;&#xb97c; &#xd6d1;&#xc5b4; &#xbaa8;&#xc740;&#xb2e4;</li>\n<li>&#xac19;&#xc740; &#xc774;&#xb984;&#xc774; &#xb458;&#xc774;&#xba74; &#xb098;&#xc911; &#xac83;&#xc774; &#xc774;&#xae34;&#xb2e4;</li>\n</ol>"}},{"content":"&#xbbf8;&#xad6c;&#xd604; &#xd638;&#xcd9c; &#xcc98;&#xb9ac; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"172,175","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xd578;&#xb4e4;&#xb7ec;&#xac00; &#xc5c6;&#xc73c;&#xba74; &#xb85c;&#xadf8;&#xb9cc; &#xb0a8;&#xae30;&#xace0; &#xbe48; &#xacb0;&#xacfc;&#xb85c; &#xd480;&#xc5b4; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xc7a0;&#xae30;&#xc9c0; &#xc54a;&#xac8c; &#xd55c;&#xb2e4;<br>\n<strong>&#xc608;&#xc678;</strong>: &#xacb0;&#xacfc; &#xac12;&#xc744; &#xc77d;&#xb294; &#xcf5c;&#xbc31;&#xc740; &#xd480;&#xc9c0; &#xc54a;&#xace0; &#xacbd;&#xace0;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xc804;&#xd22c; &#xd638;&#xcd9c; &#xbd84;&#xae30; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"175,177","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc804;&#xd22c; &#xc11c;&#xbc84;&#xac00; &#xc5c6;&#xb294; &#xcf58;&#xd150;&#xce20;&#xb294; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xc2a4;&#xc2a4;&#xb85c; &#xc804;&#xd22c;&#xd558;&#xac8c; &#xb3cc;&#xb824;&#xbcf4;&#xb0b8;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"165,177","count":3}},{"content":"&#xac8c;&#xc784; &#xaddc;&#xce59; <span class=\"mme-count\" aria-hidden=\"true\">+4</span>","children":[{"content":"&#xae30;&#xb2a5; &#xbaa8;&#xb4c8;&#xc758; &#xacf5;&#xd1b5; &#xbaa8;&#xc591; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"178,181","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xd45c; &#x2192; &#xaddc;&#xce59; &#x2192; &#xacc4;&#xc815; &#xc0c1;&#xd0dc; &#x2192; &#xac70;&#xc808; &#xd310;&#xc815; &#x2192; &#xc640;&#xc774;&#xc5b4; &#xbcc0;&#xd658; &#x2192; &#xc2a4;&#xb0c5;&#xc0f7; &#xc870;&#xac01;<br>\n<strong>&#xc774;&#xb807;&#xac8c; &#xd55c; &#xd6a8;&#xacfc;</strong>: &#xc0c8; &#xae30;&#xb2a5;&#xc744; &#xac19;&#xc740; &#xd2c0;&#xb85c; &#xcd94;&#xac00;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xc601;&#xc6c5; &#xb370;&#xc774;&#xd130; &#xc870;&#xb9bd; &#xd55c; &#xacf3; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"181,183","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc2a4;&#xb0c5;&#xc0f7;, &#xac31;&#xc2e0; &#xd478;&#xc2dc;, &#xc804;&#xd22c;&#xac00; &#xac19;&#xc740; &#xc601;&#xc6c5; &#xac12;&#xc744; &#xc4f4;&#xb2e4;</p>"}},{"content":"&#xc774;&#xbca4;&#xd2b8; &#xaddc;&#xce59; &#xbaa8;&#xb4c8; &#xbb36;&#xc74c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"183,186","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc774;&#xbca4;&#xd2b8; 38&#xc885;&#xc774; &#xac19;&#xc740; &#xace8;&#xaca9;&#xc744; &#xb530;&#xb978;&#xb2e4;<br>\n<strong>&#xcc38;&#xace0;</strong>: &#xb300;&#xbd80;&#xbd84; &#xc6d0;&#xbcf8; &#xc11c;&#xbc84;&#xac00; &#xc5c6;&#xc5b4; &#xcd94;&#xb860;&#xd55c; &#xac12;&#xc774;&#xb2e4;</p>"}},{"content":"&#xc11c;&#xbc84; &#xc2dc;&#xacc4; &#xb418;&#xd480;&#xc774; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"186,188","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc11c;&#xbe44;&#xc2a4; &#xb9d0;&#xae30; &#xad6c;&#xac04;&#xc744; &#xb418;&#xd480;&#xc774;&#xd574; &#xd55c;&#xc815; &#xc18c;&#xd658;&#xacfc; &#xc774;&#xbca4;&#xd2b8;&#xb97c; &#xb2e4;&#xc2dc; &#xc5f0;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"177,188","count":4}},{"content":"&#xc0c1;&#xd0dc; &#xc800;&#xc7a5; <span class=\"mme-count\" aria-hidden=\"true\">+1</span>","children":[{"content":"&#xc548;&#xc804;&#xd55c; &#xd30c;&#xc77c; &#xad50;&#xccb4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"189,192","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc784;&#xc2dc; &#xd30c;&#xc77c;&#xc5d0; &#xc4f0;&#xace0; &#xad50;&#xccb4;&#xd558;&#xba70;, &#xae68;&#xc9c4; &#xd30c;&#xc77c;&#xc740; &#xb530;&#xb85c; &#xc62e;&#xae34;&#xb2e4;<br>\n<strong>&#xc774;&#xb807;&#xac8c; &#xd55c; &#xd6a8;&#xacfc;</strong>: &#xc4f0;&#xb294; &#xb3c4;&#xc911; &#xc885;&#xb8cc;&#xb3fc;&#xb3c4; &#xae30;&#xc874; &#xc0c1;&#xd0dc;&#xac00; &#xb0a8;&#xb294;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"188,192","count":1}},{"content":"<span class=\"mme-more\" data-n=\"3\"></span>","children":[],"payload":{"more":true,"count":3}},{"content":"&#xbcf5;&#xc6d0; &#xb3c4;&#xad6c; <span class=\"mme-count\" aria-hidden=\"true\">+3</span>","children":[{"content":"&#xc635;&#xcf54;&#xb4dc; &#xd45c; &#xc720;&#xb3c4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"193,196","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xac8c;&#xc784;&#xc5d0; &#xb4e0; &#xd45c;&#xc900; &#xb77c;&#xc774;&#xbe0c;&#xb7ec;&#xb9ac;&#xb97c; Python 2.7 &#xcef4;&#xd30c;&#xc77c; &#xacb0;&#xacfc;&#xc640; &#xba85;&#xb839; &#xb2e8;&#xc704;&#xb85c; &#xbe44;&#xad50;&#xd574; &#xc635;&#xcf54;&#xb4dc; &#xd45c;&#xb97c; &#xb9de;&#xcd98;&#xb2e4;<br>\n<strong>&#xbc29;&#xc2dd;</strong>: 100&#xacf3;&#xc740; &#xbe44;&#xad50;&#xb85c; &#xc720;&#xb3c4;&#xd558;&#xace0; &#xb098;&#xba38;&#xc9c0;&#xb294; &#xad00;&#xc6a9;&#xad6c;&#xb85c; &#xc815;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xd45c; &#xb0b4;&#xbcf4;&#xb0b4;&#xae30; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"196,199","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xd45c;&#xb97c; &#xc2e4;&#xd589;&#xd558;&#xc9c0; &#xc54a;&#xace0; &#xad6c;&#xbb38; &#xd2b8;&#xb9ac;&#xb85c;&#xb9cc; &#xc77d;&#xc5b4; JSON&#xc73c;&#xb85c; &#xb0b4;&#xbcf4;&#xb0b8;&#xb2e4;<br>\n<strong>&#xcc38;&#xace0;</strong>: &#xc6d0;&#xbcf8;&#xc774; &#xc544;&#xb2c8;&#xb77c; &#xcd94;&#xc815;&#xc73c;&#xb85c; &#xcc44;&#xc6b4; &#xad6c;&#xac04;&#xc740; &#xd45c;&#xae30;&#xac00; &#xb530;&#xb85c; &#xc788;&#xb2e4;</p>"}},{"content":"&#xc18c;&#xc2a4; &#xbcf5;&#xc6d0; &#xaddc;&#xbaa8; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"199,201","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc18c;&#xc2a4; 4,369&#xac1c;&#xb97c; &#xb418;&#xc0b4;&#xb838;&#xace0;, &#xc804;&#xd22c; &#xc2a4;&#xd06c;&#xb9bd;&#xd2b8;&#xb97c; &#xd3ec;&#xd568;&#xd558;&#xba74; 13,462&#xac1c;</p>"}}],"payload":{"tag":"li","lines":"192,201","count":3}},{"content":"&#xac80;&#xc99d; &#xb3c4;&#xad6c; <span class=\"mme-count\" aria-hidden=\"true\">+2</span>","children":[{"content":"&#xcea1;&#xcc98; &#xb300;&#xc870; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"202,204","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: 2021 &#xcea1;&#xcc98; &#xc694;&#xccad;&#xc744; &#xc11c;&#xbc84;&#xc5d0; &#xc7ac;&#xc0dd;&#xd558;&#xace0; &#xc751;&#xb2f5;&#xc744; &#xac19;&#xc74c;, &#xb2e4;&#xb984;, &#xc0c1;&#xd0dc; &#xcc28;&#xc774;&#xb85c; &#xd310;&#xc815;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xc640;&#xc774;&#xc5b4; &#xac80;&#xc0ac; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"204,207","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xac00;&#xc9dc; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xac00; &#xc11c;&#xbc84;&#xac00; &#xbcf4;&#xb0b8; &#xbaa8;&#xb4e0; &#xd638;&#xcd9c;&#xc744; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xc2a4;&#xd141;&#xacfc; &#xb300;&#xc870;&#xd55c;&#xb2e4;<br>\n<strong>&#xc774;&#xb807;&#xac8c; &#xd55c; &#xd6a8;&#xacfc;</strong>: &#xc798;&#xbabb;&#xb41c; &#xd0a4; &#xc774;&#xb984; &#xac19;&#xc740; &#xc624;&#xb958;&#xb97c; &#xd14c;&#xc2a4;&#xd2b8;&#xc5d0;&#xc11c; &#xc7a1;&#xb294;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"201,207","count":2}},{"content":"&#xc571; &#xc548; &#xc11c;&#xbc84; <span class=\"mme-count\" aria-hidden=\"true\">+4</span>","children":[{"content":"&#xc11c;&#xbc84;&#xb97c; &#xbcc4;&#xb3c4; &#xd504;&#xb85c;&#xc138;&#xc2a4;&#xb85c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"208,210","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xae30;&#xae30; &#xc548;&#xc5d0;&#xc11c; &#xc11c;&#xbc84;&#xb97c; &#xac8c;&#xc784;&#xacfc; &#xb2e4;&#xb978; &#xd504;&#xb85c;&#xc138;&#xc2a4;&#xb85c; &#xc2e4;&#xd589;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xc571; &#xc548; VPN <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"210,212","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: 80/443 &#xc811;&#xc18d;&#xc744; &#xc11c;&#xbc84;&#xc758; &#xbe44;&#xd2b9;&#xad8c; &#xd3ec;&#xd2b8;&#xb85c; &#xb3cc;&#xb824;&#xc900;&#xb2e4;</p>"}},{"content":"&#xb300;&#xccb4; FastAPI &#xd328;&#xd0a4;&#xc9c0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"212,215","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xae30;&#xae30;&#xc5d0;&#xc11c; &#xbe4c;&#xb4dc;&#xd558;&#xae30; &#xc5b4;&#xb824;&#xc6b4; &#xc758;&#xc874;&#xc131;&#xc744; &#xd53c;&#xd574; Starlette &#xc704;&#xc5d0; &#xac19;&#xc740; &#xbaa8;&#xc591;&#xc744; &#xc81c;&#xacf5;&#xd55c;&#xb2e4;<br>\n<strong>&#xac80;&#xc99d;</strong>: &#xac19;&#xc740; &#xd14c;&#xc2a4;&#xd2b8;&#xb97c; &#xc9c4;&#xc9dc; FastAPI&#xc640; &#xb300;&#xccb4; &#xd328;&#xd0a4;&#xc9c0;&#xc5d0;&#xc11c; &#xbaa8;&#xb450; &#xb3cc;&#xb9b0;&#xb2e4;</p>"}},{"content":"&#xc18c;&#xcf13; &#xbcf5;&#xad6c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"215,218","detail":"<p><strong>&#xd558;&#xb294; &#xc77c;</strong>: &#xc548;&#xb4dc;&#xb85c;&#xc774;&#xb4dc;&#xac00; &#xb2eb;&#xc740; &#xb4e3;&#xb294; &#xc18c;&#xcf13;&#xc744; &#xc11c;&#xbc84;&#xac00; &#xb2e4;&#xc2dc; &#xc5f0;&#xb2e4;</p>"}}],"payload":{"tag":"li","lines":"207,218","count":4}},{"content":"<span class=\"mme-less\" data-n=\"3\"></span>","children":[],"payload":{"less":true,"count":3}}],"payload":{"tag":"h2","lines":"138,139","count":33}},{"content":"&#xac1c;&#xbc1c; &#xd658;&#xacbd;&#xacfc; &#xc791;&#xc5c5; &#xaddc;&#xce59; <span class=\"mme-count\" aria-hidden=\"true\">+4</span>","children":[{"content":"&#xac1c;&#xbc1c; &#xd658;&#xacbd; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"219,222","detail":"<ul>\n<li><strong>&#xc11c;&#xbc84;</strong>: Linux 24.04, systemd, nginx, dnsmasq</li>\n<li><strong>&#xac80;&#xc99d; &#xae30;&#xae30;</strong>: &#xb8e8;&#xd305;&#xb41c; &#xc548;&#xb4dc;&#xb85c;&#xc774;&#xb4dc; &#xc5d0;&#xbbac;&#xb808;&#xc774;&#xd130;, &#xc2e4;&#xae30;&#xae30; &#xd0dc;&#xbe14;&#xb9bf;</li>\n</ul>"}},{"content":"&#xbb38;&#xc11c; &#xccb4;&#xacc4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"222,228","detail":"<table>\n<thead>\n<tr>\n<th>&#xc885;&#xb958;</th>\n<th>&#xb0b4;&#xc6a9;</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>&#xbd84;&#xc11d; &#xbcf4;&#xace0;&#xc11c;</td>\n<td>&#xbc88;&#xd638;&#xac00; &#xbd99;&#xace0;, &#xc9c8;&#xbb38;&#xacfc; &#xbc29;&#xbc95;&#xacfc; &#xacb0;&#xb860;&#xc774; &#xc788;&#xb2e4;</td>\n</tr>\n<tr>\n<td>&#xc791;&#xc5c5; &#xc77c;&#xc9c0;</td>\n<td>&#xb0a0;&#xc9dc;&#xbcc4;&#xb85c; &#xbc1b;&#xc740; &#xc694;&#xccad;, &#xc9c4;&#xd589;, &#xc0c1;&#xd0dc;, &#xcee4;&#xbc0b;&#xc744; &#xc801;&#xb294;&#xb2e4;</td>\n</tr>\n<tr>\n<td>&#xd559;&#xc2b5; &#xae30;&#xb85d;</td>\n<td>&#xac19;&#xc740; &#xc2e4;&#xc218; 2&#xd68c;, 1&#xc2dc;&#xac04; &#xc774;&#xc0c1; &#xac78;&#xb9b0; &#xbc84;&#xadf8;&#xb97c; &#xc801;&#xace0;, 3&#xd68c; &#xbc18;&#xbcf5;&#xb418;&#xba74; &#xaddc;&#xce59;&#xc73c;&#xb85c; &#xc62c;&#xb9b0;&#xb2e4;</td>\n</tr>\n</tbody>\n</table>"}},{"content":"&#xaddc;&#xce59; &#xc9c4;&#xd654; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"228,231","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xad50;&#xd6c8;&#xc774; 15&#xac1c;&#xc5d0;&#xc11c; 40&#xac1c;&#xb85c; &#xb298;&#xc5c8;&#xace0;, &#xbc18;&#xbcf5;&#xb41c; &#xc2e4;&#xc218;&#xac00; &#xaddc;&#xce59;&#xc73c;&#xb85c; &#xc2b9;&#xaca9;&#xb418;&#xc5c8;&#xb2e4;<br>\n<strong>&#xc608;</strong>: &#xd504;&#xb85c;&#xc138;&#xc2a4; &#xd328;&#xd134; &#xb9e4;&#xce6d; &#xd568;&#xc815;, &#xc5d0;&#xbbac;&#xb808;&#xc774;&#xd130; &#xc790;&#xb3d9;&#xd654; &#xaddc;&#xce59;</p>"}},{"content":"&#xba85;&#xb839; &#xc2e4;&#xd589; &#xaddc;&#xce59; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"231,235","detail":"<ul>\n<li><strong>&#xbb34;&#xd55c; &#xb300;&#xae30; &#xbc29;&#xc9c0;</strong>: &#xbaa8;&#xb4e0; &#xba85;&#xb839;&#xc5d0; &#xc2dc;&#xac04; &#xc81c;&#xd55c;</li>\n<li><strong>&#xadfc;&#xac70; ID &#xac80;&#xc99d;</strong>: &#xb3c4;&#xad6c;&#xb97c; &#xbd80;&#xb974;&#xc9c0; &#xc54a;&#xc740; ID&#xb294; &#xc99d;&#xac70;&#xac00; &#xc544;&#xb2d8;</li>\n</ul>"}}],"payload":{"tag":"h2","lines":"218,219","count":4}},{"content":"&#xc124;&#xacc4; &#xc6d0;&#xce59;&#xacfc; &#xc81c;&#xc57d; <span class=\"mme-count\" aria-hidden=\"true\">+4</span>","children":[{"content":"&#xc751;&#xb2f5;&#xc740; &#xc6d0;&#xbcf8; &#xadf8;&#xb300;&#xb85c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"236,238","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: 2021 &#xcea1;&#xcc98;&#xac00; &#xc815;&#xb2f5;&#xc9c0;&#xc774;&#xba70; &#xcd94;&#xce21;&#xc73c;&#xb85c; &#xb2e4;&#xc2dc; &#xb9cc;&#xb4e4;&#xc9c0; &#xc54a;&#xb294;&#xb2e4;</p>"}},{"content":"&#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8;&#xb294; &#xac74;&#xb4dc;&#xb9ac;&#xc9c0; &#xc54a;&#xb294;&#xb2e4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"238,240","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc11c;&#xbc84;&#xac00; &#xc8fc;&#xb294; &#xac12;&#xb9cc; &#xbc14;&#xafb8;&#xb294; &#xac83;&#xc774; &#xc6d0;&#xce59;&#xc774;&#xace0;, &#xc608;&#xc678;&#xb294; &#xc815;&#xb2f9;&#xd654; &#xbb38;&#xc11c;&#xb97c; &#xb0a8;&#xae34;&#xb2e4;</p>"}},{"content":"&#xcd94;&#xb860;&#xc740; &#xcd94;&#xb860;&#xc774;&#xb77c;&#xace0; &#xc801;&#xb294;&#xb2e4; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"240,242","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xaddc;&#xce59;&#xb9c8;&#xb2e4; &#xadfc;&#xac70; &#xb4f1;&#xae09;&#xc744; &#xd45c;&#xae30;&#xd55c;&#xb2e4;</p>"}},{"content":"&#xc624;&#xd504;&#xb77c;&#xc778; &#xc804;&#xd22c; &#xd5c8;&#xc6a9; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"242,245","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc628;&#xb77c;&#xc778; &#xc804;&#xd22c; &#xc11c;&#xbc84;&#xac00; &#xc5c6;&#xc5b4; &#xd074;&#xb77c;&#xc774;&#xc5b8;&#xd2b8; &#xacc4;&#xc0b0;&#xc5d0; &#xb9e1;&#xae34;&#xb2e4;</p>"}}],"payload":{"tag":"h2","lines":"235,236","count":4}},{"content":"&#xd55c;&#xacc4;&#xc640; &#xc54c;&#xb824;&#xc9c4; &#xbb38;&#xc81c; <span class=\"mme-count\" aria-hidden=\"true\">+5</span>","children":[{"content":"&#xc6d0;&#xbcf8; &#xc11c;&#xbc84; &#xaddc;&#xce59; &#xbd80;&#xc7ac; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"246,248","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc11c;&#xbc84; &#xcabd; &#xaddc;&#xce59; &#xb2e4;&#xc218;&#xb294; &#xcd94;&#xb860;&#xc774;&#xb2e4;</p>"}},{"content":"RPC &#xad6c;&#xd604; &#xbc94;&#xc704; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"248,250","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc815;&#xc801; &#xc9d1;&#xacc4;&#xb85c; &#xc11c;&#xbc84; &#xd638;&#xcd9c;&#xc758; &#xc57d; 48.5%&#xc5d0; &#xd578;&#xb4e4;&#xb7ec;&#xac00; &#xc788;&#xb2e4;</p>"}},{"content":"&#xac8c;&#xc774;&#xd2b8; &#xad6c;&#xac04;&#xc758; &#xc815;&#xb2f5;&#xc9c0; &#xc5c6;&#xc74c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"250,252","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: 2021 &#xcea1;&#xcc98;&#xac00; HTTP &#xb85c;&#xadf8;&#xc778; &#xad6c;&#xac04;&#xc5d0; &#xd55c;&#xc815;&#xb41c;&#xb2e4;</p>"}},{"content":"&#xbb38;&#xc11c; &#xac31;&#xc2e0; &#xc9c0;&#xc5f0; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"252,254","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xc11c;&#xbc84; &#xc2dc;&#xacc4; &#xad6c;&#xac04; &#xac19;&#xc740; &#xac12;&#xc774; &#xbb38;&#xc11c;&#xb9c8;&#xb2e4; &#xb2e4;&#xb974;&#xb2e4;</p>"}},{"content":"CI &#xc5c6;&#xc74c; <span class=\"mme-info\" aria-hidden=\"true\"></span>","children":[],"payload":{"tag":"li","lines":"254,256","detail":"<p><strong>&#xb0b4;&#xc6a9;</strong>: &#xd14c;&#xc2a4;&#xd2b8;&#xb294; &#xc218;&#xb3d9;&#xc73c;&#xb85c; &#xc2e4;&#xd589;&#xd55c;&#xb2e4;</p>"}}],"payload":{"tag":"h2","lines":"245,246","count":5}}],"payload":{"tag":"h1","lines":"7,8","count":83}},{"maxWidth":320,"initialExpandLevel":2,"maxInitialScale":1.4,"spacingVertical":8,"paddingX":10})</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+    <textarea id="original-markdown" style="display:none;">---
+title: 영원한 7일의 도시 서버 복원 — 동작 원리 (신규 합류 개발자 관점)
+description: 소스 코드 없이 이 시스템이 어떻게 동작하는지. 구성 요소, 흐름, 핵심 개념, 구성 요소별 원리, 작업 규칙, 설계 원칙
+markmap:
+  initialExpandLevel: 2
+---
+
+# 영원한 7일의 도시 서버 복원 동작 원리
+
+## 이 시스템은 무엇인가
+- 목적
+  &gt; **내용**: 서비스가 종료된 모바일 게임의 서버를 다시 만든다
+  &gt; **목표**: 원본 클라이언트가 부팅부터 도시 화면과 각종 콘텐츠까지 진행한다
+- 시스템 경계
+  &gt; | 안 | 밖 |
+  &gt; |---|---|
+  &gt; | 복원 서버 (HTTP 서비스, 게이트 서버, 게임 규칙) | 원본 클라이언트 앱과 게임 데이터 |
+  &gt; | 복원 도구와 검증 도구 | 원 서비스의 서버 (소스·데이터가 없음) |
+  &gt; | 접속 보조 앱과 앱 안 서버 | 온라인 전투 서버 (복원하지 않음) |
+- 주요 사용 흐름
+  &gt; 1. 클라이언트가 복원 서버에 접속해 업데이트 확인과 로그인을 마친다
+  &gt; 2. 게이트 서버가 계정과 아바타를 만들어 도시 화면으로 보낸다
+  &gt; 3. 플레이어가 기능을 쓸 때마다 RPC가 오가고, 서버 규칙이 계정 상태를 바꾼다
+  &gt; 4. 상태는 계정마다 파일로 저장되어 서버를 다시 띄워도 남는다
+- 작업 방식 한눈에
+  &gt; - **정답지**: 2021 HTTP 캡처와 복원한 클라이언트 소스
+  &gt; - **개발자**: 1인
+  &gt; - **기록**: 번호 붙은 분석 보고서, 일자별 작업 일지, 학습 기록
+
+## 구성 요소 지도
+- 이름 해석과 중계
+  &gt; **역할**: 게임 도메인을 복원 서버로 돌리고 접속을 종류별로 나눈다
+  &gt; **입력**: 클라이언트의 DNS 질의, 80/443 접속
+  &gt; **출력**: HTTP 서비스 또는 게이트 서버로 전달된 접속
+  &gt; **연결**: 클라이언트, HTTP 서비스, 게이트 서버
+- HTTP 서비스
+  &gt; **역할**: 설정, 업데이트 확인, 로그인, 결제, 텔레메트리 응답
+  &gt; **입력**: 클라이언트의 HTTP 요청
+  &gt; **출력**: 2021 캡처와 같은 응답, 또는 게임 규칙으로 만든 응답
+  &gt; **연결**: 중계, 계정 저장소
+- 게이트 서버
+  &gt; **역할**: 로그인 이후 게임 통신을 받는 원시 TCP 서버
+  &gt; **입력**: 길이 접두 프레임으로 감싼 protobuf 메시지
+  &gt; **출력**: 엔티티 생성 메시지, RPC 응답, 생존 신호 응답
+  &gt; **연결**: 아바타 계층, 계정 저장소
+- 아바타 계층
+  &gt; **역할**: 접속한 계정 하나의 상태와 RPC 처리를 맡는다
+  &gt; **입력**: 클라이언트 RPC
+  &gt; **출력**: 응답과 서버 푸시
+  &gt; **연결**: RPC 핸들러, 게임 규칙, 상태 저장
+- RPC 핸들러
+  &gt; **역할**: 기능별 호출을 받아 규칙을 부르고 응답을 만든다
+  &gt; **입력**: 호출 이름과 인자
+  &gt; **출력**: 응답 값, 상태 변경
+  &gt; **연결**: 아바타 계층, 게임 규칙
+- 게임 규칙 모듈
+  &gt; **역할**: 도시, 영웅 육성, 장비, 던전류, 이벤트 같은 기능별 규칙
+  &gt; **입력**: 계정 상태, 표 데이터, 서버 시계
+  &gt; **출력**: 바뀐 계정 상태, 스냅샷 조각
+  &gt; **연결**: 표 데이터, 상태 저장
+- 표 데이터
+  &gt; **역할**: 클라이언트에서 뽑은 게임 표를 JSON으로 보관
+  &gt; **입력**: 복원 도구의 내보내기 결과
+  &gt; **출력**: 규칙 모듈이 읽는 표
+- 상태 저장
+  &gt; **역할**: 계정당 JSON 파일로 진행 상태를 저장
+  &gt; **연결**: 아바타 계층, 운영자 도구
+- 복원 도구 파이프라인
+  &gt; **역할**: 클라이언트 스크립트에서 소스, RPC 목록, 표를 만든다
+  &gt; **입력**: 클라이언트 리소스
+  &gt; **출력**: 복원 소스, RPC 목록, 표 JSON
+  &gt; **연결**: 표 데이터, 테스트
+- 검증 도구
+  &gt; **역할**: 캡처와 서버 응답을 대조하고, 서버가 보내는 호출을 클라이언트 스텁과 대조
+  &gt; **연결**: 테스트, 에뮬레이터 자동화
+- 접속 보조 앱과 앱 안 서버
+  &gt; **역할**: 기기만으로 실행하는 단독 구성
+  &gt; **입력**: 앱 안 VPN이 돌려준 접속
+  &gt; **출력**: 서버 응답
+  &gt; **연결**: 게이트 서버 로직 재사용
+- 운영자 도구
+  &gt; **역할**: 시험용 계정 관리, 재화 지급, 레벨 변경
+  &gt; **참고**: 원본 운영 기능이 아니라 시험 수단이다
+- 로그 수집
+  &gt; **역할**: 서버 로그, 패킷, 클라이언트 엔진 로그, 기기 로그를 모은다
+
+## 흐름
+- 부팅과 로그인
+  &gt; 1. 클라이언트가 설정, 업데이트 확인, 서버 목록을 HTTP 서비스에 요청한다
+  &gt; 2. 로그인 응답을 받는다
+  &gt; 3. 서버 목록이 알려 준 게이트 주소로 TCP 접속한다
+  &gt; 4. 게이트 서버가 접속 응답과 계정 엔티티를 보낸다
+  &gt; 5. 클라이언트가 로그인 정보를 보내면, 그 계정의 아바타를 만들어 스냅샷과 함께 보낸다
+- 도시 진입과 유지
+  &gt; 1. 클라이언트가 플레이 전환을 요청한다
+  &gt; 2. 서버가 이벤트 큐와 상태 전환에 응답한다
+  &gt; 3. 클라이언트가 5초 간격으로 생존 신호를 보낸다
+  &gt; 4. 응답이 없으면 클라이언트가 일정 시간 뒤 접속을 끊는다
+- 기능 호출
+  &gt; 1. 클라이언트가 RPC를 보낸다
+  &gt; 2. 아바타 계층이 이름으로 핸들러를 찾는다
+  &gt; 3. 핸들러가 규칙 모듈을 불러 계정 상태를 바꾼다
+  &gt; 4. 응답과 필요한 푸시를 보낸다
+  &gt; 5. 상태를 파일에 저장한다
+- 규칙 복원
+  &gt; 1. 클라이언트 스크립트를 복호화한다
+  &gt; 2. 바이트코드를 재작성해 소스로 되살린다
+  &gt; 3. 소스에서 RPC 목록과 표를 뽑는다
+  &gt; 4. 클라이언트가 읽는 필드, 타입, 순서를 계약 문서로 정리한다
+  &gt; 5. 규칙을 구현하고 테스트와 에뮬레이터로 확인한다
+- 증거 게이트
+  &gt; 1. 서버 응답 변경 전에 패킷 근거를 찾는다
+  &gt; 2. 없으면 클라이언트 소스에서 근거를 찾는다
+  &gt; 3. 클라이언트를 바꾸는 경우 별도 정당화를 문서로 남긴다
+  &gt; 4. 회귀 테스트를 1개 이상 추가한다
+
+## 핵심 개념과 용어
+- 게이트 서버
+  &gt; **뜻**: 로그인 이후의 게임 통신을 받는 원시 TCP 서버
+  &gt; **관계**: HTTP 서비스가 알려 준 주소로 접속한다
+- 엔티티
+  &gt; **뜻**: 서버와 클라이언트가 함께 들고 있는 객체. 계정과 아바타가 있다
+  &gt; **관계**: 서버가 생성 메시지를 보내면 클라이언트가 만든다
+- 스냅샷
+  &gt; **뜻**: 로그인 때 보내는 계정 상태 묶음
+  &gt; **관계**: 기능 모듈마다 조각을 등록하고, 영웅 데이터는 전투와 같은 조립기를 쓴다
+- RPC 목록
+  &gt; **뜻**: 클라이언트 소스에서 뽑은 호출 이름 목록. 서버 호출 1,334개, 클라이언트 스텁 1,493개
+  &gt; **관계**: 구현 범위의 기준이고, 테스트가 서버 호출을 이 목록과 대조한다
+- 근거 등급
+  &gt; **뜻**: 규칙마다 표, 소스, 추론, 복원 서버의 결정 중 어디서 왔는지 표기
+  &gt; **관계**: 원본 서버가 없어서 추론이 많다
+- 서버 시계
+  &gt; **뜻**: 한국 벽시계를 기준으로 하고, 서비스 말기 구간을 되풀이해 한정 이벤트를 다시 연다
+  &gt; **관계**: 이벤트 모듈이 되풀이 번호로 상태를 비운다
+- 증거 등급 Tier 1·2·3
+  &gt; **뜻**: 패킷 근거, 클라이언트 소스 근거, 클라이언트 변경의 정당화
+
+## 구성 요소별 동작 원리
+- 중계
+  - 서버명 유무로 분기
+    &gt; **하는 일**: 같은 443 포트로 오는 TLS 접속과 원시 TCP 접속을 나눈다
+    &gt; **방식**:
+    &gt; 1. TLS 서버명이 있으면 TLS를 풀어 HTTP 서비스로 보낸다
+    &gt; 2. 서버명이 없으면 게이트 서버로 보낸다
+    &gt; **이렇게 한 효과**: 한 주소로 두 종류 통신을 받는다
+  - 실제 기기 주소 보존
+    &gt; **하는 일**: 중계 뒤에서도 접속한 기기의 실제 주소를 게이트 서버가 본다
+    &gt; **방식**: 중계가 앞에 붙이는 프록시 프로토콜 헤더를 해석한다
+- HTTP 서비스
+  - 캡처 응답 재현
+    &gt; **하는 일**: 캡처된 응답을 바이트와 Content-Type까지 같게 돌려준다
+    &gt; **이렇게 한 효과**: 응답이 어긋나 업데이트 단계에서 멈추는 문제를 막는다
+  - 알 수 없는 요청 처리
+    &gt; **하는 일**: 캡처에 없는 경로는 스텁으로 답하고 경고 로그를 남긴다
+- 게이트 서버
+  - 로그인 후 아바타 생성
+    &gt; **하는 일**: 접속 직후가 아니라 로그인 정보를 받은 뒤 계정별 아바타를 만든다
+    &gt; **이유**: 기기 식별자가 접속마다 바뀐다
+  - 접속 안정화
+    &gt; **하는 일**: 예외를 접속 단위로 가두고, 중복 로그인을 정리하고, 토큰을 대조한다
+    &gt; **방식**: 토큰 대조는 엄격, 기록만, 끔 세 가지 모드
+  - 빠른 종료
+    &gt; **하는 일**: 종료할 때 접속을 먼저 닫는다
+    &gt; **이렇게 한 효과**: 접속이 있을 때 종료가 90초 걸리던 것이 1초로 줄었다
+- 아바타 계층
+  - 핸들러 자동 등록
+    &gt; **하는 일**: 표시가 붙은 핸들러를 모아 호출 이름과 연결한다
+    &gt; **방식**:
+    &gt; 1. 핸들러에 RPC 표시를 붙인다
+    &gt; 2. 아바타가 만들어질 때 멤버를 훑어 모은다
+    &gt; 3. 같은 이름이 둘이면 나중 것이 이긴다
+  - 미구현 호출 처리
+    &gt; **하는 일**: 핸들러가 없으면 로그만 남기고 빈 결과로 풀어 클라이언트가 잠기지 않게 한다
+    &gt; **예외**: 결과 값을 읽는 콜백은 풀지 않고 경고한다
+  - 전투 호출 분기
+    &gt; **하는 일**: 전투 서버가 없는 콘텐츠는 클라이언트가 스스로 전투하게 돌려보낸다
+- 게임 규칙
+  - 기능 모듈의 공통 모양
+    &gt; **하는 일**: 표 → 규칙 → 계정 상태 → 거절 판정 → 와이어 변환 → 스냅샷 조각
+    &gt; **이렇게 한 효과**: 새 기능을 같은 틀로 추가한다
+  - 영웅 데이터 조립 한 곳
+    &gt; **하는 일**: 스냅샷, 갱신 푸시, 전투가 같은 영웅 값을 쓴다
+  - 이벤트 규칙 모듈 묶음
+    &gt; **하는 일**: 이벤트 38종이 같은 골격을 따른다
+    &gt; **참고**: 대부분 원본 서버가 없어 추론한 값이다
+  - 서버 시계 되풀이
+    &gt; **하는 일**: 서비스 말기 구간을 되풀이해 한정 소환과 이벤트를 다시 연다
+- 상태 저장
+  - 안전한 파일 교체
+    &gt; **하는 일**: 임시 파일에 쓰고 교체하며, 깨진 파일은 따로 옮긴다
+    &gt; **이렇게 한 효과**: 쓰는 도중 종료돼도 기존 상태가 남는다
+- 복원 도구
+  - 옵코드 표 유도
+    &gt; **하는 일**: 게임에 든 표준 라이브러리를 Python 2.7 컴파일 결과와 명령 단위로 비교해 옵코드 표를 맞춘다
+    &gt; **방식**: 100곳은 비교로 유도하고 나머지는 관용구로 정한다
+  - 표 내보내기
+    &gt; **하는 일**: 표를 실행하지 않고 구문 트리로만 읽어 JSON으로 내보낸다
+    &gt; **참고**: 원본이 아니라 추정으로 채운 구간은 표기가 따로 있다
+  - 소스 복원 규모
+    &gt; **하는 일**: 소스 4,369개를 되살렸고, 전투 스크립트를 포함하면 13,462개
+- 검증 도구
+  - 캡처 대조
+    &gt; **하는 일**: 2021 캡처 요청을 서버에 재생하고 응답을 같음, 다름, 상태 차이로 판정한다
+  - 와이어 검사
+    &gt; **하는 일**: 가짜 클라이언트가 서버가 보낸 모든 호출을 클라이언트 스텁과 대조한다
+    &gt; **이렇게 한 효과**: 잘못된 키 이름 같은 오류를 테스트에서 잡는다
+- 앱 안 서버
+  - 서버를 별도 프로세스로
+    &gt; **하는 일**: 기기 안에서 서버를 게임과 다른 프로세스로 실행한다
+  - 앱 안 VPN
+    &gt; **하는 일**: 80/443 접속을 서버의 비특권 포트로 돌려준다
+  - 대체 FastAPI 패키지
+    &gt; **하는 일**: 기기에서 빌드하기 어려운 의존성을 피해 Starlette 위에 같은 모양을 제공한다
+    &gt; **검증**: 같은 테스트를 진짜 FastAPI와 대체 패키지에서 모두 돌린다
+  - 소켓 복구
+    &gt; **하는 일**: 안드로이드가 닫은 듣는 소켓을 서버가 다시 연다
+
+## 개발 환경과 작업 규칙
+- 개발 환경
+  &gt; - **서버**: Linux 24.04, systemd, nginx, dnsmasq
+  &gt; - **검증 기기**: 루팅된 안드로이드 에뮬레이터, 실기기 태블릿
+- 문서 체계
+  &gt; | 종류 | 내용 |
+  &gt; |---|---|
+  &gt; | 분석 보고서 | 번호가 붙고, 질문과 방법과 결론이 있다 |
+  &gt; | 작업 일지 | 날짜별로 받은 요청, 진행, 상태, 커밋을 적는다 |
+  &gt; | 학습 기록 | 같은 실수 2회, 1시간 이상 걸린 버그를 적고, 3회 반복되면 규칙으로 올린다 |
+- 규칙 진화
+  &gt; **내용**: 교훈이 15개에서 40개로 늘었고, 반복된 실수가 규칙으로 승격되었다
+  &gt; **예**: 프로세스 패턴 매칭 함정, 에뮬레이터 자동화 규칙
+- 명령 실행 규칙
+  &gt; - **무한 대기 방지**: 모든 명령에 시간 제한
+  &gt; - **근거 ID 검증**: 도구를 부르지 않은 ID는 증거가 아님
+
+## 설계 원칙과 제약
+- 응답은 원본 그대로
+  &gt; **내용**: 2021 캡처가 정답지이며 추측으로 다시 만들지 않는다
+- 클라이언트는 건드리지 않는다
+  &gt; **내용**: 서버가 주는 값만 바꾸는 것이 원칙이고, 예외는 정당화 문서를 남긴다
+- 추론은 추론이라고 적는다
+  &gt; **내용**: 규칙마다 근거 등급을 표기한다
+- 오프라인 전투 허용
+  &gt; **내용**: 온라인 전투 서버가 없어 클라이언트 계산에 맡긴다
+
+## 한계와 알려진 문제
+- 원본 서버 규칙 부재
+  &gt; **내용**: 서버 쪽 규칙 다수는 추론이다
+- RPC 구현 범위
+  &gt; **내용**: 정적 집계로 서버 호출의 약 48.5%에 핸들러가 있다
+- 게이트 구간의 정답지 없음
+  &gt; **내용**: 2021 캡처가 HTTP 로그인 구간에 한정된다
+- 문서 갱신 지연
+  &gt; **내용**: 서버 시계 구간 같은 값이 문서마다 다르다
+- CI 없음
+  &gt; **내용**: 테스트는 수동으로 실행한다
+</textarea>
+    <style id="mme-style">/* markmap-mcp-server: enhanced template styles.
+   Colors and sizes are CSS variables so a theme (e.g. dark) is a variable swap. */
+
+:root {
+    --mme-fg: #1f2328;
+    --mme-fg-2: #2f353b;
+    --mme-muted: #57606a;
+    --mme-surface: #ffffff;
+    --mme-surface-2: #f6f8fa;
+    --mme-border: #d0d7de;
+    --mme-accent: #0969da;
+    --mme-accent-soft: rgba(9, 105, 218, 0.12);
+    --mme-ok: #1a7f37;
+    --mme-code-bg: #eff2f5;
+    --mme-hover-bg: rgba(9, 105, 218, 0.08);
+    --mme-match-bg: #fff3b0;
+    --mme-active-bg: #ffd33d;
+    --mme-shadow: 0 8px 24px rgba(31, 35, 40, 0.16);
+    --mme-radius: 8px;
+    --mme-panel-width: min(380px, 92vw);
+    --mme-top: 60px;
+    --mme-font:
+        "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic",
+        system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mme-mono:
+        ui-monospace, SFMono-Regular, Menlo, Consolas, "D2Coding", monospace;
+}
+
+html,
+body {
+    background: var(--mme-surface);
+    font-family: var(--mme-font);
+}
+
+/* ---------- Map: typography by depth ---------- */
+
+/* The map lives below the floating header/toolbar so fit() never tucks nodes under them. */
+svg#mindmap {
+    position: fixed;
+    top: var(--mme-top);
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - var(--mme-top));
+}
+
+svg#mindmap.markmap {
+    --markmap-font: 400 16px/1.45 var(--mme-font);
+    --markmap-text-color: var(--mme-fg);
+    --markmap-code-bg: var(--mme-code-bg);
+    --markmap-code-color: #24292f;
+    --markmap-a-color: var(--mme-accent);
+    --markmap-a-hover-color: #0550ae;
+    --markmap-highlight-node-bg: var(--mme-accent-soft);
+    outline: none;
+}
+
+#mindmap .markmap-foreign {
+    font-family: var(--mme-font);
+    line-height: 1.45;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    color: var(--mme-muted);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#mindmap .markmap-foreign > div > div {
+    padding: 2px 4px;
+    border-radius: 6px;
+    transition: background-color 0.12s;
+}
+
+#mindmap g[data-depth="1"] > .markmap-foreign {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--mme-fg);
+}
+#mindmap g[data-depth="2"] > .markmap-foreign {
+    font-size: 20px;
+    font-weight: 650;
+    color: var(--mme-fg);
+}
+#mindmap g[data-depth="3"] > .markmap-foreign {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--mme-fg-2);
+}
+#mindmap g[data-depth="4"] > .markmap-foreign {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--mme-fg-2);
+}
+
+#mindmap .markmap-foreign a {
+    color: var(--mme-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* ---------- Map: hover, focus, selection, search ---------- */
+
+#mindmap g.markmap-node:hover > .markmap-foreign > div > div {
+    background: var(--mme-hover-bg);
+}
+#mindmap g.markmap-node {
+    outline: none;
+}
+#mindmap g.markmap-node:focus-visible > .markmap-foreign > div > div {
+    outline: 2px solid var(--mme-accent);
+    outline-offset: 1px;
+}
+#mindmap .markmap-highlight rect {
+    fill: var(--mme-accent-soft);
+    stroke: var(--mme-accent);
+    stroke-width: 1.5;
+    rx: 8;
+    ry: 8;
+}
+
+#mindmap g.markmap-node,
+#mindmap path.markmap-link {
+    transition: opacity 0.15s;
+}
+#mindmap.mme-focusing g.markmap-node:not(.mme-on-path),
+#mindmap.mme-focusing path.markmap-link:not(.mme-on-path) {
+    opacity: 0.3;
+}
+
+#mindmap.mme-searching g.markmap-node:not(.mme-match):not(.mme-anc),
+#mindmap.mme-searching path.markmap-link:not(.mme-anc) {
+    opacity: 0.35;
+}
+#mindmap g.mme-match > .markmap-foreign > div > div {
+    background: var(--mme-match-bg);
+    box-shadow: 0 0 0 2px var(--mme-match-bg);
+}
+#mindmap g.mme-active > .markmap-foreign > div > div {
+    background: var(--mme-active-bg);
+    box-shadow: 0 0 0 2px var(--mme-active-bg);
+    outline: 2px solid #bf8700;
+}
+
+/* ---------- Map: node content ---------- */
+
+#mindmap .markmap-foreign:has(.mme-task-done) {
+    color: var(--mme-muted);
+}
+.mme-task {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    width: 15px;
+    height: 15px;
+    margin-right: 6px;
+    border: 1.5px solid #8c959f;
+    border-radius: 4px;
+    vertical-align: -2px;
+    background: var(--mme-surface);
+}
+.mme-task-done {
+    background: var(--mme-ok);
+    border-color: var(--mme-ok);
+}
+.mme-task-done::after {
+    content: "";
+    position: absolute;
+    left: 3.5px;
+    top: 0;
+    width: 4px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.mme-progress {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mme-ok);
+    vertical-align: 1px;
+    white-space: nowrap;
+}
+.mme-progress i {
+    display: inline-block;
+    width: 38px;
+    height: 5px;
+    border-radius: 3px;
+    background: linear-gradient(
+        to right,
+        var(--mme-ok) var(--p, 0%),
+        var(--mme-border) var(--p, 0%)
+    );
+}
+.mme-progress b {
+    font-weight: 600;
+}
+
+.mme-count {
+    display: none;
+    margin-left: 8px;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: #eaeef2;
+    color: var(--mme-muted);
+    font-size: 11px;
+    font-weight: 600;
+    vertical-align: 1px;
+    white-space: nowrap;
+}
+.markmap-fold .mme-count {
+    display: inline-block;
+}
+
+.mme-info {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 15px;
+    height: 15px;
+    margin-left: 7px;
+    border: 1.5px solid var(--mme-accent);
+    border-radius: 50%;
+    color: var(--mme-accent);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 12px;
+    text-align: center;
+    vertical-align: 1px;
+}
+.mme-info::before {
+    content: "i";
+}
+
+/* "+N more" / "N fewer" buttons: leaf siblings, drawn as dashed pills so they
+   cannot be mistaken for a parent node. */
+.mme-more,
+.mme-less {
+    display: inline-block;
+    padding: 1px 10px;
+    border: 1px dashed var(--mme-accent);
+    border-radius: 999px;
+    color: var(--mme-accent);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.mme-more::before {
+    content: "+" attr(data-n) " more \25BE";
+}
+.mme-less::before {
+    content: "Show " attr(data-n) " fewer \25B4";
+}
+html[lang^="ko"] .mme-more::before {
+    content: "외 " attr(data-n) "개 더 보기 \25BE";
+}
+html[lang^="ko"] .mme-less::before {
+    content: "외 " attr(data-n) "개 접기 \25B4";
+}
+#mindmap g.markmap-node:hover .mme-more,
+#mindmap g.markmap-node:hover .mme-less {
+    background: var(--mme-accent-soft);
+}
+#mindmap g.mme-sentinel > line {
+    stroke-dasharray: 3 3;
+}
+#mindmap path.markmap-link.mme-sentinel-link {
+    stroke-dasharray: 3 4;
+    opacity: 0.85;
+}
+
+.mme-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* code, tables, images */
+
+#mindmap .markmap-foreign pre {
+    margin: 4px 0;
+}
+#mindmap .markmap-foreign pre > code {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: var(--mme-code-bg);
+    color: #24292f;
+    font: 12.5px/1.55 var(--mme-mono);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+#mindmap .markmap-foreign table {
+    width: 100%;
+    margin: 4px 0;
+    border: 1px solid var(--mme-border);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.4;
+}
+#mindmap .markmap-foreign th,
+#mindmap .markmap-foreign td {
+    padding: 5px 10px;
+    border: 0;
+    border-bottom: 1px solid var(--mme-border);
+    text-align: left;
+    color: var(--mme-fg-2);
+    font-weight: 400;
+}
+#mindmap .markmap-foreign th {
+    background: var(--mme-surface-2);
+    font-weight: 600;
+}
+#mindmap .markmap-foreign tr:last-child td {
+    border-bottom: 0;
+}
+#mindmap .markmap-foreign tbody tr:nth-child(even) td {
+    background: #fafbfc;
+}
+/* Nodes holding code or tables get a wider text column than prose. */
+#mindmap .markmap-foreign > div > div:has(pre, table) {
+    width: min(560px, 80vw);
+}
+
+#mindmap .markmap-foreign img {
+    display: block;
+    max-width: 240px;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+    margin: 2px 0;
+    border-radius: 6px;
+    object-fit: contain;
+    cursor: zoom-in;
+}
+#mindmap .markmap-foreign figure {
+    display: block;
+    margin: 2px 0;
+}
+#mindmap .markmap-foreign figcaption {
+    max-width: 240px;
+    margin-top: 2px;
+    color: var(--mme-muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* ---------- Chrome: shared ---------- */
+
+.mme-ui {
+    font-family: var(--mme-font);
+    color: var(--mme-fg);
+    box-sizing: border-box;
+}
+.mme-ui *,
+.mme-ui *::before,
+.mme-ui *::after {
+    box-sizing: border-box;
+}
+
+.mme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border: 1px solid var(--mme-border);
+    border-radius: var(--mme-radius);
+    background: var(--mme-surface);
+    color: var(--mme-fg);
+    font: 500 13px/1 var(--mme-font);
+    cursor: pointer;
+}
+.mme-btn:hover {
+    background: var(--mme-surface-2);
+}
+.mme-btn:focus-visible,
+.mme-menu button:focus-visible,
+.mme-panel button:focus-visible,
+.mme-search input:focus-visible {
+    outline: 2px solid var(--mme-accent);
+    outline-offset: 1px;
+}
+.mme-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.mme-btn[aria-expanded="true"],
+.mme-btn.mme-on {
+    background: var(--mme-accent-soft);
+    border-color: var(--mme-accent);
+    color: var(--mme-accent);
+}
+
+/* ---------- Chrome: header + toolbar ---------- */
+
+.mme-head {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 900;
+    max-width: min(46vw, 520px);
+    padding: 8px 12px;
+    border: 1px solid var(--mme-border);
+    border-radius: var(--mme-radius);
+    background: color-mix(in srgb, var(--mme-surface) 92%, transparent);
+    backdrop-filter: blur(6px);
+}
+.mme-head h1 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mme-head p {
+    margin: 2px 0 0;
+    color: var(--mme-muted);
+    font-size: 12px;
+    line-height: 1.4;
+}
+.mme-head .mme-meta {
+    margin-top: 4px;
+    font-size: 11px;
+}
+
+.mme-bar {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 950;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: right 0.2s;
+}
+body.mme-panel-open .mme-bar {
+    right: calc(var(--mme-panel-width) + 12px);
+}
+/* With the panel open the bar and header compete for the same row. */
+body.mme-panel-open .mme-head {
+    max-width: 240px;
+}
+body.mme-panel-open .mme-head p {
+    display: none;
+}
+body.mme-panel-open .mme-search input {
+    width: 130px;
+}
+
+.mme-search {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.mme-search-field {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 36px;
+    padding: 0 4px 0 10px;
+    border: 1px solid var(--mme-border);
+    border-radius: var(--mme-radius);
+    background: var(--mme-surface);
+}
+.mme-search-field:focus-within {
+    border-color: var(--mme-accent);
+}
+.mme-search input {
+    width: 190px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: var(--mme-fg);
+    font: 400 14px/1 var(--mme-font);
+}
+.mme-search input:focus-visible {
+    outline: none;
+}
+.mme-search input::-webkit-search-cancel-button,
+.mme-search input::-webkit-search-decoration {
+    display: none;
+    -webkit-appearance: none;
+}
+.mme-search-count {
+    min-width: 40px;
+    color: var(--mme-muted);
+    font-size: 12px;
+    text-align: right;
+    white-space: nowrap;
+}
+.mme-search-field .mme-btn {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 6px;
+    border: 0;
+    background: transparent;
+}
+.mme-search-field .mme-btn:hover {
+    background: var(--mme-surface-2);
+}
+.mme-search-toggle {
+    display: none;
+}
+.mme-search-field:not(.mme-has-results) .mme-search-count,
+.mme-search-field:not(.mme-has-results) .mme-step {
+    display: none;
+}
+
+.mme-dropdown {
+    position: relative;
+}
+.mme-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 1200;
+    display: none;
+    min-width: 190px;
+    padding: 4px;
+    border: 1px solid var(--mme-border);
+    border-radius: 10px;
+    background: var(--mme-surface);
+    box-shadow: var(--mme-shadow);
+}
+.mme-menu.mme-open {
+    display: block;
+}
+.mme-menu button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--mme-fg);
+    font: 400 13px/1.2 var(--mme-font);
+    text-align: left;
+    cursor: pointer;
+}
+.mme-menu button:hover {
+    background: var(--mme-surface-2);
+}
+.mme-menu button[aria-checked="true"]::after {
+    content: "✓";
+    color: var(--mme-accent);
+    font-weight: 700;
+}
+.mme-menu hr {
+    margin: 4px 0;
+    border: 0;
+    border-top: 1px solid var(--mme-border);
+}
+
+.mme-zoombar {
+    position: fixed !important;
+    right: 16px !important;
+    bottom: 16px !important;
+    left: auto !important;
+    transition: right 0.2s;
+}
+body.mme-panel-open .mme-zoombar {
+    right: calc(var(--mme-panel-width) + 16px) !important;
+}
+
+/* ---------- Chrome: hover card ---------- */
+
+.mme-card {
+    position: fixed;
+    z-index: 1100;
+    max-width: 320px;
+    padding: 10px 12px;
+    border: 1px solid var(--mme-border);
+    border-radius: 10px;
+    background: var(--mme-surface);
+    box-shadow: var(--mme-shadow);
+    font-size: 13px;
+    line-height: 1.5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.12s;
+}
+.mme-card.mme-show {
+    opacity: 1;
+}
+.mme-card-title {
+    margin: 0 0 4px;
+    font-weight: 650;
+    font-size: 14px;
+}
+.mme-card-detail {
+    position: relative;
+    max-height: 11em;
+    overflow: hidden;
+    color: var(--mme-fg-2);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+.mme-card-detail.mme-clipped::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 2.4em;
+    background: linear-gradient(transparent, var(--mme-surface));
+}
+.mme-card-meta {
+    margin-top: 6px;
+    color: var(--mme-muted);
+    font-size: 12px;
+}
+.mme-card a {
+    color: var(--mme-accent);
+}
+.mme-card ul {
+    margin: 4px 0 0;
+    padding-left: 18px;
+    color: var(--mme-fg-2);
+}
+.mme-card hint,
+.mme-card .mme-hint {
+    display: block;
+    margin-top: 6px;
+    color: var(--mme-muted);
+    font-size: 11px;
+}
+
+/* ---------- Chrome: detail panel ---------- */
+
+.mme-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    width: var(--mme-panel-width);
+    border-left: 1px solid var(--mme-border);
+    background: var(--mme-surface);
+    box-shadow: var(--mme-shadow);
+    transform: translateX(105%);
+    transition: transform 0.2s;
+    visibility: hidden;
+}
+.mme-panel.mme-open {
+    transform: none;
+    visibility: visible;
+}
+.mme-panel-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px 12px 8px 16px;
+}
+.mme-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 4px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--mme-muted);
+    font-size: 12px;
+}
+.mme-crumbs li:not(:last-child)::after {
+    content: "›";
+    margin-left: 4px;
+}
+.mme-crumbs button {
+    max-width: 14em;
+    padding: 2px 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--mme-accent);
+    font: inherit;
+    cursor: pointer;
+}
+.mme-crumbs button:hover {
+    background: var(--mme-surface-2);
+}
+.mme-panel-body {
+    flex: 1;
+    padding: 0 16px 16px;
+    overflow: auto;
+    overscroll-behavior: contain;
+}
+.mme-panel-title {
+    margin: 4px 0 10px;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+.mme-panel h3 {
+    margin: 16px 0 6px;
+    color: var(--mme-muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+.mme-detail {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--mme-fg-2);
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+}
+
+/* Detail content is written by agents in whatever structure fits it, so every
+   block type must read well in both the card preview and the side panel. */
+.mme-detail p,
+.mme-card-detail p {
+    margin: 0 0 8px;
+}
+.mme-detail > :last-child,
+.mme-card-detail > :last-child {
+    margin-bottom: 0;
+}
+.mme-detail a,
+.mme-card-detail a {
+    color: var(--mme-accent);
+}
+.mme-detail strong,
+.mme-card-detail strong {
+    color: var(--mme-fg);
+    font-weight: 650;
+}
+.mme-detail ul,
+.mme-detail ol,
+.mme-card-detail ul,
+.mme-card-detail ol {
+    margin: 0 0 8px;
+    padding-left: 20px;
+}
+.mme-detail li,
+.mme-card-detail li {
+    margin: 2px 0;
+}
+.mme-detail li > ul,
+.mme-detail li > ol,
+.mme-card-detail li > ul,
+.mme-card-detail li > ol {
+    margin: 2px 0 0;
+}
+.mme-detail code,
+.mme-card-detail code {
+    padding: 1px 4px;
+    border-radius: 4px;
+    background: var(--mme-code-bg);
+    font: 0.92em/1.4 var(--mme-mono);
+    word-break: break-all;
+}
+.mme-detail blockquote,
+.mme-card-detail blockquote {
+    margin: 0 0 8px;
+    padding-left: 10px;
+    border-left: 3px solid var(--mme-border);
+    color: var(--mme-muted);
+}
+.mme-detail h1,
+.mme-detail h2,
+.mme-detail h3,
+.mme-detail h4,
+.mme-card-detail h1,
+.mme-card-detail h2,
+.mme-card-detail h3,
+.mme-card-detail h4 {
+    margin: 10px 0 4px;
+    font-size: 1em;
+    font-weight: 650;
+    color: var(--mme-fg);
+}
+.mme-detail hr {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid var(--mme-border);
+}
+.mme-detail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    cursor: zoom-in;
+}
+.mme-detail pre,
+.mme-card-detail pre,
+.mme-panel-title pre {
+    overflow: auto;
+    margin: 0 0 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: var(--mme-code-bg);
+    font: 12.5px/1.55 var(--mme-mono);
+}
+.mme-detail pre code,
+.mme-card-detail pre code {
+    padding: 0;
+    background: none;
+    word-break: normal;
+}
+.mme-detail table,
+.mme-card-detail table {
+    display: block;
+    max-width: 100%;
+    margin: 0 0 8px;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.mme-detail th,
+.mme-detail td,
+.mme-card-detail th,
+.mme-card-detail td {
+    padding: 4px 8px;
+    border: 1px solid var(--mme-border);
+    text-align: left;
+    vertical-align: top;
+}
+.mme-detail th,
+.mme-card-detail th {
+    background: var(--mme-code-bg);
+    color: var(--mme-fg);
+    font-weight: 650;
+    white-space: nowrap;
+}
+.mme-detail tbody tr:nth-child(even) td,
+.mme-card-detail tbody tr:nth-child(even) td {
+    background: color-mix(in srgb, var(--mme-code-bg) 45%, transparent);
+}
+.mme-panel .mme-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.mme-panel .mme-list button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    padding: 7px 8px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--mme-fg);
+    font: 400 13px/1.35 var(--mme-font);
+    text-align: left;
+    cursor: pointer;
+}
+.mme-panel .mme-list button:hover {
+    background: var(--mme-surface-2);
+}
+.mme-panel .mme-list small {
+    color: var(--mme-muted);
+    white-space: nowrap;
+}
+.mme-panel .mme-list a {
+    color: var(--mme-accent);
+    font-size: 13px;
+    word-break: break-all;
+}
+.mme-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+}
+.mme-panel .mme-progress-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--mme-ok);
+    font-weight: 600;
+}
+.mme-panel .mme-progress-line i {
+    flex: 1;
+    max-width: 160px;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(
+        to right,
+        var(--mme-ok) var(--p, 0%),
+        var(--mme-border) var(--p, 0%)
+    );
+}
+
+/* ---------- Chrome: lightbox, toast ---------- */
+
+.mme-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1300;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.82);
+    cursor: zoom-out;
+}
+.mme-lightbox.mme-open {
+    display: flex;
+}
+.mme-lightbox img {
+    max-width: 92vw;
+    max-height: 82vh;
+    border-radius: 8px;
+    background: #fff;
+}
+.mme-lightbox p {
+    margin: 0;
+    color: #fff;
+    font-size: 14px;
+}
+.mme-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 1400;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #24292f;
+    color: #fff;
+    font-size: 13px;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+}
+.mme-toast.mme-show {
+    opacity: 1;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (pointer: coarse) {
+    .mme-btn {
+        min-width: 44px;
+        height: 44px;
+    }
+    .mme-search-field {
+        height: 44px;
+    }
+    .mme-menu button {
+        padding: 12px 12px;
+    }
+}
+
+@media (max-width: 640px) {
+    :root {
+        --mme-panel-width: 100vw;
+        --mme-top: 56px;
+    }
+    .mme-head {
+        top: 10px;
+        left: 10px;
+        max-width: calc(100vw - 150px);
+        padding: 6px 10px;
+    }
+    .mme-head p,
+    .mme-head .mme-meta {
+        display: none;
+    }
+    .mme-bar {
+        top: 10px;
+        right: 10px;
+        gap: 6px;
+    }
+    body.mme-panel-open .mme-bar {
+        right: 10px;
+    }
+    .mme-search-toggle {
+        display: inline-flex;
+    }
+    .mme-search-field {
+        display: none;
+    }
+    .mme-search.mme-open {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        z-index: 1250;
+    }
+    .mme-search.mme-open .mme-search-field {
+        display: flex;
+        flex: 1;
+    }
+    .mme-search.mme-open .mme-search-toggle {
+        display: none;
+    }
+    .mme-search input {
+        flex: 1;
+        width: 100%;
+        min-width: 0;
+        font-size: 16px;
+    }
+    .mme-panel {
+        top: auto;
+        left: 0;
+        width: 100%;
+        max-height: 58vh;
+        border-left: 0;
+        border-top: 1px solid var(--mme-border);
+        border-radius: 16px 16px 0 0;
+        transform: translateY(105%);
+    }
+    .mme-panel.mme-open {
+        transform: none;
+    }
+    .mme-zoombar {
+        right: 10px !important;
+        bottom: 10px !important;
+    }
+    body.mme-panel-open .mme-zoombar {
+        display: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mme-panel,
+    .mme-card,
+    .mme-bar,
+    .mme-zoombar,
+    #mindmap g.markmap-node,
+    #mindmap path.markmap-link {
+        transition: none;
+    }
+}
+
+@media print {
+    .mme-ui {
+        display: none !important;
+    }
+}
+</style>
+    
+    <script>
+      (function() {
+        const labels = {"exportPng":"Export PNG","exportJpg":"Export JPG","exportSvg":"Export SVG","copyMarkdown":"Copy Markdown","copied":"✓ Copied","copyFailed":"Failed to copy to clipboard, please check browser permissions","copyError":"Unable to copy Markdown: ","exportFailed":"Image export failed: ","pngTitle":"Export as PNG image","jpgTitle":"Export as JPG image","svgTitle":"Export as SVG image","copyTitle":"Copy original Markdown content"};
+        const local = () => window.mmeT || {};
+        const notify = (msg) => {
+          if (window.mmeToast) window.mmeToast(msg);
+          else alert(msg);
+        };
+
+        function copyOriginalMarkdown() {
+          try {
+            const markdownElement = document.getElementById('original-markdown');
+            if (!markdownElement) throw new Error('Original Markdown content not found');
+            navigator.clipboard.writeText(markdownElement.value)
+              .then(() => notify(local().copied || labels.copied))
+              .catch(() => notify(local().copyFailed || labels.copyFailed));
+          } catch (e) {
+            notify(labels.copyError + (e && e.message ? e.message : e));
+          }
+        }
+
+        function exportToImage(format) {
+          try {
+            const node = window.mm.svg._groups[0][0];
+            if (!node) throw new Error('Cannot find mind map SVG element');
+            if (window.mmeBeforeExport) window.mmeBeforeExport();
+            const finish = () => { if (window.mmeAfterExport) window.mmeAfterExport(); };
+            window.mm.fit().then(() => {
+              const options = {
+                backgroundColor: '#ffffff',
+                quality: 1.0,
+                width: node.getBoundingClientRect().width,
+                height: node.getBoundingClientRect().height
+              };
+              const exportPromise = format === 'svg'
+                ? htmlToImage.toSvg(node, options)
+                : format === 'jpeg'
+                  ? htmlToImage.toJpeg(node, options)
+                  : htmlToImage.toPng(node, options);
+              exportPromise.then((dataUrl) => {
+                const link = document.createElement('a');
+                const timestamp = new Date().toISOString().slice(0, 10);
+                const ext = format === 'jpeg' ? 'jpg' : format;
+                link.download = 'markmap-' + timestamp + '.' + ext;
+                link.href = dataUrl;
+                link.click();
+              }).catch((err) => {
+                console.error('Export failed:', err);
+                notify(labels.exportFailed + (err && err.message ? err.message : err));
+              }).finally(finish);
+            });
+          } catch (e) {
+            if (window.mmeAfterExport) window.mmeAfterExport();
+            notify(labels.exportFailed + (e && e.message ? e.message : e));
+          }
+        }
+
+        window.mmExport = {
+          png: () => exportToImage('png'),
+          jpg: () => exportToImage('jpeg'),
+          svg: () => exportToImage('svg'),
+          copy: copyOriginalMarkdown
+        };
+      })();
+    </script>
+  
+    <script>window.__MM_ENHANCE__ = {"title":"영원한 7일의 도시 서버 복원 — 동작 원리 (신규 합류 개발자 관점)","header":{"title":"영원한 7일의 도시 서버 복원 — 동작 원리 (신규 합류 개발자 관점)","description":"소스 코드 없이 이 시스템이 어떻게 동작하는지. 구성 요소, 흐름, 핵심 개념, 구성 요소별 원리, 작업 규칙, 설계 원칙","meta":""},"mobileLevel":null,"hasTasks":false};</script>
+    <script id="mme-client">// @ts-nocheck
+/* markmap-mcp-server: enhanced template runtime.
+   Runs after markmap-view created `window.mm`. Plain browser JS, no dependencies
+   besides the d3 and markmap globals already on the page. */
+(function () {
+    "use strict";
+
+    var cfg = window.__MM_ENHANCE__ || {};
+    var mm = window.mm;
+    if (!mm || !mm.state || !mm.state.data || !mm.svg) return;
+
+    var doc = document;
+    var d3 = window.d3;
+    var svgEl = mm.svg.node();
+    var root = mm.state.data;
+    var isKo = /^ko/i.test(navigator.language || "");
+    doc.documentElement.lang = isKo ? "ko" : "en";
+
+    /* ------------------------------------------------------------------ */
+    /* Labels                                                              */
+    /* ------------------------------------------------------------------ */
+
+    var KO = {
+        search: "검색",
+        placeholder: "노드 검색  ( / )",
+        clear: "지우기",
+        prev: "이전 결과",
+        next: "다음 결과",
+        noResult: "결과 없음",
+        level: "레벨",
+        levelItem: function (n) {
+            return n + "단계까지 보기";
+        },
+        expandAll: "전체 펼치기",
+        todoOnly: "미완료 작업만 보기",
+        exportLabel: "내보내기",
+        exportPng: "PNG로 저장",
+        exportJpg: "JPG로 저장",
+        exportSvg: "SVG로 저장",
+        copyMd: "마크다운 복사",
+        copied: "복사했습니다",
+        copyFailed: "복사하지 못했습니다",
+        panelLabel: "노드 상세",
+        close: "닫기",
+        detail: "상세",
+        progress: "진행률",
+        children: "하위 항목",
+        links: "링크",
+        collapse: "접기",
+        expand: "펼치기",
+        expandBelow: "하위 모두 펼치기",
+        copyText: "텍스트 복사",
+        hint: "클릭하면 상세 보기",
+        childCount: function (n) {
+            return "하위 " + n + "개";
+        },
+        folded: "접힘",
+        moreItems: function (n) {
+            return "외 " + n + "개 더 보기";
+        },
+        lessItems: function (n) {
+            return "외 " + n + "개 접기";
+        },
+        done: "완료",
+        todo: "미완료",
+        hasDetail: "상세 정보 있음",
+        resultsAnnounce: function (n) {
+            return "검색 결과 " + n + "개";
+        },
+        treeLabel: "마인드맵",
+        closeImage: "이미지 닫기",
+        images: "이미지",
+        zoomTitles: {
+            "Zoom in": "확대",
+            "Zoom out": "축소",
+            "Fit window size": "화면에 맞추기",
+            "Toggle recursively": "하위 모두 접기/펼치기"
+        }
+    };
+
+    var EN = {
+        search: "Search",
+        placeholder: "Search nodes  ( / )",
+        clear: "Clear",
+        prev: "Previous result",
+        next: "Next result",
+        noResult: "No results",
+        level: "Level",
+        levelItem: function (n) {
+            return "Show " + n + " level" + (n > 1 ? "s" : "");
+        },
+        expandAll: "Expand all",
+        todoOnly: "Open tasks only",
+        exportLabel: "Export",
+        exportPng: "Save as PNG",
+        exportJpg: "Save as JPG",
+        exportSvg: "Save as SVG",
+        copyMd: "Copy Markdown",
+        copied: "Copied",
+        copyFailed: "Copy failed",
+        panelLabel: "Node details",
+        close: "Close",
+        detail: "Details",
+        progress: "Progress",
+        children: "Items",
+        links: "Links",
+        collapse: "Collapse",
+        expand: "Expand",
+        expandBelow: "Expand all below",
+        copyText: "Copy text",
+        hint: "Click for details",
+        childCount: function (n) {
+            return n + " item" + (n > 1 ? "s" : "");
+        },
+        folded: "collapsed",
+        moreItems: function (n) {
+            return "+" + n + " more";
+        },
+        lessItems: function (n) {
+            return "Show " + n + " fewer";
+        },
+        done: "done",
+        todo: "open",
+        hasDetail: "has details",
+        resultsAnnounce: function (n) {
+            return n + " search results";
+        },
+        treeLabel: "Mind map",
+        closeImage: "Close image",
+        images: "Images",
+        zoomTitles: {}
+    };
+
+    var T = isKo ? KO : EN;
+    window.mmeT = T;
+
+    /* ------------------------------------------------------------------ */
+    /* Helpers                                                             */
+    /* ------------------------------------------------------------------ */
+
+    function h(tag, props, kids) {
+        var e = doc.createElement(tag);
+        if (props) {
+            Object.keys(props).forEach(function (k) {
+                var v = props[k];
+                if (v == null || v === false) return;
+                if (k === "class") e.className = v;
+                else if (k === "html") e.innerHTML = v;
+                else if (k === "text") e.textContent = v;
+                else if (k.slice(0, 2) === "on")
+                    e.addEventListener(k.slice(2), v);
+                else e.setAttribute(k, v === true ? "" : v);
+            });
+        }
+        (kids || []).forEach(function (c) {
+            if (c)
+                e.appendChild(
+                    typeof c === "string" ? doc.createTextNode(c) : c
+                );
+        });
+        return e;
+    }
+
+    function esc(s) {
+        return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;");
+    }
+
+    var ICONS = {
+        search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+        layers: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg>',
+        download:
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>',
+        close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+        up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6"/></svg>',
+        down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>'
+    };
+
+    function iconButton(icon, label, cls, onClick) {
+        return h("button", {
+            type: "button",
+            class: "mme-btn " + (cls || ""),
+            "aria-label": label,
+            title: label,
+            html: ICONS[icon],
+            onclick: onClick
+        });
+    }
+
+    // While a sibling group is collapsed, `n.children` (what markmap lays out)
+    // omits the hidden siblings. `n.__all` always holds every real child plus the
+    // "more"/"less" buttons.
+    function allKids(n) {
+        return n.__all || n.children || [];
+    }
+    function isSentinel(n) {
+        var p = n.payload;
+        return !!(p && (p.more || p.less));
+    }
+    function realKids(n) {
+        return allKids(n).filter(function (c) {
+            return !isSentinel(c);
+        });
+    }
+    function walk(n, fn) {
+        fn(n);
+        allKids(n).forEach(function (c) {
+            walk(c, fn);
+        });
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Tree index                                                          */
+    /* ------------------------------------------------------------------ */
+
+    var parentOf = new Map();
+    var sibIndex = new Map();
+    (function index(n, p) {
+        parentOf.set(n, p || null);
+        allKids(n).forEach(function (c, i) {
+            sibIndex.set(c, i);
+            index(c, n);
+        });
+    })(root, null);
+
+    // Sibling groups: a parent with many children shows the first few plus a
+    // "more" button that is a leaf sibling (not a parent of the hidden ones).
+    var groups = new Map();
+    (function collapseGroups(n) {
+        var kids = n.children || [];
+        var mi = kids.findIndex(function (c) {
+            return c.payload && c.payload.more;
+        });
+        var li = kids.findIndex(function (c) {
+            return c.payload && c.payload.less;
+        });
+        if (mi !== -1 && li !== -1) {
+            groups.set(n, {
+                visible: kids.slice(0, mi),
+                more: kids[mi],
+                hidden: kids.slice(mi + 1, li),
+                less: kids[li],
+                expanded: false
+            });
+            n.__all = kids.slice();
+            n.children = kids.slice(0, mi + 1);
+        }
+        allKids(n).forEach(collapseGroups);
+    })(root);
+
+    function setSiblingsExpanded(p, expanded) {
+        var g = groups.get(p);
+        if (!g || g.expanded === expanded) return false;
+        g.expanded = expanded;
+        p.children = expanded
+            ? g.visible.concat(g.hidden, [g.less])
+            : g.visible.concat([g.more]);
+        return true;
+    }
+    function inView(x) {
+        var p = parentOf.get(x);
+        return !p || p.children.indexOf(x) !== -1;
+    }
+
+    function ancestors(n) {
+        var out = [];
+        for (var p = parentOf.get(n); p; p = parentOf.get(p)) out.push(p);
+        return out;
+    }
+    function hasKids(n) {
+        return allKids(n).length > 0;
+    }
+    function isFolded(n) {
+        return hasKids(n) && !!(n.payload && n.payload.fold);
+    }
+    function setFold(n, v) {
+        n.payload = Object.assign({}, n.payload, { fold: v });
+    }
+    function isShown(n) {
+        return (
+            ancestors(n).every(function (a) {
+                return !isFolded(a);
+            }) && ancestors(n).concat([n]).every(inView)
+        );
+    }
+    // Closest node that is currently on screen: the node itself, a hidden
+    // sibling's "more" button, or the nearest visible ancestor.
+    function nearestShown(n) {
+        for (var x = n; x; x = parentOf.get(x)) {
+            if (isShown(x)) return x;
+            var p = parentOf.get(x);
+            var g = p && groups.get(p);
+            if (g && !g.expanded && isShown(g.more)) return g.more;
+        }
+        return root;
+    }
+    // Makes `n` visible: unfolds its ancestors and expands any sibling group
+    // that hides it or one of its ancestors. Returns whether anything changed.
+    function revealSync(n) {
+        var changed = false;
+        ancestors(n)
+            .reverse()
+            .concat([n])
+            .forEach(function (x) {
+                var p = parentOf.get(x);
+                if (p && groups.has(p) && !inView(x)) {
+                    setSiblingsExpanded(p, true);
+                    changed = true;
+                }
+            });
+        ancestors(n).forEach(function (a) {
+            if (isFolded(a)) {
+                setFold(a, 0);
+                changed = true;
+            }
+        });
+        return changed;
+    }
+
+    var textCache = new Map();
+    function parseHtml(html) {
+        return new DOMParser().parseFromString(html, "text/html").body;
+    }
+    var BADGES = ".mme-count,.mme-progress,.mme-info,.mme-more,.mme-less";
+    function textOf(n) {
+        if (textCache.has(n)) return textCache.get(n);
+        var p = n.payload || {};
+        var t;
+        if (p.more) {
+            t = T.moreItems(p.count || 0);
+        } else if (p.less) {
+            t = T.lessItems(p.count || 0);
+        } else {
+            var body = parseHtml(n.content || "");
+            body.querySelectorAll(BADGES + ",.mme-task").forEach(function (e) {
+                e.remove();
+            });
+            t = (body.textContent || "").replace(/\s+/g, " ").trim();
+            if (!t) {
+                var img = body.querySelector("img");
+                t = (img && img.getAttribute("alt")) || (img ? T.images : "");
+            }
+        }
+        textCache.set(n, t);
+        return t;
+    }
+    function detailText(n) {
+        var d = n.payload && n.payload.detail;
+        return d
+            ? (parseHtml(d).textContent || "").replace(/\s+/g, " ").trim()
+            : "";
+    }
+    function titleHtml(n) {
+        if (isSentinel(n)) return esc(textOf(n));
+        var body = parseHtml(n.content || "");
+        body.querySelectorAll(BADGES).forEach(function (e) {
+            e.remove();
+        });
+        return body.innerHTML.trim();
+    }
+    function labelOf(n) {
+        var p = n.payload || {};
+        var parts = [textOf(n)];
+        if (p.task) parts.push(p.task === "done" ? T.done : T.todo);
+        if (p.tasks)
+            parts.push(T.done + " " + p.tasks.done + "/" + p.tasks.total);
+        if (p.detail) parts.push(T.hasDetail);
+        if (hasKids(n)) {
+            parts.push(T.childCount(realKids(n).length));
+            if (isFolded(n)) parts.push(T.folded);
+        }
+        return parts.join(", ");
+    }
+    function norm(s) {
+        return String(s || "")
+            .normalize("NFC")
+            .toLowerCase();
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* State                                                               */
+    /* ------------------------------------------------------------------ */
+
+    var S = {
+        selected: null,
+        focus: root,
+        hover: null,
+        pathSet: null,
+        query: "",
+        todoOnly: false,
+        searchActive: false,
+        matches: [],
+        matchSet: new Set(),
+        ancSet: new Set(),
+        active: -1,
+        savedFold: null,
+        savedSib: null,
+        userMoved: false,
+        searchToken: 0
+    };
+    var gMap = new Map();
+
+    /* ------------------------------------------------------------------ */
+    /* Options: color, line width, motion                                  */
+    /* ------------------------------------------------------------------ */
+
+    var branchScale = d3.scaleOrdinal(d3.schemeCategory10);
+    function colorOf(n) {
+        if (isSentinel(n)) return "#8c959f";
+        var path = String(n.state.path || "").split(".");
+        if (path.length < 2) return "#24292f";
+        var base = branchScale(path.slice(0, 2).join("."));
+        if (path.length < 3) return base;
+        var c = d3.hsl(base);
+        c.l = Math.min(
+            0.62,
+            Math.max(0.32, c.l + (((sibIndex.get(n) || 0) % 3) - 1) * 0.09)
+        );
+        return String(c);
+    }
+    function lineWidthOf(n) {
+        if (isSentinel(n)) return 1.5;
+        var d = n.state.depth;
+        return d === 1 ? 5 : Math.max(1.5, 4 - (d - 2) * 0.7);
+    }
+    var reduceMotion =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var motionMs = reduceMotion ? 0 : 350;
+    // No animation while the first layout settles (hidden siblings are removed
+    // right after markmap's own first render).
+    mm.setOptions({
+        color: colorOf,
+        lineWidth: lineWidthOf,
+        duration: 0
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Fit handling                                                        */
+    /* ------------------------------------------------------------------ */
+
+    var origFit = mm.fit.bind(mm);
+    mm.fit = function () {
+        S.userMoved = false;
+        return origFit.apply(null, arguments);
+    };
+    var fitTimer = 0;
+    function fitSoon(delay) {
+        if (S.userMoved) return;
+        clearTimeout(fitTimer);
+        fitTimer = setTimeout(
+            function () {
+                if (!S.userMoved) origFit();
+            },
+            delay == null ? 200 : delay
+        );
+    }
+    mm.zoom.on("zoom.mme", function (ev) {
+        if (ev && ev.sourceEvent) S.userMoved = true;
+    });
+    svgEl.addEventListener(
+        "wheel",
+        function () {
+            S.userMoved = true;
+        },
+        { passive: true }
+    );
+    window.addEventListener("resize", function () {
+        fitSoon(250);
+    });
+    window.addEventListener("orientationchange", function () {
+        fitSoon(350);
+    });
+    window.addEventListener("load", function () {
+        fitSoon(250);
+    });
+    if (doc.fonts && doc.fonts.ready) {
+        doc.fonts.ready.then(function () {
+            fitSoon(250);
+        });
+    }
+    svgEl.addEventListener(
+        "load",
+        function (e) {
+            if (e.target && e.target.tagName === "IMG") fitSoon(350);
+        },
+        true
+    );
+
+    /* ------------------------------------------------------------------ */
+    /* Decoration (ARIA + state classes), re-applied after every render    */
+    /* ------------------------------------------------------------------ */
+
+    svgEl.setAttribute("role", "tree");
+    // markmap wraps every node in one plain <g>; without this the browser does
+    // not expose the nodes as tree items of the tree above.
+    mm.g.attr("role", "none");
+    svgEl.setAttribute("aria-label", cfg.title || T.treeLabel);
+
+    // markmap appends nodes children-first; assistive tech reads flat tree
+    // items in DOM order, so keep the DOM in tree (pre-order) order.
+    function orderDom() {
+        var pre = visibleList().filter(function (n) {
+            return gMap.has(n);
+        });
+        if (!pre.length) return;
+        var parent = gMap.get(pre[0]).parentNode;
+        var current = Array.prototype.filter.call(
+            parent.children,
+            function (c) {
+                return c.classList && c.classList.contains("markmap-node");
+            }
+        );
+        var same =
+            current.length === pre.length &&
+            current.every(function (g, i) {
+                return g === gMap.get(pre[i]);
+            });
+        if (same) return;
+        var active = doc.activeElement;
+        pre.forEach(function (n) {
+            parent.appendChild(gMap.get(n));
+        });
+        if (active && active !== doc.activeElement && svgEl.contains(active)) {
+            active.focus({ preventScroll: true });
+        }
+    }
+
+    function decorate() {
+        gMap.clear();
+        if (!S.focus || !isShown(S.focus))
+            S.focus = nearestShown(S.focus || root);
+        svgEl.querySelectorAll("g.markmap-node").forEach(function (g) {
+            var n = g.__data__;
+            if (!n || !n.state) return;
+            gMap.set(n, g);
+            var p = parentOf.get(n);
+            g.setAttribute("role", "treeitem");
+            g.setAttribute("aria-level", n.state.depth);
+            g.setAttribute("aria-setsize", p ? p.children.length : 1);
+            g.setAttribute(
+                "aria-posinset",
+                (p ? p.children.indexOf(n) : 0) + 1
+            );
+            if (hasKids(n))
+                g.setAttribute("aria-expanded", isFolded(n) ? "false" : "true");
+            else g.removeAttribute("aria-expanded");
+            g.setAttribute(
+                "aria-selected",
+                n === S.selected ? "true" : "false"
+            );
+            g.setAttribute("aria-label", labelOf(n));
+            g.setAttribute("tabindex", n === S.focus ? "0" : "-1");
+            Array.prototype.forEach.call(g.children, function (c) {
+                c.setAttribute("aria-hidden", "true");
+            });
+            g.querySelectorAll("a, img").forEach(function (e) {
+                e.setAttribute("tabindex", "-1");
+            });
+            g.querySelectorAll("img.mme-img").forEach(function (img) {
+                img.setAttribute("draggable", "false");
+            });
+        });
+        orderDom();
+        paintClasses();
+    }
+
+    function paintClasses() {
+        var searching = S.searchActive && S.matchSet.size > 0;
+        svgEl.classList.toggle("mme-searching", searching);
+        svgEl.classList.toggle("mme-focusing", !!S.pathSet && !searching);
+        var activeNode = S.matches[S.active];
+        gMap.forEach(function (g, n) {
+            g.classList.toggle("mme-sentinel", isSentinel(n));
+            g.classList.toggle("mme-match", S.matchSet.has(n));
+            g.classList.toggle("mme-active", activeNode === n);
+            g.classList.toggle("mme-anc", S.ancSet.has(n));
+            g.classList.toggle("mme-on-path", !!S.pathSet && S.pathSet.has(n));
+        });
+        svgEl.querySelectorAll("path.markmap-link").forEach(function (p) {
+            var d = p.__data__;
+            if (!d) return;
+            p.classList.toggle("mme-sentinel-link", isSentinel(d.target));
+            p.classList.toggle(
+                "mme-anc",
+                S.ancSet.has(d.target) || S.matchSet.has(d.target)
+            );
+            p.classList.toggle(
+                "mme-on-path",
+                !!S.pathSet &&
+                    S.pathSet.has(d.target) &&
+                    S.pathSet.has(d.source)
+            );
+        });
+    }
+
+    var firstRender = true;
+    var origRender = mm.renderData.bind(mm);
+    mm.renderData = function (t) {
+        return origRender(t).then(function () {
+            decorate();
+            if (firstRender) {
+                firstRender = false;
+                fitSoon(60);
+                setTimeout(function () {
+                    mm.setOptions({ duration: motionMs });
+                }, 400);
+            }
+        });
+    };
+
+    /* ------------------------------------------------------------------ */
+    /* Chrome: skeleton                                                    */
+    /* ------------------------------------------------------------------ */
+
+    var live = h("div", {
+        class: "mme-ui mme-sr",
+        "aria-live": "polite",
+        role: "status"
+    });
+    var toastEl = h("div", { class: "mme-ui mme-toast", role: "status" });
+    var cardEl = h("div", {
+        class: "mme-ui mme-card",
+        role: "tooltip",
+        "aria-hidden": "true"
+    });
+    var lightbox = h("div", {
+        class: "mme-ui mme-lightbox",
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": T.images
+    });
+    var panelEl = h("aside", {
+        class: "mme-ui mme-panel",
+        "aria-label": T.panelLabel,
+        tabindex: "-1"
+    });
+    var barEl = h("div", { class: "mme-ui mme-bar" });
+    doc.body.appendChild(live);
+    doc.body.appendChild(toastEl);
+    doc.body.appendChild(cardEl);
+    doc.body.appendChild(lightbox);
+    doc.body.appendChild(panelEl);
+    doc.body.appendChild(barEl);
+
+    function announce(msg) {
+        live.textContent = "";
+        setTimeout(function () {
+            live.textContent = msg;
+        }, 30);
+    }
+    var toastTimer = 0;
+    window.mmeToast = function (msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add("mme-show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+            toastEl.classList.remove("mme-show");
+        }, 1800);
+    };
+
+    // Header from front matter
+    if (cfg.header && (cfg.header.title || cfg.header.description)) {
+        var head = h("header", { class: "mme-ui mme-head" });
+        if (cfg.header.title)
+            head.appendChild(
+                h("h1", { text: cfg.header.title, title: cfg.header.title })
+            );
+        if (cfg.header.description)
+            head.appendChild(h("p", { text: cfg.header.description }));
+        if (cfg.header.meta)
+            head.appendChild(
+                h("p", { class: "mme-meta", text: cfg.header.meta })
+            );
+        doc.body.appendChild(head);
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Dropdown helper                                                     */
+    /* ------------------------------------------------------------------ */
+
+    var openMenus = [];
+    function closeMenus(except) {
+        openMenus.forEach(function (m) {
+            if (m.menu !== except) m.close();
+        });
+    }
+    function dropdown(icon, label, items) {
+        var wrap = h("div", { class: "mme-dropdown" });
+        var menu = h("div", {
+            class: "mme-menu",
+            role: "menu",
+            "aria-label": label
+        });
+        var btn = h("button", {
+            type: "button",
+            class: "mme-btn",
+            "aria-haspopup": "menu",
+            "aria-expanded": "false",
+            "aria-label": label,
+            title: label,
+            html:
+                ICONS[icon] +
+                '<span class="mme-btn-label">' +
+                esc(label) +
+                "</span>"
+        });
+        var entry = {
+            menu: menu,
+            close: function () {
+                menu.classList.remove("mme-open");
+                btn.setAttribute("aria-expanded", "false");
+            }
+        };
+        openMenus.push(entry);
+        items.forEach(function (it) {
+            if (it === "-")
+                return menu.appendChild(h("hr", { role: "separator" }));
+            var b = h("button", {
+                type: "button",
+                role: it.checkbox ? "menuitemcheckbox" : "menuitem",
+                text: it.label,
+                "aria-checked": it.checkbox ? "false" : null,
+                tabindex: "-1"
+            });
+            b.addEventListener("click", function () {
+                entry.close();
+                it.run(b);
+            });
+            it.el = b;
+            menu.appendChild(b);
+        });
+        function open() {
+            closeMenus(menu);
+            menu.classList.add("mme-open");
+            btn.setAttribute("aria-expanded", "true");
+        }
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            if (menu.classList.contains("mme-open")) entry.close();
+            else open();
+        });
+        btn.addEventListener("keydown", function (e) {
+            if (e.key === "ArrowDown") {
+                e.preventDefault();
+                open();
+                var first = menu.querySelector("button");
+                if (first) first.focus();
+            }
+        });
+        menu.addEventListener("keydown", function (e) {
+            var btns = Array.prototype.slice.call(
+                menu.querySelectorAll("button")
+            );
+            var i = btns.indexOf(doc.activeElement);
+            if (e.key === "ArrowDown") {
+                e.preventDefault();
+                btns[(i + 1) % btns.length].focus();
+            } else if (e.key === "ArrowUp") {
+                e.preventDefault();
+                btns[(i - 1 + btns.length) % btns.length].focus();
+            } else if (e.key === "Escape") {
+                e.stopPropagation();
+                entry.close();
+                btn.focus();
+            }
+        });
+        wrap.appendChild(btn);
+        wrap.appendChild(menu);
+        return { el: wrap, items: items };
+    }
+    doc.addEventListener("click", function () {
+        closeMenus();
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Search                                                              */
+    /* ------------------------------------------------------------------ */
+
+    var input = h("input", {
+        type: "search",
+        id: "mme-search-input",
+        name: "mme-search",
+        placeholder: T.placeholder,
+        "aria-label": T.search,
+        autocomplete: "off",
+        spellcheck: "false"
+    });
+    var countEl = h("span", {
+        class: "mme-search-count",
+        "aria-hidden": "true"
+    });
+    var prevBtn = iconButton("up", T.prev, "mme-step", function () {
+        stepMatch(-1);
+    });
+    var nextBtn = iconButton("down", T.next, "mme-step", function () {
+        stepMatch(1);
+    });
+    var clearBtn = iconButton("close", T.clear, "", function () {
+        clearSearchUi();
+        input.focus();
+    });
+    var searchField = h("div", { class: "mme-search-field" }, [
+        h("span", {
+            class: "mme-search-ico",
+            html: ICONS.search,
+            "aria-hidden": "true"
+        }),
+        input,
+        countEl,
+        prevBtn,
+        nextBtn,
+        clearBtn
+    ]);
+    var searchToggle = iconButton(
+        "search",
+        T.search,
+        "mme-search-toggle",
+        function () {
+            searchWrap.classList.add("mme-open");
+            input.focus();
+        }
+    );
+    var searchWrap = h("div", { class: "mme-search", role: "search" }, [
+        searchToggle,
+        searchField
+    ]);
+    // inline icon inside the field should not look like a button
+    searchField.firstChild.style.cssText =
+        "display:inline-flex;width:16px;height:16px;color:#57606a";
+    searchField.firstChild.firstChild.style.cssText =
+        "width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round";
+
+    function matchesNode(n, q) {
+        if (isSentinel(n)) return false;
+        if (S.todoOnly && !(n.payload && n.payload.task === "todo"))
+            return false;
+        if (!q) return true;
+        return (
+            norm(textOf(n)).indexOf(q) !== -1 ||
+            norm(detailText(n)).indexOf(q) !== -1
+        );
+    }
+
+    function snapshotFold() {
+        var m = new Map();
+        walk(root, function (n) {
+            if (hasKids(n)) m.set(n, (n.payload && n.payload.fold) || 0);
+        });
+        return m;
+    }
+    function snapshotSiblings() {
+        var m = new Map();
+        groups.forEach(function (g, p) {
+            m.set(p, g.expanded);
+        });
+        return m;
+    }
+    function restoreFold() {
+        if (!S.savedFold) return false;
+        S.savedFold.forEach(function (v, n) {
+            setFold(n, v);
+        });
+        if (S.savedSib) {
+            S.savedSib.forEach(function (expanded, p) {
+                setSiblingsExpanded(p, expanded);
+            });
+        }
+        S.savedFold = null;
+        S.savedSib = null;
+        return true;
+    }
+
+    var searchTimer = 0;
+    function scheduleSearch() {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(runSearch, 140);
+    }
+
+    function updateCount() {
+        var q = S.query.trim();
+        if (!S.searchActive) {
+            countEl.textContent = "";
+        } else if (S.matches.length) {
+            countEl.textContent = S.active + 1 + "/" + S.matches.length;
+        } else {
+            countEl.textContent = T.noResult;
+        }
+        searchField.classList.toggle("mme-has-results", S.searchActive);
+        prevBtn.disabled = nextBtn.disabled = S.matches.length < 2;
+        clearBtn.style.visibility = q || S.todoOnly ? "visible" : "hidden";
+    }
+
+    async function runSearch() {
+        var token = ++S.searchToken;
+        var q = norm(S.query.trim());
+        S.searchActive = !!q || S.todoOnly;
+        if (!S.searchActive) {
+            await clearSearchState();
+            return;
+        }
+        if (!S.savedFold) {
+            S.savedFold = snapshotFold();
+            S.savedSib = snapshotSiblings();
+        }
+        var matches = [];
+        walk(root, function (n) {
+            if (matchesNode(n, q)) matches.push(n);
+        });
+        var anc = new Set();
+        matches.forEach(function (n) {
+            ancestors(n).forEach(function (a) {
+                anc.add(a);
+            });
+        });
+        S.matches = matches;
+        S.matchSet = new Set(matches);
+        S.ancSet = anc;
+        var changed = false;
+        matches.forEach(function (n) {
+            if (revealSync(n)) changed = true;
+        });
+        S.active = matches.length ? 0 : -1;
+        if (changed) await mm.renderData();
+        if (token !== S.searchToken) return;
+        paintClasses();
+        updateCount();
+        announce(
+            matches.length ? T.resultsAnnounce(matches.length) : T.noResult
+        );
+        if (matches.length) gotoActive();
+    }
+
+    function panelPad() {
+        if (!panelEl.classList.contains("mme-open")) return {};
+        var r = panelEl.getBoundingClientRect();
+        return window.innerWidth <= 640
+            ? { bottom: r.height + 16 }
+            : { right: r.width + 16 };
+    }
+
+    function gotoActive() {
+        var n = S.matches[S.active];
+        if (!n) return;
+        S.focus = n;
+        decorate();
+        updateCount();
+        mm.centerNode(n, panelPad());
+    }
+    function stepMatch(dir) {
+        if (!S.matches.length) return;
+        S.active = (S.active + dir + S.matches.length) % S.matches.length;
+        gotoActive();
+    }
+
+    async function clearSearchState() {
+        S.matches = [];
+        S.matchSet = new Set();
+        S.ancSet = new Set();
+        S.active = -1;
+        S.searchActive = false;
+        var restored = restoreFold();
+        updateCount();
+        if (restored) await mm.renderData();
+        else paintClasses();
+    }
+    function clearSearchUi() {
+        input.value = "";
+        S.query = "";
+        S.todoOnly = false;
+        todoItem.el.setAttribute("aria-checked", "false");
+        S.searchToken++;
+        clearSearchState();
+        searchWrap.classList.remove("mme-open");
+    }
+
+    input.addEventListener("input", function () {
+        S.query = input.value;
+        scheduleSearch();
+    });
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            clearTimeout(searchTimer);
+            if (
+                S.searchToken &&
+                S.matches.length &&
+                norm(input.value.trim()) === norm(S.query.trim()) &&
+                S.searchActive
+            ) {
+                stepMatch(e.shiftKey ? -1 : 1);
+            } else {
+                S.query = input.value;
+                runSearch();
+            }
+        } else if (e.key === "ArrowDown") {
+            e.preventDefault();
+            stepMatch(1);
+        } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            stepMatch(-1);
+        } else if (e.key === "Escape") {
+            e.stopPropagation();
+            clearSearchUi();
+            input.blur();
+            focusNode(nearestShown(S.focus));
+        }
+    });
+    input.addEventListener("blur", function () {
+        if (!input.value && window.innerWidth <= 640 && !S.todoOnly) {
+            searchWrap.classList.remove("mme-open");
+        }
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Level menu                                                          */
+    /* ------------------------------------------------------------------ */
+
+    async function structuralChange() {
+        S.savedFold = null;
+        S.savedSib = null;
+        S.searchToken++;
+        S.matches = [];
+        S.matchSet = new Set();
+        S.ancSet = new Set();
+        S.active = -1;
+        S.searchActive = !!(S.query.trim() || S.todoOnly);
+        await mm.renderData();
+        await mm.fit();
+        if (S.searchActive) runSearch();
+        else updateCount();
+    }
+    function setLevel(level) {
+        walk(root, function (n) {
+            if (hasKids(n)) setFold(n, n.state.depth >= level + 1 ? 1 : 0);
+        });
+        structuralChange();
+    }
+    function expandAll() {
+        walk(root, function (n) {
+            if (hasKids(n)) setFold(n, 0);
+        });
+        groups.forEach(function (g, p) {
+            setSiblingsExpanded(p, true);
+        });
+        structuralChange();
+    }
+
+    var todoItem = {
+        label: T.todoOnly,
+        checkbox: true,
+        run: function (b) {
+            S.todoOnly = !S.todoOnly;
+            b.setAttribute("aria-checked", S.todoOnly ? "true" : "false");
+            runSearch();
+        }
+    };
+    var levelItems = [1, 2, 3, 4].map(function (n) {
+        return {
+            label: T.levelItem(n),
+            run: function () {
+                setLevel(n);
+            }
+        };
+    });
+    levelItems.push({ label: T.expandAll, run: expandAll });
+    if (cfg.hasTasks) {
+        levelItems.push("-");
+        levelItems.push(todoItem);
+    }
+    var levelDd = dropdown("layers", T.level, levelItems);
+
+    var exportDd = dropdown("download", T.exportLabel, [
+        {
+            label: T.exportPng,
+            run: function () {
+                exportAs("png");
+            }
+        },
+        {
+            label: T.exportJpg,
+            run: function () {
+                exportAs("jpg");
+            }
+        },
+        {
+            label: T.exportSvg,
+            run: function () {
+                exportAs("svg");
+            }
+        },
+        "-",
+        {
+            label: T.copyMd,
+            run: function () {
+                exportAs("copy");
+            }
+        }
+    ]);
+    function exportAs(kind) {
+        var api = window.mmExport;
+        if (api && api[kind]) api[kind]();
+    }
+
+    barEl.appendChild(searchWrap);
+    barEl.appendChild(levelDd.el);
+    barEl.appendChild(exportDd.el);
+    // Menu is built before todoItem exists only if tasks are absent.
+    if (!cfg.hasTasks) todoItem.el = h("span");
+
+    /* Export hooks: strip transient visual state while an image is rendered. */
+    window.mmeBeforeExport = function () {
+        svgEl.classList.add("mme-exporting");
+        cardEl.classList.remove("mme-show");
+    };
+    window.mmeAfterExport = function () {
+        svgEl.classList.remove("mme-exporting");
+    };
+
+    /* ------------------------------------------------------------------ */
+    /* Hover                                                               */
+    /* ------------------------------------------------------------------ */
+
+    function pathOf(n) {
+        var s = new Set([n]);
+        ancestors(n).forEach(function (a) {
+            s.add(a);
+        });
+        if (!isFolded(n)) {
+            (n.children || []).forEach(function (c) {
+                s.add(c);
+            });
+        }
+        return s;
+    }
+
+    function cardHtml(n) {
+        var p = n.payload || {};
+        var parts = [];
+        function list(items, extra) {
+            var li = items
+                .slice(0, 5)
+                .map(function (c) {
+                    return "<li>" + esc(textOf(c)) + "</li>";
+                })
+                .join("");
+            var more =
+                items.length > 5
+                    ? "<li>…" + esc(T.moreItems(items.length - 5)) + "</li>"
+                    : "";
+            return "<ul>" + li + more + "</ul>" + (extra || "");
+        }
+        if (p.less) return "";
+        if (p.more) {
+            var g = groups.get(parentOf.get(n));
+            return (
+                '<div class="mme-card-title">' +
+                esc(textOf(n)) +
+                "</div>" +
+                list(g ? g.hidden : [])
+            );
+        }
+        var needTitle = !!p.detail || isFolded(n);
+        if (needTitle)
+            parts.push(
+                '<div class="mme-card-title">' + esc(textOf(n)) + "</div>"
+            );
+        if (p.detail)
+            parts.push('<div class="mme-card-detail">' + p.detail + "</div>");
+        if (isFolded(n)) {
+            parts.push(
+                '<div class="mme-card-meta">' +
+                    esc(T.childCount(realKids(n).length) + " · " + T.folded) +
+                    "</div>" +
+                    list(realKids(n))
+            );
+        }
+        if (p.tasks) {
+            parts.push(
+                '<div class="mme-card-meta">' +
+                    esc(T.done + " " + p.tasks.done + "/" + p.tasks.total) +
+                    "</div>"
+            );
+        }
+        if (!parts.length) return "";
+        if (p.detail)
+            parts.push('<span class="mme-hint">' + esc(T.hint) + "</span>");
+        return parts.join("");
+    }
+
+    function positionCard(n) {
+        var g = gMap.get(n);
+        if (!g) return;
+        var fo = g.querySelector("foreignObject") || g;
+        var r = fo.getBoundingClientRect();
+        cardEl.style.left = "0px";
+        cardEl.style.top = "0px";
+        var cw = cardEl.offsetWidth;
+        var ch = cardEl.offsetHeight;
+        var left = Math.min(Math.max(8, r.left), window.innerWidth - cw - 8);
+        var top = r.bottom + 8;
+        if (top + ch > window.innerHeight - 8)
+            top = Math.max(8, r.top - ch - 8);
+        cardEl.style.left = left + "px";
+        cardEl.style.top = top + "px";
+    }
+    function showCard(n) {
+        var html = cardHtml(n);
+        if (!html) {
+            hideCard();
+            return;
+        }
+        cardEl.innerHTML = html;
+        var preview = cardEl.querySelector(".mme-card-detail");
+        if (preview && preview.scrollHeight > preview.clientHeight + 1) {
+            preview.classList.add("mme-clipped");
+        }
+        positionCard(n);
+        cardEl.classList.add("mme-show");
+    }
+    function hideCard() {
+        cardEl.classList.remove("mme-show");
+    }
+    var cardTimer = 0;
+    function startHover(n, immediate) {
+        S.hover = n;
+        S.pathSet = pathOf(n);
+        paintClasses();
+        clearTimeout(cardTimer);
+        cardTimer = setTimeout(
+            function () {
+                // The panel already shows the selected node's details.
+                if (S.hover === n && S.selected !== n) showCard(n);
+            },
+            immediate ? 60 : 220
+        );
+    }
+    function endHover() {
+        S.hover = null;
+        S.pathSet = null;
+        clearTimeout(cardTimer);
+        hideCard();
+        paintClasses();
+    }
+    var noHover =
+        window.matchMedia && window.matchMedia("(hover: none)").matches;
+    svgEl.addEventListener("mouseover", function (e) {
+        if (noHover || e.buttons) return;
+        var g = e.target.closest && e.target.closest("g.markmap-node");
+        var n = g && g.__data__;
+        if (n === S.hover) return;
+        if (!n || !n.state) endHover();
+        else startHover(n, false);
+    });
+    svgEl.addEventListener("mouseleave", endHover);
+    svgEl.addEventListener("mousedown", hideCard);
+    svgEl.addEventListener("focusin", function (e) {
+        var g = e.target.closest && e.target.closest("g.markmap-node");
+        var n = g && g.__data__;
+        if (n && n.state) {
+            S.focus = n;
+            startHover(n, true);
+        }
+    });
+    svgEl.addEventListener("focusout", endHover);
+    mm.zoom.on("start.mme", hideCard);
+
+    /* ------------------------------------------------------------------ */
+    /* Selection panel                                                     */
+    /* ------------------------------------------------------------------ */
+
+    function collectLinks(n) {
+        var out = [];
+        var seen = {};
+        [n.content, n.payload && n.payload.detail].forEach(function (html) {
+            if (!html) return;
+            parseHtml(html)
+                .querySelectorAll("a[href]")
+                .forEach(function (a) {
+                    var href = a.getAttribute("href");
+                    if (!href || seen[href]) return;
+                    seen[href] = 1;
+                    out.push({
+                        href: href,
+                        text: (a.textContent || href).trim()
+                    });
+                });
+        });
+        return out;
+    }
+
+    function labelButton(n, extraHtml) {
+        var b = h("button", { type: "button" });
+        b.appendChild(h("span", { text: textOf(n) }));
+        if (extraHtml) b.appendChild(h("small", { text: extraHtml }));
+        b.addEventListener("click", function () {
+            selectNode(n, { center: true });
+        });
+        return b;
+    }
+
+    function renderPanel(n) {
+        var p = n.payload || {};
+        panelEl.textContent = "";
+        var chain = ancestors(n).reverse();
+        var crumbs = h("ol", { class: "mme-crumbs", "aria-label": "path" });
+        chain.forEach(function (a) {
+            var li = h("li");
+            li.appendChild(labelButton(a));
+            crumbs.appendChild(li);
+        });
+        var closeBtn = iconButton("close", T.close, "", function () {
+            deselect(true);
+        });
+        panelEl.appendChild(
+            h("div", { class: "mme-panel-head" }, [crumbs, closeBtn])
+        );
+
+        var body = h("div", { class: "mme-panel-body" });
+        body.appendChild(
+            h("div", { class: "mme-panel-title", html: titleHtml(n) })
+        );
+
+        if (p.tasks) {
+            var pct = Math.round((p.tasks.done / p.tasks.total) * 100);
+            body.appendChild(h("h3", { text: T.progress }));
+            body.appendChild(
+                h("div", { class: "mme-progress-line" }, [
+                    h("i", { style: "--p:" + pct + "%" }),
+                    h("span", { text: p.tasks.done + "/" + p.tasks.total })
+                ])
+            );
+        }
+        if (p.detail) {
+            body.appendChild(h("h3", { text: T.detail }));
+            body.appendChild(h("div", { class: "mme-detail", html: p.detail }));
+        }
+        if (hasKids(n)) {
+            var kids = realKids(n);
+            body.appendChild(
+                h("h3", { text: T.children + " (" + kids.length + ")" })
+            );
+            var ul = h("ul", { class: "mme-list" });
+            kids.forEach(function (c) {
+                var li = h("li");
+                var extra =
+                    hasKids(c) && c.payload && c.payload.count
+                        ? "+" + c.payload.count
+                        : "";
+                li.appendChild(labelButton(c, extra));
+                ul.appendChild(li);
+            });
+            body.appendChild(ul);
+        }
+        var links = collectLinks(n);
+        if (links.length) {
+            body.appendChild(h("h3", { text: T.links }));
+            var lul = h("ul", { class: "mme-list" });
+            links.forEach(function (l) {
+                lul.appendChild(
+                    h("li", null, [
+                        h("a", {
+                            href: l.href,
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                            text: l.text
+                        })
+                    ])
+                );
+            });
+            body.appendChild(lul);
+        }
+
+        var actions = h("div", { class: "mme-actions" });
+        if (hasKids(n)) {
+            actions.appendChild(
+                h("button", {
+                    type: "button",
+                    class: "mme-btn",
+                    text: isFolded(n) ? T.expand : T.collapse,
+                    onclick: function () {
+                        mm.toggleNode(n, false).then(function () {
+                            renderPanel(n);
+                        });
+                    }
+                })
+            );
+            actions.appendChild(
+                h("button", {
+                    type: "button",
+                    class: "mme-btn",
+                    text: T.expandBelow,
+                    onclick: function () {
+                        walk(n, function (x) {
+                            if (hasKids(x)) setFold(x, 0);
+                        });
+                        mm.renderData(n).then(function () {
+                            renderPanel(n);
+                        });
+                    }
+                })
+            );
+        }
+        actions.appendChild(
+            h("button", {
+                type: "button",
+                class: "mme-btn",
+                text: T.copyText,
+                onclick: function () {
+                    copyText(textOf(n));
+                }
+            })
+        );
+        body.appendChild(actions);
+        panelEl.appendChild(body);
+        panelEl.setAttribute("aria-label", T.panelLabel + ": " + textOf(n));
+    }
+
+    function copyText(text) {
+        var done = function () {
+            window.mmeToast(T.copied);
+        };
+        var fail = function () {
+            window.mmeToast(T.copyFailed);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, fail);
+        } else fail();
+    }
+
+    async function reveal(n) {
+        if (revealSync(n)) await mm.renderData();
+    }
+
+    // Expands/collapses the hidden siblings of a long child list. The clicked
+    // button is swapped for its counterpart, so focus is handed over explicitly.
+    async function toggleSiblings(p, keyboard) {
+        var g = groups.get(p);
+        if (!g) return;
+        var expanding = !g.expanded;
+        setSiblingsExpanded(p, expanding);
+        await mm.renderData(p);
+        var target = expanding ? g.hidden[0] : g.more;
+        if (keyboard) await focusNode(target);
+        else {
+            S.focus = target;
+            decorate();
+        }
+        announce(textOf(expanding ? g.less : g.more));
+    }
+
+    async function selectNode(n, opts) {
+        opts = opts || {};
+        if (isSentinel(n)) {
+            await toggleSiblings(parentOf.get(n), opts.keyboard);
+            return;
+        }
+        await reveal(n);
+        S.selected = n;
+        S.focus = n;
+        // The panel shows the details now; a lingering hover card would repeat them.
+        clearTimeout(cardTimer);
+        hideCard();
+        renderPanel(n);
+        panelEl.classList.add("mme-open");
+        doc.body.classList.add("mme-panel-open");
+        await mm.setHighlight(n);
+        mm.ensureVisible(n, Object.assign({ left: 24, top: 64 }, panelPad()));
+        if (opts.keyboard) panelEl.focus({ preventScroll: true });
+        announce(T.panelLabel + ": " + textOf(n));
+    }
+
+    function deselect(refocus) {
+        var had = S.selected;
+        S.selected = null;
+        panelEl.classList.remove("mme-open");
+        doc.body.classList.remove("mme-panel-open");
+        mm.setHighlight(null);
+        if (refocus && had) focusNode(had);
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Lightbox                                                            */
+    /* ------------------------------------------------------------------ */
+
+    function openLightbox(img) {
+        var cap = "";
+        var fig = img.closest && img.closest("figure");
+        if (fig && fig.querySelector("figcaption"))
+            cap = fig.querySelector("figcaption").textContent;
+        else cap = img.getAttribute("alt") || "";
+        lightbox.textContent = "";
+        lightbox.appendChild(
+            h("img", { src: img.currentSrc || img.src, alt: cap })
+        );
+        if (cap) lightbox.appendChild(h("p", { text: cap }));
+        lightbox.classList.add("mme-open");
+        lightbox.setAttribute("tabindex", "-1");
+        lightbox.focus();
+    }
+    function closeLightbox() {
+        lightbox.classList.remove("mme-open");
+    }
+    lightbox.addEventListener("click", closeLightbox);
+    doc.addEventListener("click", function (e) {
+        var img = e.target;
+        if (img && img.tagName === "IMG" && panelEl.contains(img))
+            openLightbox(img);
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Pointer interaction on the map                                      */
+    /* ------------------------------------------------------------------ */
+
+    var downPos = null;
+    svgEl.addEventListener("pointerdown", function (e) {
+        downPos = { x: e.clientX, y: e.clientY };
+    });
+    var coarse =
+        window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+
+    function nearestCircle(x, y, radius) {
+        var best = null;
+        var bestD = radius;
+        svgEl.querySelectorAll("g.markmap-node > circle").forEach(function (c) {
+            var r = c.getBoundingClientRect();
+            var dx = r.left + r.width / 2 - x;
+            var dy = r.top + r.height / 2 - y;
+            var d = Math.sqrt(dx * dx + dy * dy);
+            if (d <= bestD) {
+                best = c;
+                bestD = d;
+            }
+        });
+        return best;
+    }
+
+    svgEl.addEventListener("click", function (e) {
+        var t = e.target;
+        if (
+            downPos &&
+            Math.hypot(e.clientX - downPos.x, e.clientY - downPos.y) > 5
+        )
+            return;
+        if (t.closest && t.closest("a")) return;
+        if (t.tagName === "IMG") {
+            openLightbox(t);
+            return;
+        }
+        if (t.tagName === "circle") return; // markmap toggles on its own handler
+        var c = nearestCircle(e.clientX, e.clientY, coarse ? 22 : 10);
+        if (c && c.__data__) {
+            mm.toggleNode(c.__data__, e.ctrlKey || e.metaKey);
+            return;
+        }
+        var g = t.closest && t.closest("g.markmap-node");
+        if (g && g.__data__ && t.closest("foreignObject")) {
+            selectNode(g.__data__, {}); // sibling-group buttons toggle instead
+        } else if (!g && S.selected) {
+            deselect(false);
+        }
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Keyboard tree navigation                                            */
+    /* ------------------------------------------------------------------ */
+
+    function visibleList() {
+        var out = [];
+        (function rec(n) {
+            out.push(n);
+            if (!isFolded(n)) (n.children || []).forEach(rec);
+        })(root);
+        return out;
+    }
+
+    async function focusNode(n) {
+        if (!n) return;
+        if (!isShown(n)) await reveal(n);
+        S.focus = n;
+        decorate();
+        var g = gMap.get(n);
+        if (g) g.focus({ preventScroll: true });
+        mm.ensureVisible(n, Object.assign({ left: 24, top: 64 }, panelPad()));
+    }
+
+    svgEl.addEventListener("keydown", function (e) {
+        var g = e.target.closest && e.target.closest("g.markmap-node");
+        var n = g && g.__data__;
+        if (!n || !n.state || e.altKey || e.ctrlKey || e.metaKey) return;
+        var list = visibleList();
+        var i = list.indexOf(n);
+        var handled = true;
+        switch (e.key) {
+            case "ArrowDown":
+                focusNode(list[Math.min(list.length - 1, i + 1)]);
+                break;
+            case "ArrowUp":
+                focusNode(list[Math.max(0, i - 1)]);
+                break;
+            case "Home":
+                focusNode(list[0]);
+                break;
+            case "End":
+                focusNode(list[list.length - 1]);
+                break;
+            case "ArrowRight":
+                if (hasKids(n) && isFolded(n)) mm.toggleNode(n, false);
+                else if (hasKids(n)) focusNode(n.children[0]);
+                break;
+            case "ArrowLeft":
+                if (hasKids(n) && !isFolded(n)) mm.toggleNode(n, false);
+                else if (parentOf.get(n)) focusNode(parentOf.get(n));
+                break;
+            case "Enter":
+                selectNode(n, { keyboard: true });
+                break;
+            case " ":
+                if (isSentinel(n)) toggleSiblings(parentOf.get(n), true);
+                else if (hasKids(n)) mm.toggleNode(n, e.shiftKey);
+                break;
+            default:
+                handled = false;
+        }
+        if (handled) e.preventDefault();
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Global shortcuts                                                    */
+    /* ------------------------------------------------------------------ */
+
+    function typing(el) {
+        return (
+            el &&
+            (el.tagName === "INPUT" ||
+                el.tagName === "TEXTAREA" ||
+                el.isContentEditable)
+        );
+    }
+    doc.addEventListener("keydown", function (e) {
+        if (
+            (e.key === "/" && !typing(e.target) && !e.ctrlKey && !e.metaKey) ||
+            ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k")
+        ) {
+            e.preventDefault();
+            searchWrap.classList.add("mme-open");
+            input.focus();
+            input.select();
+            return;
+        }
+        if (e.key !== "Escape") return;
+        if (lightbox.classList.contains("mme-open")) {
+            closeLightbox();
+        } else if (
+            openMenus.some(function (m) {
+                return m.menu.classList.contains("mme-open");
+            })
+        ) {
+            closeMenus();
+        } else if (S.searchActive || input.value) {
+            clearSearchUi();
+        } else if (S.selected) {
+            deselect(true);
+        } else {
+            endHover();
+        }
+    });
+
+    /* ------------------------------------------------------------------ */
+    /* Toolbar localisation (markmap-toolbar)                              */
+    /* ------------------------------------------------------------------ */
+
+    function enhanceZoomBar() {
+        var bar = doc.querySelector(".mm-toolbar");
+        if (!bar) return false;
+        bar.classList.add("mme-ui", "mme-zoombar");
+        bar.querySelectorAll(".mm-toolbar-item").forEach(function (item) {
+            var title = item.getAttribute("title") || "";
+            var local = T.zoomTitles[title] || title;
+            item.setAttribute("title", local);
+            item.setAttribute("role", "button");
+            item.setAttribute("aria-label", local);
+            item.setAttribute("tabindex", "0");
+            item.addEventListener("keydown", function (e) {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    item.click();
+                }
+            });
+        });
+        return true;
+    }
+    var zoomTries = 0;
+    (function waitZoomBar() {
+        if (enhanceZoomBar() || ++zoomTries > 40) return;
+        setTimeout(waitZoomBar, 100);
+    })();
+
+    /* ------------------------------------------------------------------ */
+    /* Boot                                                                */
+    /* ------------------------------------------------------------------ */
+
+    // Small screens: start with the first levels only so text stays readable.
+    if (window.innerWidth <= 640 && cfg.mobileLevel) {
+        walk(root, function (n) {
+            if (!hasKids(n)) return;
+            setFold(n, n.state.depth >= cfg.mobileLevel + 1 ? 1 : 0);
+        });
+    }
+
+    updateCount();
+    mm.renderData();
+})();
+</script>
+  
+</body>
+</html>
