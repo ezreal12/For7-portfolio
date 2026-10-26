@@ -20,12 +20,13 @@
 <!-- portfolio-readme:begin maps -->
 ## 더 깊이 보려면
 
-README에 다 담지 못한 세부를 두 개의 인터랙티브 마크맵으로 펼쳤습니다. 노드를 클릭하면 접고 펼 수 있고, `/` 키로 검색됩니다.
+README에 다 담지 못한 세부를 인터랙티브 마크맵과 archify 도구 지형으로 펼쳤습니다. 마크맵은 노드를 클릭하면 접고 펼 수 있고, `/` 키로 검색됩니다.
 
-| 마크맵 | 답하려는 질문 |
+| 지도 | 답하려는 질문 |
 |---|---|
 | [연구 과정 지도](https://ezreal12.github.io/For7-portfolio/markmap/interviewer.html) | 무엇을 알아내려 했고, 어떤 방법과 도구로, 무엇을 근거로 어디까지 확인했는가. 막힌 곳과 결정의 이유는 무엇인가 |
 | [시스템 구조 지도](https://ezreal12.github.io/For7-portfolio/markmap/onboarding.html) | 복원 서버는 어떻게 짜여 있고 요청 하나가 어떻게 흐르는가. 증상이 나오면 어디부터 의심하는가 |
+| [복원 도구 지형](https://ezreal12.github.io/For7-portfolio/archify/toolchain.html) | 이번 작업을 가능하게 한 도구들은 무엇이고, 어떤 구조와 원리로 연결되어 어떤 순서로 동작했는가. REA는 언제 합류했는가 |
 <!-- portfolio-readme:end maps -->
 
 <!-- portfolio-readme:begin overview -->
